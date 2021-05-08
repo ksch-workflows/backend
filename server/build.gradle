@@ -27,6 +27,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation project(':ksch-administration')
+    implementation project(':ksch-patient-management')
 }
 
 test {
