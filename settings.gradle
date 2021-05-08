@@ -1,0 +1,16 @@
+include "server"
+
+include("ksch-administration:administration-api")
+include("ksch-administration:administration-impl")
+
+include("ksch-billing:billing-api")
+include("ksch-billing:billing-impl")
+
+include("ksch-patient-management:patient-management-api")
+include("ksch-patient-management:patient-management-impl")
+
+include("ksch-reporting:reporting-api")
+include("ksch-reporting:reporting-impl")
+
+include("ksch-scheduling:scheduling-api")
+include("ksch-scheduling:scheduling-impl")
