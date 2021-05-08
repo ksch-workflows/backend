@@ -1,3 +1,5 @@
+rootProject.name = "ksch-workflows-backend"
+
 include "server"
 
 include("ksch-administration:administration-api")
