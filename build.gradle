@@ -47,7 +47,6 @@ subprojects {
 configure(subprojects.findAll { it.name.endsWith('-impl') } ) {
 
     apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'org.springframework.boot'
 
     dependencies {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
