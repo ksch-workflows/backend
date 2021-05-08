@@ -46,7 +46,8 @@ subprojects {
 
 configure(subprojects.findAll { it.name.endsWith('-impl') } ) {
 
-//    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
 //
 //    dependencies {
 //        implementation 'org.springframework.boot:spring-boot-starter'
