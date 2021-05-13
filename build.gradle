@@ -50,4 +50,8 @@ configure(subprojects.findAll { it.name.endsWith('-impl') } ) {
         
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
+
+    test {
+        useJUnitPlatform()
+    }
 }
