@@ -1,7 +1,8 @@
 plugins {
-    id 'org.springframework.boot'
+    id 'com.google.cloud.tools.appengine' version '2.4.1'
     id 'io.spring.dependency-management'
     id 'java'
+    id 'org.springframework.boot'
 }
 
 configurations {
@@ -32,4 +33,14 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+appengine {
+    stage {
+        artifact = 'build/libs/app.jar'
+    }
+    deploy {
+        version = 'GCLOUD_CONFIG'
+        projectId = 'GCLOUD_CONFIG'
+    }
 }
