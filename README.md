@@ -51,6 +51,15 @@ The following list gives an overview of the contents in the project's directorie
 - `ksch-patient-management`: domain module for patient-related workflows
 - `server`: the application's entry point, global configuration, and database migrations
 
+## Maintenance
+
+### Deploy to staging environment
+
+```
+gcloud init
+./gradlew appengineDeploy
+```
+
 ## License
 
 K.S.C.H. Workflows is maintained by [KS-plus e.V.](https://ks-plus.org/en/welcome/),
