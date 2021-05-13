@@ -15,7 +15,8 @@ repositories {
 }
 
 bootJar {
-    mainClassName = 'ksch.BackendApplication'
+    mainClass.set('ksch.BackendApplication')
+    archiveFileName = 'app.jar'
 }
 
 dependencies {
