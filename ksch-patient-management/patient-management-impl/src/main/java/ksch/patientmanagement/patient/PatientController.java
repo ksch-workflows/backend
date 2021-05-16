@@ -15,12 +15,17 @@
  */
 package ksch.patientmanagement.patient;
 
+import ksch.commons.http.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 
+import javax.websocket.server.PathParam;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,7 +34,7 @@ public class PatientController {
     private final PatientRepository patientRepository;
 
     @PostMapping("/api/patients")
-    public PatientEntity createPatient() {
+    public PatientEntity create() {
         return patientRepository.save(PatientEntity.builder()
                 .name("John Doe")
                 .gender("MALE")
@@ -39,7 +44,17 @@ public class PatientController {
     }
 
     @GetMapping("/api/patients")
-    public Iterable<PatientEntity> getPatient() {
+    public Iterable<PatientEntity> list() {
         return patientRepository.findAll();
+    }
+
+    @GetMapping("/api/patients/{patientId}")
+    public PatientEntity get(@PathVariable("patientId") UUID patientId) {
+        return patientRepository.findById(patientId).orElseThrow(NotFoundException::new);
+    }
+
+    @GetMapping("/api/patients/{patientId}/address")
+    public String getAddress(@PathVariable("patientId") UUID patientId) {
+        return patientRepository.findById(patientId).orElseThrow(NotFoundException::new).getAddress();
     }
 }
