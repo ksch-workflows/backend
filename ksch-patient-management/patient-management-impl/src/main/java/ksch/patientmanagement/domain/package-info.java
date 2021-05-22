@@ -13,18 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement;
+/**
+ * Classes which use domain terms for their names and methods.
+ *
+ * @see <a href="https://github.com/xmolecules/jmolecules#expressing-ddd-concepts">xmolecules</a>
+ */
+@DomainLayer
+package ksch.patientmanagement.domain;
 
-import java.util.UUID;
-
-public interface Patient {
-    UUID getId();
-    String getPatientNumber();
-    String getName();
-    Integer getAge();
-    Gender getGender();
-    String getPhoneNumber();
-    String getResidentialAddress();
-    String getPatientCategory();
-}
-
+import org.jmolecules.architecture.layered.DomainLayer;

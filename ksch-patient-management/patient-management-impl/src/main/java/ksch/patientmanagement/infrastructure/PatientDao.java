@@ -13,51 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.patient;
+package ksch.patientmanagement.infrastructure;
 
+import ksch.patientmanagement.Gender;
+import ksch.patientmanagement.Patient;
+import ksch.util.TypeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import java.time.LocalDate;
 import java.util.UUID;
 
-import static javax.persistence.EnumType.STRING;
-
 @Entity
-@Table
-@Getter
-@Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientEntity {
+@Builder
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+public class PatientDao implements Patient {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @Column(unique = true)
     private UUID id;
 
-    @Column
+    private String patientNumber;
+
     private String name;
 
-    @Column
-    private String nameFather;
+    private Integer age;
 
-    @Column
-    private LocalDate dateOfBirth;
+    private Gender gender;
 
-    @Column
-    private String gender;
+    private String phoneNumber;
 
-    @Column
-    private String address;
+    private String residentialAddress;
+
+    private String patientCategory;
+
+    public static PatientDao from(Patient patient) {
+        return new TypeConverter<>(Patient.class).convertTo(patient, PatientDao.class);
+    }
 }

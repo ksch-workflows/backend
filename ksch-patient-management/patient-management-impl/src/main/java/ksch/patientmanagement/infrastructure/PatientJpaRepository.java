@@ -13,17 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.patient;
+package ksch.patientmanagement.infrastructure;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.transaction.Transactional;
 import java.util.UUID;
 
-@Transactional
-@Component
-public interface PatientRepository extends CrudRepository<PatientEntity, UUID> {
-
-    PatientEntity getById(UUID patientId);
+public interface PatientJpaRepository extends JpaRepository<PatientDao, UUID> {
 }

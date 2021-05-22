@@ -24,7 +24,7 @@ Second, there are technical modules that provide a scaffold for the business mod
 
 The following diagram gives an overview of the project's module structure:
 
-![module structure](docs/modules.png)
+![module structure](docs/img/modules.png)
 
 The "server" module contains the `main` function of the Java application.
 It has a dependency on all the other modules so that their JAR files will be on the classpath when the application starts.

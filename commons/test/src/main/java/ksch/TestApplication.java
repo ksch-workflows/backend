@@ -13,18 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement;
+package ksch;
 
-import java.util.UUID;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-public interface Patient {
-    UUID getId();
-    String getPatientNumber();
-    String getName();
-    Integer getAge();
-    Gender getGender();
-    String getPhoneNumber();
-    String getResidentialAddress();
-    String getPatientCategory();
-}
-
+@SpringBootApplication
+public class TestApplication {}
