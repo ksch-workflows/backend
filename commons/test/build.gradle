@@ -1,4 +1,6 @@
 dependencies {
+    // TODO Which dependencies are actually needed?
     implementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-test'
 }
