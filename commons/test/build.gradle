@@ -3,10 +3,4 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.springframework.restdocs:spring-restdocs-mockmvc'
     implementation 'org.springframework.boot:spring-boot-starter-test'
-
-    // Lombok
-    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-    testImplementation "org.projectlombok:lombok:${lombokVersion}"
 }

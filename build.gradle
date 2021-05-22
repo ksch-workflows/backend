@@ -31,9 +31,29 @@ subprojects {
     }
 }
 
-configure(subprojects.findAll { it.name.endsWith('-impl') || it.name.startsWith('test') } ) {
-
+configure(subprojects.findAll { !it.name.endsWith('-api') } ) {
     apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+
+        // Lombok
+        annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+        testImplementation "org.projectlombok:lombok:${lombokVersion}"
+
+        // Architecture documentation
+        compileOnly("org.jmolecules:jmolecules-ddd:${jmoleculesVersion}")
+        compileOnly("org.jmolecules:jmolecules-layered-architecture:${jmoleculesVersion}")
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+configure(subprojects.findAll { it.name.endsWith('-impl') } ) {
 
     dependencies {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
@@ -45,21 +65,7 @@ configure(subprojects.findAll { it.name.endsWith('-impl') || it.name.startsWith(
         implementation 'org.springframework.boot:spring-boot-starter-hateoas'
         runtimeOnly 'com.h2database:h2'
 
-        // Lombok
-        annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-        compileOnly "org.projectlombok:lombok:${lombokVersion}"
-        testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-        testImplementation "org.projectlombok:lombok:${lombokVersion}"
-
-        // Other
-        compileOnly("org.jmolecules:jmolecules-ddd:${jmoleculesVersion}")
-        compileOnly("org.jmolecules:jmolecules-layered-architecture:${jmoleculesVersion}")
-
         // Test
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    }
-
-    test {
-        useJUnitPlatform()
     }
 }
