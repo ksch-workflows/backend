@@ -13,15 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.administration;
+package ksch.test;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import lombok.SneakyThrows;
 
-public class ExampleTest {
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-    @Test
-    public void should_pass() {
-        Assertions.assertTrue(true);
+public class TestResource {
+
+    private final Path path;
+
+    @SneakyThrows
+    public TestResource(String path) {
+        var resource = Thread.currentThread().getContextClassLoader().getResource(path);
+        if (resource == null) {
+            throw new IllegalArgumentException("Resource not found: " + path);
+        }
+        this.path = Paths.get(resource.toURI());
+    }
+
+    @SneakyThrows
+    public String readString() {
+        return Files.readString(path);
     }
 }

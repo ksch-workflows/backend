@@ -15,16 +15,9 @@
  */
 package ksch.patientmanagement;
 
-import java.util.UUID;
+public interface PatientService {
 
-public interface Patient {
-    UUID getId();
-    String getPatientNumber();
-    String getName();
-    Integer getAge();
-    Gender getGender();
-    String getPhoneNumber();
-    String getResidentialAddress();
-    String getPatientCategory();
+    Patient createPatient();
+
+    Patient createPatient(Patient patient);
 }
-

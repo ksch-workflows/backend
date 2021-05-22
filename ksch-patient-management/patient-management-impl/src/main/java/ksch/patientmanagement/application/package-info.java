@@ -13,18 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement;
+@ApplicationLayer
+package ksch.patientmanagement.application;
 
-import java.util.UUID;
-
-public interface Patient {
-    UUID getId();
-    String getPatientNumber();
-    String getName();
-    Integer getAge();
-    Gender getGender();
-    String getPhoneNumber();
-    String getResidentialAddress();
-    String getPatientCategory();
-}
-
+import org.jmolecules.architecture.layered.ApplicationLayer;
