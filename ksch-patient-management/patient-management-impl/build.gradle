@@ -1,3 +1,10 @@
 dependencies {
+    api project(':ksch-patient-management:patient-management-api')
+
     implementation project(':commons:http')
+    implementation project(':commons:util')
+
+    testImplementation project(':commons:test')
+
+    testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }

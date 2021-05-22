@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.patient;
+package ksch.patientmanagement.infrastructure;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,7 +39,7 @@ import static javax.persistence.EnumType.STRING;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientEntity {
+public class PatientEntityOld {
 
     @Id
     @GeneratedValue(generator = "UUID")

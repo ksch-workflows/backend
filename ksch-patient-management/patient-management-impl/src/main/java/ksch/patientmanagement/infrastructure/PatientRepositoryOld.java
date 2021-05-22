@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.patient;
+package ksch.patientmanagement.infrastructure;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @Transactional
 @Component
-public interface PatientRepository extends CrudRepository<PatientEntity, UUID> {
+public interface PatientRepositoryOld extends CrudRepository<PatientEntityOld, UUID> {
 
-    PatientEntity getById(UUID patientId);
+    PatientEntityOld getById(UUID patientId);
 }

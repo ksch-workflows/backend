@@ -1,0 +1,8 @@
+{
+  "gender" : "MALE",
+  "name" : "John Doe",
+  "patientCategory" : "GENERAL",
+  "patientNumber" : "10-1002",
+  "phoneNumber" : "0123456789",
+  "residentialAddress" : "Guesthouse"
+}
