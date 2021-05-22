@@ -3,8 +3,4 @@ dependencies {
 
     implementation project(':commons:http')
     implementation project(':commons:util')
-
-
-
-    testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
