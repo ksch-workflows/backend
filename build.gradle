@@ -67,5 +67,6 @@ configure(subprojects.findAll { it.name.endsWith('-impl') } ) {
 
         // Test
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testCompileOnly 'org.springframework.restdocs:spring-restdocs-mockmvc'
     }
 }
