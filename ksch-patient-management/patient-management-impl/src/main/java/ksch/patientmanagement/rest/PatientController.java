@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -70,7 +71,12 @@ class PatientController {
     }
 
     @GetMapping("/{patientId}/residential-address")
-    public String getResidentialAddress(@PathVariable("patientId") UUID patientId) {
-        return patientRepository.findById(patientId).orElseThrow(NotFoundException::new).getResidentialAddress();
+    public HashMap<String, String> getResidentialAddress(@PathVariable("patientId") UUID patientId) {
+        var residentialAddress = patientRepository.findById(patientId)
+                .orElseThrow(NotFoundException::new)
+                .getResidentialAddress();
+        var result = new HashMap<String, String>();
+        result.put("residentialAddress", residentialAddress);
+        return result;
     }
 }
