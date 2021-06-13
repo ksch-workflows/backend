@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -58,16 +59,25 @@ class PatientController {
         return patientModelAssembler.toModel(patient);
     }
 
-    @GetMapping
-    PagedModel<PatientModel> listPatients(Pageable pageable) {
-        var patients = patientRepository.findAll(pageable).map(p -> (Patient) p);
-        return pagedResourcesAssembler.toModel(patients, patientModelAssembler);
-    }
-
     @GetMapping("/{patientId}")
     public PatientModel getPatient(@PathVariable("patientId") UUID patientId) {
         var patient = patientRepository.findById(patientId).orElseThrow(NotFoundException::new);
         return patientModelAssembler.toModel(patient);
+    }
+
+    @GetMapping
+    PagedModel<PatientModel> listPatients(Pageable pageable) {
+
+
+
+        var patients = patientRepository.findAll(pageable).map(p -> (Patient) p);
+        return pagedResourcesAssembler.toModel(patients, patientModelAssembler);
+    }
+
+    @GetMapping("/search")
+    PagedModel<PatientModel> searchPatients(@RequestParam("q") String query, Pageable pageable) {
+        var patients = patientRepository.findAll(pageable).map(p -> (Patient) p);
+        return pagedResourcesAssembler.toModel(patients, patientModelAssembler);
     }
 
     @GetMapping("/{patientId}/residential-address")
