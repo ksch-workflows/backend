@@ -1,5 +1,6 @@
 package ksch.patientmanagement.infrastructure;
 
+import ksch.patientmanagement.Patient;
 import ksch.patientmanagement.PatientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,10 +23,15 @@ public class PatientJpaRepositoryTest {
     @Autowired
     private PatientService patientService;
 
+    private Patient janeDoe;
+
+    private Patient johnDoe;
+
     @BeforeEach
     public void createPatients() {
-        patientService.createPatient(new JaneDoe());
-        patientService.createPatient(new JohnDoe());
+        patientService.createPatient();
+        janeDoe = patientService.createPatient(new JaneDoe());
+        johnDoe = patientService.createPatient(new JohnDoe());
     }
 
     @Test
@@ -69,11 +75,19 @@ public class PatientJpaRepositoryTest {
 
     @Test
     public void should_find_patient_by_id() {
+        var result = patientRepository.findAll(new PatientSearchSpecification(johnDoe.getId().toString()));
+        assertEquals(1, result.size());
 
+        var firstPatient = result.get(0);
+        assertEquals("John Doe", firstPatient.getName());
     }
 
     @Test
     public void should_find_patient_by_opd_number() {
+        var result = patientRepository.findAll(new PatientSearchSpecification(janeDoe.getPatientNumber()));
+        assertEquals(1, result.size());
 
+        var firstPatient = result.get(0);
+        assertEquals("Jane Doe", firstPatient.getName());
     }
 }
