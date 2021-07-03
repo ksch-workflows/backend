@@ -123,10 +123,13 @@ public class PatientControllerTest {
     @Test
     @SneakyThrows
     public void should_search_patients() {
-        mockMvc.perform(get("/api/patients/search?q=John%20Doe").accept(APPLICATION_JSON))
+        var searchedPatient = patientService.createPatient();
+        patientService.createPatient(searchedPatient);
+
+        mockMvc.perform(get("/api/patients/search?q=" + searchedPatient.getId().toString()).accept(APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("page.totalElements", is(greaterThanOrEqualTo(2))))
+                .andExpect(jsonPath("page.totalElements", is(equalTo(1))))
                 .andDo(document("patients-search"));
     }
 }
