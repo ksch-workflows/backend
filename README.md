@@ -57,8 +57,8 @@ The following list gives an overview of the contents in the project's directorie
 
 ### Udpate API documentation
 
-The [REST API documentation]() for this project is hosted on GitHub Pages via the `/docs` directory in this
-repository.
+The [REST API documentation](https://ksch-workflows.github.io/backend/) for this project is hosted on GitHub
+Pages via the `/docs` directory in this repository.
 
 It can be updated by executing the following commands:
 
