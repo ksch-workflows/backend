@@ -32,3 +32,19 @@ include::../../build/generated-snippets/patients-list/curl-request.adoc[]
 *Response*
 
 include::../../build/generated-snippets/patients-list/http-response.adoc[]
+
+=== Search patient
+
+Patients can be searched via a query string.
+
+- If the query string is a valid UUID, it is searched for a patient with this patient ID.
+- If the query string is a valid patient number, it is search for a patient with this patient number.
+- Otherwise, it is searched for patients with a name matching with the query string.
+
+*Request*
+
+include::../../build/generated-snippets/patients-search/curl-request.adoc[]
+
+*Response*
+
+include::../../build/generated-snippets/patients-search/http-response.adoc[]

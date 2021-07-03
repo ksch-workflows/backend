@@ -446,6 +446,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_create_a_patient">Create a patient</a></li>
 <li><a href="#_create_a_patient_in_emergency">Create a patient in emergency</a></li>
 <li><a href="#_list_all_patients">List all patients</a></li>
+<li><a href="#_search_patient">Search patient</a></li>
 </ul>
 </li>
 </ul>
@@ -495,10 +496,10 @@ Content-Length: 377
   "patientCategory" : "GENERAL",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/api/patients/e0e1395e-65a4-484e-ab07-e751e4e4d7dd"
+      "href" : "http://localhost:8080/api/patients/1e71cd49-0d7a-4107-901e-e43ab5afdc59"
     }
   },
-  "_id" : "e0e1395e-65a4-484e-ab07-e751e4e4d7dd"
+  "_id" : "1e71cd49-0d7a-4107-901e-e43ab5afdc59"
 }</code></pre>
 </div>
 </div>
@@ -537,10 +538,10 @@ Content-Length: 343
   "patientCategory" : null,
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/api/patients/21098e15-6d8f-4d44-b28b-d71773f3c668"
+      "href" : "http://localhost:8080/api/patients/9e0db8b2-d135-4341-b2b2-7b70c148dfd5"
     }
   },
-  "_id" : "21098e15-6d8f-4d44-b28b-d71773f3c668"
+  "_id" : "9e0db8b2-d135-4341-b2b2-7b70c148dfd5"
 }</code></pre>
 </div>
 </div>
@@ -563,11 +564,25 @@ Content-Length: 343
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1898
+Content-Length: 2299
 
 {
   "_embedded" : {
     "patientModelList" : [ {
+      "patientNumber" : null,
+      "name" : null,
+      "age" : null,
+      "gender" : null,
+      "phoneNumber" : null,
+      "residentialAddress" : null,
+      "patientCategory" : null,
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/patients/7124bd32-2f99-4def-ba84-e2a430d0e6d5"
+        }
+      },
+      "_id" : "7124bd32-2f99-4def-ba84-e2a430d0e6d5"
+    }, {
       "patientNumber" : "10-1002",
       "name" : "John Doe",
       "age" : null,
@@ -577,10 +592,10 @@ Content-Length: 1898
       "patientCategory" : "GENERAL",
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/api/patients/e0e1395e-65a4-484e-ab07-e751e4e4d7dd"
+          "href" : "http://localhost:8080/api/patients/1e71cd49-0d7a-4107-901e-e43ab5afdc59"
         }
       },
-      "_id" : "e0e1395e-65a4-484e-ab07-e751e4e4d7dd"
+      "_id" : "1e71cd49-0d7a-4107-901e-e43ab5afdc59"
     }, {
       "patientNumber" : null,
       "name" : null,
@@ -591,10 +606,10 @@ Content-Length: 1898
       "patientCategory" : null,
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/api/patients/21098e15-6d8f-4d44-b28b-d71773f3c668"
+          "href" : "http://localhost:8080/api/patients/9e0db8b2-d135-4341-b2b2-7b70c148dfd5"
         }
       },
-      "_id" : "21098e15-6d8f-4d44-b28b-d71773f3c668"
+      "_id" : "9e0db8b2-d135-4341-b2b2-7b70c148dfd5"
     }, {
       "patientNumber" : null,
       "name" : null,
@@ -605,10 +620,10 @@ Content-Length: 1898
       "patientCategory" : null,
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/api/patients/c6335af3-7988-4016-b6c7-2c702d6e4bed"
+          "href" : "http://localhost:8080/api/patients/aa5703bf-b715-4c48-90a0-aa03a69ffe49"
         }
       },
-      "_id" : "c6335af3-7988-4016-b6c7-2c702d6e4bed"
+      "_id" : "aa5703bf-b715-4c48-90a0-aa03a69ffe49"
     }, {
       "patientNumber" : null,
       "name" : null,
@@ -619,10 +634,10 @@ Content-Length: 1898
       "patientCategory" : null,
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8080/api/patients/74fcd005-bce2-4f29-9adb-64bf00d8c424"
+          "href" : "http://localhost:8080/api/patients/1f54a031-b02a-4073-954c-8b40a66708a2"
         }
       },
-      "_id" : "74fcd005-bce2-4f29-9adb-64bf00d8c424"
+      "_id" : "1f54a031-b02a-4073-954c-8b40a66708a2"
     } ]
   },
   "_links" : {
@@ -632,7 +647,76 @@ Content-Length: 1898
   },
   "page" : {
     "size" : 20,
-    "totalElements" : 4,
+    "totalElements" : 5,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_search_patient">Search patient</h3>
+<div class="paragraph">
+<p>Patients can be searched via a query string.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the query string is a valid UUID, it is searched for a patient with this patient ID.</p>
+</li>
+<li>
+<p>If the query string is a valid patient number, it is search for a patient with this patient number.</p>
+</li>
+<li>
+<p>Otherwise, it is searched for patients with a name matching with the query string.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/search?q=7124bd32-2f99-4def-ba84-e2a430d0e6d5' -i -X GET \
+    -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 707
+
+{
+  "_embedded" : {
+    "patientModelList" : [ {
+      "patientNumber" : null,
+      "name" : null,
+      "age" : null,
+      "gender" : null,
+      "phoneNumber" : null,
+      "residentialAddress" : null,
+      "patientCategory" : null,
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/patients/7124bd32-2f99-4def-ba84-e2a430d0e6d5"
+        }
+      },
+      "_id" : "7124bd32-2f99-4def-ba84-e2a430d0e6d5"
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/patients/search?q=7124bd32-2f99-4def-ba84-e2a430d0e6d5&amp;page=0&amp;size=20"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 1,
     "totalPages" : 1,
     "number" : 0
   }
@@ -645,7 +729,7 @@ Content-Length: 1898
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-05-22 17:49:31 +0200
+Last updated 2021-05-24 17:34:57 +0200
 </div>
 </div>
 </body>

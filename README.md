@@ -66,7 +66,7 @@ It can be updated by executing the following commands:
 ./gradlew test
 ./docs/api/build.sh
 git add .
-git commit -m "Update API documentation [skip ci]"
+git commit -m "Update API documentation"
 git push
 ```
 
