@@ -55,6 +55,21 @@ The following list gives an overview of the contents in the project's directorie
 
 ## Maintenance
 
+### Udpate API documentation
+
+The [REST API documentation]() for this project is hosted on GitHub Pages via the `/docs` directory in this
+repository.
+
+It can be updated by executing the following commands:
+
+```
+./gradlew test
+./docs/api/build.sh
+git add .
+git commit -m "Update API documentation [skip ci]"
+git push
+```
+
 ### Deploy to staging environment
 
 ```
