@@ -19,6 +19,7 @@ import ksch.commons.http.NotFoundException;
 import ksch.patientmanagement.Patient;
 import ksch.patientmanagement.PatientService;
 import ksch.patientmanagement.infrastructure.PatientJpaRepository;
+import ksch.patientmanagement.infrastructure.PatientSearchSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -58,18 +60,31 @@ class PatientController {
         return patientModelAssembler.toModel(patient);
     }
 
-    @GetMapping
-    PagedModel<PatientModel> listPatients(Pageable pageable) {
-        var patients = patientRepository.findAll(pageable).map(p -> (Patient) p);
-        return pagedResourcesAssembler.toModel(patients, patientModelAssembler);
-    }
-
     @GetMapping("/{patientId}")
     public PatientModel getPatient(@PathVariable("patientId") UUID patientId) {
         var patient = patientRepository.findById(patientId).orElseThrow(NotFoundException::new);
         return patientModelAssembler.toModel(patient);
     }
 
+    @GetMapping
+    PagedModel<PatientModel> listPatients(Pageable pageable) {
+        var patients = patientRepository.findAll(pageable).map(p -> (Patient) p);
+        return pagedResourcesAssembler.toModel(patients, patientModelAssembler);
+    }
+
+    @GetMapping("/search")
+    PagedModel<PatientModel> searchPatients(@RequestParam("q") String query, Pageable pageable) {
+        var patients = patientRepository
+                .findAll(new PatientSearchSpecification(query), pageable)
+                .map(p -> (Patient) p);
+        return pagedResourcesAssembler.toModel(patients, patientModelAssembler);
+    }
+
+    /**
+     * @deprecated This endpoint has no actual use but was added to be able to experiment with subresource
+     * in the client SDK design.
+     */
+    @Deprecated
     @GetMapping("/{patientId}/residential-address")
     public HashMap<String, String> getResidentialAddress(@PathVariable("patientId") UUID patientId) {
         var residentialAddress = patientRepository.findById(patientId)
