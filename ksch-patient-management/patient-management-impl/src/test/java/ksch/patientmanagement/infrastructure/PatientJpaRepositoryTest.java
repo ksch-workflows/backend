@@ -28,7 +28,9 @@ public class PatientJpaRepositoryTest {
     private Patient johnDoe;
 
     @BeforeEach
-    public void createPatients() {
+    public void setup() {
+        patientRepository.deleteAll();
+
         patientService.createPatient();
         janeDoe = patientService.createPatient(new JaneDoe());
         johnDoe = patientService.createPatient(new JohnDoe());
