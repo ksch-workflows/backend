@@ -28,7 +28,6 @@ public class PatientSearchSpecification implements Specification<PatientDao> {
     private final static Pattern UUID_PATTERN =
             Pattern.compile("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$");
 
-
     final String searchCriteria;
 
     public PatientSearchSpecification(String searchCriteria) {

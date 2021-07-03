@@ -81,7 +81,7 @@ class PatientController {
     }
 
     /**
-     * @deprecated This endpoint has not actual use but was added to be able to experiment with subresource
+     * @deprecated This endpoint has no actual use but was added to be able to experiment with subresource
      * in the client SDK design.
      */
     @Deprecated
