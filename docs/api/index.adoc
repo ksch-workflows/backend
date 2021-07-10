@@ -1,4 +1,4 @@
 = REST API Documentation
 :toc: left
 
-include::../../ksch-patient-management/impl/src/docs/patient-management.adoc[]
+include::../../ksch-patient-management/patient-management-impl/src/docs/patient-management.adoc[]

@@ -1,4 +1,4 @@
 dependencies {
-    api project(':ksch-billing:api')
-    implementation project(':ksch-billing:impl')
+    api project(':ksch-billing:billing-api')
+    implementation project(':ksch-billing:billing-impl')
 }
