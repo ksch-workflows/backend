@@ -1,5 +1,5 @@
 dependencies {
-    api project(':ksch-patient-management:patient-management-api')
+    api project(':ksch-patient-management:api')
 
     implementation project(':commons:http')
     implementation project(':commons:util')

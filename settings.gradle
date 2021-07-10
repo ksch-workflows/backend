@@ -20,17 +20,17 @@ include("commons:http")
 include("commons:test")
 include("commons:util")
 
-include("ksch-administration:administration-api")
-include("ksch-administration:administration-impl")
+include("ksch-administration:api")
+include("ksch-administration:impl")
 
-include("ksch-billing:billing-api")
-include("ksch-billing:billing-impl")
+include("ksch-billing:api")
+include("ksch-billing:impl")
 
-include("ksch-patient-management:patient-management-api")
-include("ksch-patient-management:patient-management-impl")
+include("ksch-patient-management:api")
+include("ksch-patient-management:impl")
 
-include("ksch-reporting:reporting-api")
-include("ksch-reporting:reporting-impl")
+include("ksch-reporting:api")
+include("ksch-reporting:impl")
 
-include("ksch-scheduling:scheduling-api")
-include("ksch-scheduling:scheduling-impl")
+include("ksch-scheduling:api")
+include("ksch-scheduling:impl")
