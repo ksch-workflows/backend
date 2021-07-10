@@ -53,9 +53,23 @@ The following list gives an overview of the contents in the project's directorie
 - `ksch-patient-management`: domain module for patient-related workflows
 - `server`: the application's entry point, global configuration, and database migrations
 
+## Development
+
+### Problems with module dependencies
+
+If IntelliJ cannot resolve the dependencies between modules, then most likely this can be fixed by resetting
+the caches or re-generating the project files.
+
+[File > Invalidate caches]
+
+```
+find . -name "*.iml" -or -name "*.ipr" -or -name "*.iws" | xargs rm
+./gradlew idea
+```
+
 ## Maintenance
 
-### Udpate API documentation
+### Update API documentation
 
 The [REST API documentation](https://ksch-workflows.github.io/backend/) for this project is hosted on GitHub
 Pages via the `/docs` directory in this repository.
