@@ -13,29 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.test;
+package ksch.testing;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
+import org.opentest4j.AssertionFailedError;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-public class TestResource {
-
-    private final Path path;
+@NoArgsConstructor
+public class ObjectVerifier {
 
     @SneakyThrows
-    public TestResource(String path) {
-        var resource = Thread.currentThread().getContextClassLoader().getResource(path);
-        if (resource == null) {
-            throw new IllegalArgumentException("Resource not found: " + path);
+    public static void verifyAllFieldsAreSet(Object object) {
+        var objectMapper = new ObjectMapper();
+        var json = objectMapper.writeValueAsString(object);
+        if (json.contains("null")) {
+            var message = "The provided object contains one or more fields which are not initialized: " + json;
+            throw new AssertionFailedError(message);
         }
-        this.path = Paths.get(resource.toURI());
-    }
-
-    @SneakyThrows
-    public String readString() {
-        return Files.readString(path);
     }
 }
