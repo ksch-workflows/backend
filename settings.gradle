@@ -17,6 +17,7 @@ rootProject.name = "ksch-workflows-backend"
 include "server"
 
 include("commons:http")
+include("commons:link-registry")
 include("commons:testing")
 include("commons:util")
 
@@ -34,3 +35,6 @@ include("ksch-reporting:reporting-impl")
 
 include("ksch-scheduling:scheduling-api")
 include("ksch-scheduling:scheduling-impl")
+
+include("ksch-visit:visit-api")
+include("ksch-visit:visit-impl")

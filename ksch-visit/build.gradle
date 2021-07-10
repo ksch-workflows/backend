@@ -1,0 +1,4 @@
+dependencies {
+    api project(':ksch-visit:visit-api')
+    implementation project(':ksch-visit:visit-impl')
+}
