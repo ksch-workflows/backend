@@ -16,7 +16,7 @@
 package ksch.patientmanagement.rest;
 
 import ksch.patientmanagement.PatientService;
-import ksch.test.TestResource;
+import ksch.testing.TestResource;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
