@@ -1,4 +1,4 @@
 dependencies {
-    api project(':ksch-administration:administration-api')
-    implementation project(':ksch-administration:administration-impl')
+    api project(':ksch-administration:api')
+    implementation project(':ksch-administration:impl')
 }
