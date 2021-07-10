@@ -1,22 +1,20 @@
-package ksch.patientmanagement.rest;
+package ksch.billing;
 
 import ksch.linkregistry.LinkRegistry;
 import ksch.patientmanagement.Patient;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PatientResourceExtensions implements ApplicationRunner {
+public class BillingPatientResourceExtensions {
 
     private final LinkRegistry linkRegistry;
 
-    public PatientResourceExtensions(LinkRegistry linkRegistry) {
+    public BillingPatientResourceExtensions(LinkRegistry linkRegistry) {
         this.linkRegistry = linkRegistry;
     }
 
-    @Override
     public void run(ApplicationArguments args) {
         linkRegistry.registerLink(
                 Patient.class,

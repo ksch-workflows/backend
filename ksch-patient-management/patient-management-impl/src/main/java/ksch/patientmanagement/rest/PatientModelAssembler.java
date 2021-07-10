@@ -31,12 +31,10 @@ class PatientModelAssembler implements RepresentationModelAssembler<Patient, Pat
 
     @Override
     public PatientModel toModel(Patient patient) {
-
-        linkRegistry.getLinks(Patient.class, patient);
-
         var result = PatientModel.from(patient);
         var selfLink = linkTo(PatientController.class).slash(patient.getId()).withSelfRel();
         result.add(selfLink);
+        result.add(linkRegistry.getLinks(Patient.class, patient));
         return result;
     }
 }
