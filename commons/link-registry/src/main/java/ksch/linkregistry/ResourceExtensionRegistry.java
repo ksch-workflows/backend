@@ -18,7 +18,7 @@ public class ResourceExtensionRegistry {
 
     private final Map<Class, List<LinkRegistryEntry>> entries = new HashMap<>();
 
-    public <T> void registerLink(Class<T> cls, Function<T, Link> linkProvider) {
+    <T> void registerLink(Class<T> cls, Function<T, Link> linkProvider) {
         if (entries.containsKey(cls)) {
             var links = entries.get(cls);
             var entry = new LinkRegistryEntry(linkProvider);
