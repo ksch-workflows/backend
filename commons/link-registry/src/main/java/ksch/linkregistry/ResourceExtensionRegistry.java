@@ -1,7 +1,5 @@
 package ksch.linkregistry;
 
-
-import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
@@ -14,28 +12,20 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 
-// TODO Maybe this can be moved to the "server" module
-@SuppressWarnings("rawtypes")
 @Service
-public class LinkRegistry {
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class ResourceExtensionRegistry {
 
-    private Map<Class, List<LinkRegistryEntry>> entries = new HashMap<>();
+    private final Map<Class, List<LinkRegistryEntry>> entries = new HashMap<>();
 
-    public <T> void registerLink(Class<T> cls, String relation, Function<T, Link> linkProvider) {
+    public <T> void registerLink(Class<T> cls, Function<T, Link> linkProvider) {
         if (entries.containsKey(cls)) {
             var links = entries.get(cls);
-            var entry = new LinkRegistryEntry(relation, linkProvider);
-            if (links.contains(entry)) {
-                var msg = String.format("There is already a link with relation '%s' registered from class '%s'.",
-                        relation, cls
-                );
-                throw new IllegalStateException(msg);
-            } else {
-                links.add(entry);
-            }
+            var entry = new LinkRegistryEntry(linkProvider);
+            links.add(entry);
         } else {
             var links = new ArrayList<LinkRegistryEntry>();
-            links.add(new LinkRegistryEntry(relation, linkProvider));
+            links.add(new LinkRegistryEntry(linkProvider));
             entries.put(cls, links);
         }
     }
@@ -53,9 +43,7 @@ public class LinkRegistry {
     }
 
     @RequiredArgsConstructor
-    @EqualsAndHashCode(of = "relation")
     private static class LinkRegistryEntry <T> {
-        final String relation;
         final Function<T, Link> linkProvider;
     }
 }
