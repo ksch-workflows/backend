@@ -55,6 +55,15 @@ The following list gives an overview of the contents in the project's directorie
 
 ## Development
 
+### Add license comments
+
+In order to add license header comments to all Java files which don't have them yet, you
+can call the following shell script:
+
+```
+./docs/license/add-license-notices.sh
+```
+
 ### Problems with module dependencies
 
 If IntelliJ cannot resolve the dependencies between modules, then most likely this can be fixed by resetting
