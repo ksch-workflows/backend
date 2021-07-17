@@ -18,17 +18,19 @@ package ksch.visit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
 @RestController
+@RequestMapping(value = "/api/patients")
 @RequiredArgsConstructor
 public class VisitController {
 
     private final VisitService visitService;
 
-    @PostMapping("/api/patients/{patientId}/visits")
+    @PostMapping("/{patientId}/visits")
     public Object startVisit(@PathVariable("patientId") UUID patientId) {
 
         return "hello";
