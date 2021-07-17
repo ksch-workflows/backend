@@ -26,6 +26,16 @@ public class ResourceExtensionsTest {
     }
 
     @Test
+    public void should_two_links_to_resource_extensions() {
+        var resourceExtensions = new TwoResourceExtensions(resourceExtensionRegistry);
+
+        resourceExtensions.init();
+
+        var links = resourceExtensionRegistry.getLinks(ExampleEntity.class, exampleEntity);
+        assertThat(links.size(), equalTo(2));
+    }
+
+    @Test
     public void should_get_empty_results_for_unknown_type() {
         var links = resourceExtensionRegistry.getLinks(ExampleEntity.class, exampleEntity);
         assertThat(links.size(), equalTo(0));
