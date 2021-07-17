@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
@@ -55,6 +56,7 @@ public class ResourceExtensionRegistry {
             var links = entries.get(cls);
             return links.stream()
                     .map(link -> link.linkProvider.apply(entity))
+                    .filter(Objects::nonNull) // TODO Create unit test for this scenario
                     .map(l -> (Link) l)
                     .collect(toList());
         }

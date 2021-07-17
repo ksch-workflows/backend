@@ -18,6 +18,7 @@ package ksch.visit;
 import ksch.commons.http.ResourceExtensionRegistry;
 import ksch.commons.http.ResourceExtensions;
 import ksch.patientmanagement.Patient;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -32,12 +33,10 @@ public class VisitResourceExtensions extends ResourceExtensions {
 
     @Override
     public void init() {
+        registerLink(Patient.class, this::createStartVisitLink);
+    }
 
-
-
-        registerLink(
-                Patient.class,
-                (p) -> linkTo(methodOn(VisitController.class).startVisit(p.getId())).withRel("start-visit")
-        );
+    private Link createStartVisitLink(Patient p) {
+        return linkTo(methodOn(VisitController.class).startVisit(p.getId())).withRel("start-visit");
     }
 }
