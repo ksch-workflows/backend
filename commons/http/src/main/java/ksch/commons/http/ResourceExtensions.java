@@ -1,15 +1,18 @@
 package ksch.commons.http;
 
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
 import java.util.function.Function;
+
+import static lombok.AccessLevel.PROTECTED;
 
 public abstract class ResourceExtensions {
 
     @Autowired
+    @Setter(PROTECTED) // required for testing
     private ResourceExtensionRegistry resourceExtensionRegistry;
 
     /**
@@ -24,14 +27,7 @@ public abstract class ResourceExtensions {
      * Registers a callback function which generates links in REST resources for entities
      * of the provided type.
      */
-    protected <T> void registerLink(Class<T> cls, Function<T, Link> linkProvider) {
+    protected final <T> void registerLink(Class<T> cls, Function<T, Link> linkProvider) {
         resourceExtensionRegistry.registerLink(cls, linkProvider);
-    }
-
-    /**
-     * @return the links which should be added to a resource for the provided entity.
-     */
-    public <T> List<Link> getLinks(Class<T> cls, T entity) {
-        return resourceExtensionRegistry.getLinks(cls, entity);
     }
 }

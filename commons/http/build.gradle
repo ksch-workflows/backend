@@ -1,4 +1,11 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-web'
+    testCompileOnly 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-library
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
 }

@@ -2,7 +2,7 @@ package ksch.commons.http;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Link;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,9 +12,9 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 
-@Service
+@Component
 @SuppressWarnings({"rawtypes", "unchecked"})
-class ResourceExtensionRegistry {
+public class ResourceExtensionRegistry {
 
     private final Map<Class, List<LinkRegistryEntry>> entries = new HashMap<>();
 
@@ -30,7 +30,10 @@ class ResourceExtensionRegistry {
         }
     }
 
-    <T> List<Link> getLinks(Class<T> cls, T entity) {
+    /**
+     * @return the links which should be added to a resource for the provided entity.
+     */
+    public <T> List<Link> getLinks(Class<T> cls, T entity) {
         if (!entries.containsKey(cls)) {
             return new ArrayList<>();
         } else {

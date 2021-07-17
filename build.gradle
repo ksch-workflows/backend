@@ -37,6 +37,9 @@ configure(subprojects.findAll { !it.name.endsWith('-api') } ) {
     dependencies {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
 
+        // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-library
+        testImplementation 'org.hamcrest:hamcrest-library:2.2'
+
         // Lombok
         annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
         compileOnly "org.projectlombok:lombok:${lombokVersion}"

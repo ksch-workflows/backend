@@ -15,7 +15,7 @@
  */
 package ksch.patientmanagement.rest;
 
-import ksch.commons.http.ResourceExtensions;
+import ksch.commons.http.ResourceExtensionRegistry;
 import ksch.patientmanagement.Patient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -27,14 +27,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @RequiredArgsConstructor
 class PatientModelAssembler implements RepresentationModelAssembler<Patient, PatientModel> {
 
-    private final ResourceExtensions resourceExtensions;
+    private final ResourceExtensionRegistry resourceExtensionRegistry;
 
     @Override
     public PatientModel toModel(Patient patient) {
         var result = PatientModel.from(patient);
         var selfLink = linkTo(PatientController.class).slash(patient.getId()).withSelfRel();
         result.add(selfLink);
-        result.add(resourceExtensions.getLinks(Patient.class, patient));
+        result.add(resourceExtensionRegistry.getLinks(Patient.class, patient));
         return result;
     }
 }
