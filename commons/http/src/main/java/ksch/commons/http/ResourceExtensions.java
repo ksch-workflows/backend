@@ -15,20 +15,16 @@
  */
 package ksch.commons.http;
 
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Link;
 
 import javax.annotation.PostConstruct;
 import java.util.function.Function;
 
-import static lombok.AccessLevel.PROTECTED;
-
+@RequiredArgsConstructor
 public abstract class ResourceExtensions {
 
-    @Autowired
-    @Setter(PROTECTED) // required for testing
-    private ResourceExtensionRegistry resourceExtensionRegistry;
+    private final ResourceExtensionRegistry resourceExtensionRegistry;
 
     /**
      * Use this method to register the resource extensions.

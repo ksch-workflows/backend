@@ -20,7 +20,7 @@ import org.springframework.hateoas.Link;
 public class SingleResourceExtension extends ResourceExtensions {
 
     public SingleResourceExtension(ResourceExtensionRegistry resourceExtensionRegistry) {
-        setResourceExtensionRegistry(resourceExtensionRegistry);
+        super(resourceExtensionRegistry);
     }
 
     @Override

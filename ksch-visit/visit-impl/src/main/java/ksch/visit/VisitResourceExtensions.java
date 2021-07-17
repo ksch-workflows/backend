@@ -15,6 +15,7 @@
  */
 package ksch.visit;
 
+import ksch.commons.http.ResourceExtensionRegistry;
 import ksch.commons.http.ResourceExtensions;
 import ksch.patientmanagement.Patient;
 import org.springframework.hateoas.Link;
@@ -22,6 +23,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VisitResourceExtensions extends ResourceExtensions {
+
+    public VisitResourceExtensions(ResourceExtensionRegistry resourceExtensionRegistry) {
+        super(resourceExtensionRegistry);
+    }
 
     @Override
     public void init() {
