@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class ResourceExtensionRegistry {
+class ResourceExtensionRegistry {
 
     private final Map<Class, List<LinkRegistryEntry>> entries = new HashMap<>();
 
@@ -30,7 +30,7 @@ public class ResourceExtensionRegistry {
         }
     }
 
-    public <T> List<Link> getLinks(Class<T> cls, T entity) {
+    <T> List<Link> getLinks(Class<T> cls, T entity) {
         if (!entries.containsKey(cls)) {
             return new ArrayList<>();
         } else {
