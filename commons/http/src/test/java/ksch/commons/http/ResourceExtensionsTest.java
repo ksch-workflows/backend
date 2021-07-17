@@ -22,6 +22,7 @@ public class ResourceExtensionsTest {
 
         var links = resourceExtensionRegistry.getLinks(ExampleEntity.class, exampleEntity);
         assertThat(links.size(), equalTo(1));
+        assertThat(links.get(0).getRel().value(), equalTo("current-example"));
         assertThat(links.get(0).getHref(), containsString(exampleEntity.getId().toString()));
     }
 
@@ -33,11 +34,16 @@ public class ResourceExtensionsTest {
 
         var links = resourceExtensionRegistry.getLinks(ExampleEntity.class, exampleEntity);
         assertThat(links.size(), equalTo(2));
+        assertThat(links.get(0).getRel().value(), equalTo("current-example"));
+        assertThat(links.get(0).getHref(), containsString(exampleEntity.getId().toString()));
+        assertThat(links.get(1).getRel().value(), equalTo("default-example"));
+        assertThat(links.get(1).getHref(), containsString(exampleEntity.getId().toString()));
     }
 
     @Test
     public void should_get_empty_results_for_unknown_type() {
         var links = resourceExtensionRegistry.getLinks(ExampleEntity.class, exampleEntity);
+
         assertThat(links.size(), equalTo(0));
     }
 }
