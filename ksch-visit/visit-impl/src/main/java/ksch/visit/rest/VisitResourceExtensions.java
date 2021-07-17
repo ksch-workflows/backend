@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.visit;
+package ksch.visit.rest;
 
 import ksch.commons.http.ResourceExtensionRegistry;
 import ksch.commons.http.ResourceExtensions;
 import ksch.patientmanagement.Patient;
+import ksch.visit.infrastructure.VisitJpaRepository;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +30,15 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class VisitResourceExtensions extends ResourceExtensions {
 
-    public VisitResourceExtensions(ResourceExtensionRegistry resourceExtensionRegistry) {
+    private final VisitJpaRepository visitRepository;
+
+    public VisitResourceExtensions(
+            ResourceExtensionRegistry resourceExtensionRegistry,
+            VisitJpaRepository visitRepository
+    ) {
         super(resourceExtensionRegistry);
+
+        this.visitRepository = visitRepository;
     }
 
     @Override
@@ -38,7 +46,12 @@ public class VisitResourceExtensions extends ResourceExtensions {
         registerLink(Patient.class, this::createStartVisitLink);
     }
 
-    private Optional<Link> createStartVisitLink(Patient p) {
-        return Optional.of(linkTo(methodOn(VisitController.class).startVisit(p.getId())).withRel("start-visit"));
+    private Optional<Link> createStartVisitLink(Patient patient) {
+        if (visitRepository.hasActiveVisit(patient.getId())) {
+            return Optional.empty();
+        } else {
+            var link = linkTo(methodOn(VisitController.class).startVisit(patient.getId())).withRel("start-visit");
+            return Optional.of(link);
+        }
     }
 }

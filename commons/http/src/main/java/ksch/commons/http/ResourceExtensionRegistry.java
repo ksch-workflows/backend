@@ -57,6 +57,7 @@ public class ResourceExtensionRegistry {
             return links.stream()
                     .map(link -> link.linkProvider.apply(entity))
                     .map(link -> (Optional<Link>) link)
+                    .filter(Optional::isPresent) // TODO Missing unit test for this part
                     .map(Optional::get)
                     .collect(toList());
         }

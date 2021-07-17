@@ -13,22 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.visit;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
-
-public interface Visit {
-
-    UUID getId();
-
-    String getOpdNumber();
-
-    UUID getPatientId();
-
-    VisitType getType();
-
-    LocalDateTime getTimeStart();
-
-    LocalDateTime getTimeEnd();
-}
+@org.hibernate.annotations.GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+)
+package ksch.billing;

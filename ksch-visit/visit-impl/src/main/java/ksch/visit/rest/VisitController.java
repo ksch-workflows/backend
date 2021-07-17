@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.visit;
+package ksch.visit.rest;
 
+import ksch.visit.VisitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,6 @@ public class VisitController {
 
     @PostMapping("/{patientId}/visits")
     public Object startVisit(@PathVariable("patientId") UUID patientId) {
-
-        return "hello";
+        return visitService.startVisit(patientId); // TODO Return proper REST resource
     }
 }
