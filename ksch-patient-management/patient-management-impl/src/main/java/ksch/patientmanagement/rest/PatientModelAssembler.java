@@ -15,7 +15,7 @@
  */
 package ksch.patientmanagement.rest;
 
-import ksch.linkregistry.ResourceExtensionRegistry;
+import ksch.commons.http.ResourceExtensionRegistry;
 import ksch.patientmanagement.Patient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.server.RepresentationModelAssembler;

@@ -1,4 +1,4 @@
-package ksch.linkregistry;
+package ksch.commons.http;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;

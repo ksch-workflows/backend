@@ -1,4 +1,4 @@
-package ksch.linkregistry;
+package ksch.commons.http;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Link;
