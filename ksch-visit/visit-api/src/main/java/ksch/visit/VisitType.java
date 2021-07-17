@@ -13,22 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement;
+package ksch.visit;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+public enum VisitType {
 
-public interface Visit {
+    /**
+     * Out Patient Department
+     */
+    OPD,
 
-    UUID getId();
+    /**
+     * In Patient Department
+     */
+    IPD,
 
-    String getOpdNumber();
-
-    Patient getPatient();
-
-    VisitType getType();
-
-    LocalDateTime getTimeStart();
-
-    LocalDateTime getTimeEnd();
+    PHYSIO_THERAPY
 }
