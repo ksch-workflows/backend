@@ -17,6 +17,8 @@ package ksch.commons.http;
 
 import org.springframework.hateoas.Link;
 
+import java.util.Optional;
+
 public class SingleResourceExtension extends ResourceExtensions {
 
     public SingleResourceExtension(ResourceExtensionRegistry resourceExtensionRegistry) {
@@ -27,7 +29,7 @@ public class SingleResourceExtension extends ResourceExtensions {
     protected void init() {
         registerLink(
                 ExampleEntity.class,
-                exampleEntity -> Link.of("http://localhost/examples/" + exampleEntity.getId(), "current-example")
+                exampleEntity -> Optional.of(Link.of("http://localhost/examples/" + exampleEntity.getId(), "current-example"))
         );
     }
 }

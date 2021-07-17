@@ -21,6 +21,8 @@ import ksch.patientmanagement.Patient;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -36,7 +38,7 @@ public class VisitResourceExtensions extends ResourceExtensions {
         registerLink(Patient.class, this::createStartVisitLink);
     }
 
-    private Link createStartVisitLink(Patient p) {
-        return linkTo(methodOn(VisitController.class).startVisit(p.getId())).withRel("start-visit");
+    private Optional<Link> createStartVisitLink(Patient p) {
+        return Optional.of(linkTo(methodOn(VisitController.class).startVisit(p.getId())).withRel("start-visit"));
     }
 }

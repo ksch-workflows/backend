@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
@@ -34,7 +34,7 @@ public class ResourceExtensionRegistry {
 
     private final Map<Class, List<LinkRegistryEntry>> entries = new HashMap<>();
 
-    <T> void registerLink(Class<T> cls, Function<T, Link> linkProvider) {
+    <T> void registerLink(Class<T> cls, Function<T, Optional<Link>> linkProvider) {
         if (entries.containsKey(cls)) {
             var links = entries.get(cls);
             var entry = new LinkRegistryEntry(linkProvider);
@@ -56,14 +56,14 @@ public class ResourceExtensionRegistry {
             var links = entries.get(cls);
             return links.stream()
                     .map(link -> link.linkProvider.apply(entity))
-                    .filter(Objects::nonNull) // TODO Create unit test for this scenario
-                    .map(l -> (Link) l)
+                    .map(link -> (Optional<Link>) link)
+                    .map(Optional::get)
                     .collect(toList());
         }
     }
 
     @RequiredArgsConstructor
     private static class LinkRegistryEntry <T> {
-        final Function<T, Link> linkProvider;
+        final Function<T, Optional<Link>> linkProvider;
     }
 }

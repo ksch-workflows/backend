@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Link;
 
 import javax.annotation.PostConstruct;
+import java.util.Optional;
 import java.util.function.Function;
 
 @RequiredArgsConstructor
@@ -38,7 +39,7 @@ public abstract class ResourceExtensions {
      * Registers a callback function which generates links in REST resources for entities
      * of the provided type.
      */
-    protected final <T> void registerLink(Class<T> cls, Function<T, Link> linkProvider) {
+    protected final <T> void registerLink(Class<T> cls, Function<T, Optional<Link>> linkProvider) {
         resourceExtensionRegistry.registerLink(cls, linkProvider);
     }
 }
