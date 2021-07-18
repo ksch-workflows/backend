@@ -37,8 +37,11 @@ configure(subprojects.findAll { !it.name.endsWith('-api') } ) {
     dependencies {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
 
+        // Testing libraries and frameworks
         testImplementation "org.hamcrest:hamcrest-library:${hamcrestVersion}"
         testImplementation 'org.junit.jupiter:junit-jupiter-api'
+        testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+        testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
         // Lombok

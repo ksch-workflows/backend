@@ -33,6 +33,7 @@ public class VisitController {
 
     @PostMapping("/{patientId}/visits")
     public Object startVisit(@PathVariable("patientId") UUID patientId) {
+
         return visitService.startVisit(patientId); // TODO Return proper REST resource
     }
 }
