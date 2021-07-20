@@ -30,7 +30,7 @@ import static java.util.stream.Collectors.toList;
 
 @Component
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class ResourceExtensionRegistry {
+public class ResourceExtensionsRegistry {
 
     private final Map<Class, List<LinkRegistryEntry>> entries = new HashMap<>();
 

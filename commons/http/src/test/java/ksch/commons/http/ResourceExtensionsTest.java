@@ -25,17 +25,17 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ResourceExtensionsTest {
 
-    private final ResourceExtensionRegistry resourceExtensionRegistry = new ResourceExtensionRegistry();
+    private final ResourceExtensionsRegistry resourceExtensionsRegistry = new ResourceExtensionsRegistry();
 
     private final ExampleEntity exampleEntity = new ExampleEntity(UUID.randomUUID());
 
     @Test
     public void should_add_link_to_resource_extensions() {
-        var resourceExtension = new SingleResourceExtension(resourceExtensionRegistry);
+        var resourceExtension = new SingleResourceExtension(resourceExtensionsRegistry);
 
         resourceExtension.init();
 
-        var links = resourceExtensionRegistry.getLinks(ExampleEntity.class, exampleEntity);
+        var links = resourceExtensionsRegistry.getLinks(ExampleEntity.class, exampleEntity);
         assertThat(links.size(), equalTo(1));
         assertThat(links.get(0).getRel().value(), equalTo("current-example"));
         assertThat(links.get(0).getHref(), containsString(exampleEntity.getId().toString()));
@@ -43,11 +43,11 @@ public class ResourceExtensionsTest {
 
     @Test
     public void should_two_links_to_resource_extensions() {
-        var resourceExtensions = new TwoResourceExtensions(resourceExtensionRegistry);
+        var resourceExtensions = new TwoResourceExtensions(resourceExtensionsRegistry);
 
         resourceExtensions.init();
 
-        var links = resourceExtensionRegistry.getLinks(ExampleEntity.class, exampleEntity);
+        var links = resourceExtensionsRegistry.getLinks(ExampleEntity.class, exampleEntity);
         assertThat(links.size(), equalTo(2));
         assertThat(links.get(0).getRel().value(), equalTo("current-example"));
         assertThat(links.get(0).getHref(), containsString(exampleEntity.getId().toString()));
@@ -57,7 +57,7 @@ public class ResourceExtensionsTest {
 
     @Test
     public void should_get_empty_results_for_unknown_type() {
-        var links = resourceExtensionRegistry.getLinks(ExampleEntity.class, exampleEntity);
+        var links = resourceExtensionsRegistry.getLinks(ExampleEntity.class, exampleEntity);
 
         assertThat(links.size(), equalTo(0));
     }

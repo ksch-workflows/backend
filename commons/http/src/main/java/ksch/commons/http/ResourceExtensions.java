@@ -25,7 +25,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public abstract class ResourceExtensions {
 
-    private final ResourceExtensionRegistry resourceExtensionRegistry;
+    private final ResourceExtensionsRegistry resourceExtensionsRegistry;
 
     /**
      * Use this method to register the resource extensions.
@@ -40,6 +40,6 @@ public abstract class ResourceExtensions {
      * of the provided type.
      */
     protected final <T> void registerLink(Class<T> cls, Function<T, Optional<Link>> linkProvider) {
-        resourceExtensionRegistry.registerLink(cls, linkProvider);
+        resourceExtensionsRegistry.registerLink(cls, linkProvider);
     }
 }

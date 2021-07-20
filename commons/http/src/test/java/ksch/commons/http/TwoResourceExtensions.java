@@ -21,8 +21,8 @@ import java.util.Optional;
 
 public class TwoResourceExtensions extends ResourceExtensions {
 
-    public TwoResourceExtensions(ResourceExtensionRegistry resourceExtensionRegistry) {
-        super(resourceExtensionRegistry);
+    public TwoResourceExtensions(ResourceExtensionsRegistry resourceExtensionsRegistry) {
+        super(resourceExtensionsRegistry);
     }
 
     @Override

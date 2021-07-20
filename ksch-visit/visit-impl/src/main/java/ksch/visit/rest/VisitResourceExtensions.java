@@ -15,7 +15,7 @@
  */
 package ksch.visit.rest;
 
-import ksch.commons.http.ResourceExtensionRegistry;
+import ksch.commons.http.ResourceExtensionsRegistry;
 import ksch.commons.http.ResourceExtensions;
 import ksch.patientmanagement.Patient;
 import ksch.visit.infrastructure.VisitJpaRepository;
@@ -36,10 +36,10 @@ public class VisitResourceExtensions extends ResourceExtensions {
     private final VisitJpaRepository visitRepository;
 
     public VisitResourceExtensions(
-            ResourceExtensionRegistry resourceExtensionRegistry,
+            ResourceExtensionsRegistry resourceExtensionsRegistry,
             VisitJpaRepository visitRepository
     ) {
-        super(resourceExtensionRegistry);
+        super(resourceExtensionsRegistry);
 
         this.visitRepository = visitRepository;
     }

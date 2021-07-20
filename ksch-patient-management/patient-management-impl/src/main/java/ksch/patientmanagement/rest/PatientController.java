@@ -47,37 +47,37 @@ class PatientController {
 
     private final PagedResourcesAssembler<Patient> pagedResourcesAssembler;
 
-    private final PatientModelAssembler patientModelAssembler;
+    private final PatientResourceAssembler patientResourceAssembler;
 
     @PostMapping
-    PatientModel createPatient(@RequestBody Optional<PatientPayload> request) {
+    PatientResource createPatient(@RequestBody Optional<PatientPayload> request) {
         Patient patient = null;
         if (request.isPresent()) {
             patient = patientService.createPatient(request.get());
         } else {
             patient = patientService.createPatient();
         }
-        return patientModelAssembler.toModel(patient);
+        return patientResourceAssembler.toModel(patient);
     }
 
     @GetMapping("/{patientId}")
-    public PatientModel getPatient(@PathVariable("patientId") UUID patientId) {
+    public PatientResource getPatient(@PathVariable("patientId") UUID patientId) {
         var patient = patientRepository.findById(patientId).orElseThrow(NotFoundException::new);
-        return patientModelAssembler.toModel(patient);
+        return patientResourceAssembler.toModel(patient);
     }
 
     @GetMapping
-    PagedModel<PatientModel> listPatients(Pageable pageable) {
+    PagedModel<PatientResource> listPatients(Pageable pageable) {
         var patients = patientRepository.findAll(pageable).map(p -> (Patient) p);
-        return pagedResourcesAssembler.toModel(patients, patientModelAssembler);
+        return pagedResourcesAssembler.toModel(patients, patientResourceAssembler);
     }
 
     @GetMapping("/search")
-    PagedModel<PatientModel> searchPatients(@RequestParam("q") String query, Pageable pageable) {
+    PagedModel<PatientResource> searchPatients(@RequestParam("q") String query, Pageable pageable) {
         var patients = patientRepository
                 .findAll(new PatientSearchSpecification(query), pageable)
                 .map(p -> (Patient) p);
-        return pagedResourcesAssembler.toModel(patients, patientModelAssembler);
+        return pagedResourcesAssembler.toModel(patients, patientResourceAssembler);
     }
 
     /**

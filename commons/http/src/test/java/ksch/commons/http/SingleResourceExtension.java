@@ -21,8 +21,8 @@ import java.util.Optional;
 
 public class SingleResourceExtension extends ResourceExtensions {
 
-    public SingleResourceExtension(ResourceExtensionRegistry resourceExtensionRegistry) {
-        super(resourceExtensionRegistry);
+    public SingleResourceExtension(ResourceExtensionsRegistry resourceExtensionsRegistry) {
+        super(resourceExtensionsRegistry);
     }
 
     @Override

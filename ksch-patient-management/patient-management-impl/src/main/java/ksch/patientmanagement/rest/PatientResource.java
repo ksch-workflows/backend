@@ -33,7 +33,7 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
-class PatientModel extends RepresentationModel<PatientModel> implements Patient {
+class PatientResource extends RepresentationModel<PatientResource> implements Patient {
 
     @JsonProperty("_id")
     private UUID id;
@@ -52,7 +52,7 @@ class PatientModel extends RepresentationModel<PatientModel> implements Patient 
 
     private String patientCategory;
 
-    static PatientModel from(Patient patient) {
-        return new TypeConverter<>(Patient.class).convertTo(patient, PatientModel.class);
+    static PatientResource from(Patient patient) {
+        return new TypeConverter<>(Patient.class).convertTo(patient, PatientResource.class);
     }
 }
