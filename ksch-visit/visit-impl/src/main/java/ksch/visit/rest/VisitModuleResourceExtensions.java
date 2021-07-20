@@ -31,11 +31,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  * This class is responsible to register the visit related links in related REST resources.
  */
 @Component
-public class VisitResourceExtensions extends ResourceExtensions {
+public class VisitModuleResourceExtensions extends ResourceExtensions {
 
     private final VisitJpaRepository visitRepository;
 
-    public VisitResourceExtensions(
+    public VisitModuleResourceExtensions(
             ResourceExtensionsRegistry resourceExtensionsRegistry,
             VisitJpaRepository visitRepository
     ) {
