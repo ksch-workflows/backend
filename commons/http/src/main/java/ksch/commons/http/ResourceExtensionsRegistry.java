@@ -53,10 +53,8 @@ public class ResourceExtensionsRegistry {
         if (!entries.containsKey(cls)) {
             return new ArrayList<>();
         } else {
-            var links = entries.get(cls);
-            return links.stream()
-                    .map(link -> link.linkProvider.apply(entity))
-                    .map(link -> (Optional<Link>) link)
+            return entries.get(cls).stream()
+                    .map(link -> (Optional<Link>) link.linkProvider.apply(entity))
                     .filter(Optional::isPresent) // TODO Missing unit test for this part
                     .map(Optional::get)
                     .collect(toList());

@@ -46,7 +46,7 @@ public class VisitModuleResourceExtensions extends ResourceExtensions {
 
     @Override
     public void init() {
-        registerLink(Patient.class, this::createStartVisitLink);
+        registerLink(Patient.class, patient -> createStartVisitLink(patient));
     }
 
     private Optional<Link> createStartVisitLink(Patient patient) {
