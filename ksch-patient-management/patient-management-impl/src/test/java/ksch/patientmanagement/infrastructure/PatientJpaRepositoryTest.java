@@ -98,13 +98,4 @@ public class PatientJpaRepositoryTest {
         var firstPatient = result.get(0);
         assertEquals("John Doe", firstPatient.getName());
     }
-
-    @Test
-    public void should_find_patient_by_opd_number() {
-        var result = patientRepository.findAll(new PatientSearchSpecification(janeDoe.getPatientNumber()));
-        assertEquals(1, result.size());
-
-        var firstPatient = result.get(0);
-        assertEquals("Jane Doe", firstPatient.getName());
-    }
 }

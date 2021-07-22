@@ -15,77 +15,27 @@
  */
 package ksch.visit.rest;
 
-import ksch.patientmanagement.PatientService;
+import ksch.testing.RestControllerTest;
 import ksch.testing.TestResource;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.startsWith;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.restdocs.cli.CliDocumentation.curlRequest;
-import static org.springframework.restdocs.http.HttpDocumentation.httpResponse;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-public class VisitControllerTest {
-
-    @Autowired
-    private PatientService patientService;
-
-    @Autowired
-    private WebApplicationContext context;
-
-    private MockMvc mockMvc;
-
-    @BeforeEach
-    public void setUp(
-            WebApplicationContext webApplicationContext,
-            RestDocumentationContextProvider restDocumentation
-    ) {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                .apply(documentationConfiguration(restDocumentation)
-                        .snippets()
-                        .withDefaults(
-                                curlRequest(),
-                                httpResponse()
-                        )
-                ).build();
-    }
+public class VisitControllerTest extends RestControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_create_patient_without_payload() {
-        mockMvc.perform(post("/api/patients").accept(APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("_id", is(notNullValue())))
-                .andDo(print())
-                .andDo(document("patients-create-emergency"));
-    }
-
-    @Test
-    @SneakyThrows
-    public void should_create_patient_with_payload() {
+    public void should_start_visit() {
         var payload = new TestResource("create-patient.json").readString();
         mockMvc.perform(
                 post("/api/patients")
@@ -93,7 +43,7 @@ public class VisitControllerTest {
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON)
                         .characterEncoding("UTF-8")
-                )
+        )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("_id", is(notNullValue())))
@@ -109,27 +59,7 @@ public class VisitControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_list_patients() {
-        patientService.createPatient();
-        patientService.createPatient();
+    public void should_fail_to_start_visit_if_there_is_already_a_visit() {
 
-        mockMvc.perform(get("/api/patients").accept(APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("page.totalElements", is(greaterThanOrEqualTo(2))))
-                .andDo(document("patients-list"));
-    }
-
-    @Test
-    @SneakyThrows
-    public void should_search_patients() {
-        var searchedPatient = patientService.createPatient();
-        patientService.createPatient(searchedPatient);
-
-        mockMvc.perform(get("/api/patients/search?q=" + searchedPatient.getId().toString()).accept(APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("page.totalElements", is(equalTo(1))))
-                .andDo(document("patients-search"));
     }
 }

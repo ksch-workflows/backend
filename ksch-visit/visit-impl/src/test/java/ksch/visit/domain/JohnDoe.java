@@ -15,11 +15,6 @@ public class JohnDoe implements Patient {
     }
 
     @Override
-    public String getPatientNumber() {
-        return "10-12345";
-    }
-
-    @Override
     public String getName() {
         return "John Doe";
     }

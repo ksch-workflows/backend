@@ -19,7 +19,6 @@ import java.util.UUID;
 
 public interface Patient {
     UUID getId();
-    String getPatientNumber();
     String getName();
     Integer getAge();
     Gender getGender();
@@ -27,4 +26,3 @@ public interface Patient {
     String getResidentialAddress();
     String getPatientCategory();
 }
-
