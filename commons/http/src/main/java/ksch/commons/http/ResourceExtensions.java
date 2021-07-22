@@ -22,6 +22,12 @@ import javax.annotation.PostConstruct;
 import java.util.Optional;
 import java.util.function.Function;
 
+/**
+ * A resource extension is a link to a related REST resource.
+ * Later on, the possibility for embedded resources may be added.
+ *
+ * This class is intended to be used as base class for those classes which perform the extension registration.
+ */
 @RequiredArgsConstructor
 public abstract class ResourceExtensions {
 

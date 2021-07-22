@@ -25,7 +25,7 @@ public class VisitControllerTest extends RestControllerTest {
     @SneakyThrows
     public void should_start_visit() {
 
-        
+
 //        var payload = new TestResource("start-visit.json").readString();
 //        var resourcePath = String.format("/api/patients/%s/visits", patient);
 //        mockMvc.perform(
