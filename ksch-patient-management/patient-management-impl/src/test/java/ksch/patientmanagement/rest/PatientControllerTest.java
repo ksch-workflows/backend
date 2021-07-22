@@ -68,7 +68,6 @@ public class PatientControllerTest extends RestControllerTest {
                 .andExpect(jsonPath("gender", is(equalTo("MALE"))))
                 .andExpect(jsonPath("name", is(equalTo("John Doe"))))
                 .andExpect(jsonPath("patientCategory", is(equalTo("GENERAL"))))
-                .andExpect(jsonPath("patientNumber", is(equalTo("10-1002"))))
                 .andExpect(jsonPath("phoneNumber", is(equalTo("0123456789"))))
                 .andExpect(jsonPath("residentialAddress", is(equalTo("Guesthouse"))))
                 .andDo(document("patients-create-normal"));
