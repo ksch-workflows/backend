@@ -3,6 +3,7 @@ package ksch.visit.application;
 import ksch.visit.Visit;
 import ksch.visit.VisitService;
 import ksch.visit.VisitType;
+import ksch.visit.domain.OpdNumberGenerator;
 import ksch.visit.domain.VisitCannotBeStartedException;
 import ksch.visit.domain.VisitRepository;
 import ksch.visit.infrastructure.VisitDao;
@@ -21,6 +22,8 @@ public class VisitServiceImpl implements VisitService {
 
     private final VisitRepository visitRepository;
 
+    private final OpdNumberGenerator opdNumberGenerator;
+
     @Override
     public Visit startVisit(UUID patientId, VisitType type) {
         // TODO Check that patient actually exists
@@ -30,8 +33,10 @@ public class VisitServiceImpl implements VisitService {
                     patientId + "'.";
             throw new VisitCannotBeStartedException(message);
         }
-        // TODO Generate OPD number
+        var opdNumber = opdNumberGenerator.generateOpdNumber();
+
         return visitRepository.save(VisitDao.builder()
+                .opdNumber(opdNumber)
                 .patientId(patientId)
                 .type(type)
                 .timeStart(now())
