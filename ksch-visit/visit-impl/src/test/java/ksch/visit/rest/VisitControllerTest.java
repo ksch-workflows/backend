@@ -52,6 +52,7 @@ public class VisitControllerTest extends RestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("_id", is(notNullValue())))
                 .andDo(document("visit.start-visit"));
+        // TODO Check that start time is rendered as ISO string
     }
 
     @Test
