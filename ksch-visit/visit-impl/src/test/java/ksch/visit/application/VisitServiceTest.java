@@ -1,5 +1,6 @@
 package ksch.visit.application;
 
+import ksch.visit.VisitType;
 import ksch.visit.domain.VisitCannotBeStartedException;
 import ksch.visit.domain.VisitRepository;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ public class VisitServiceTest {
 
         assertThrows(
                 VisitCannotBeStartedException.class,
-                () -> visitService.startVisit(UUID.randomUUID())
+                () -> visitService.startVisit(UUID.randomUUID(), VisitType.IPD)
         );
     }
 }

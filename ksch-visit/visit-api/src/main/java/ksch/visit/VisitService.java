@@ -19,5 +19,5 @@ import java.util.UUID;
 
 public interface VisitService {
 
-    Visit startVisit(UUID patientId);
+    Visit startVisit(UUID patientId, VisitType type);
 }

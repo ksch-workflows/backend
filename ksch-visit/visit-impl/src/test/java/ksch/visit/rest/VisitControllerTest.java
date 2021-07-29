@@ -15,37 +15,43 @@
  */
 package ksch.visit.rest;
 
+import ksch.patientmanagement.PatientService;
 import ksch.testing.RestControllerTest;
+import ksch.testing.TestResource;
+import ksch.visit.domain.JohnDoe;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class VisitControllerTest extends RestControllerTest {
+
+    @Autowired
+    private PatientService patientService;
 
     @Test
     @SneakyThrows
     public void should_start_visit() {
-
-
-//        var payload = new TestResource("start-visit.json").readString();
-//        var resourcePath = String.format("/api/patients/%s/visits", patient);
-//        mockMvc.perform(
-//                post("/api/patients/")
-//                        .content(payload)
-//                        .contentType(APPLICATION_JSON)
-//                        .accept(APPLICATION_JSON)
-//                        .characterEncoding("UTF-8")
-//        )
-//                .andDo(print())
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("_id", is(notNullValue())))
-//                .andExpect(jsonPath("_links.self.href", is(startsWith("http://localhost:8080/api/patients/"))))
-//                .andExpect(jsonPath("gender", is(equalTo("MALE"))))
-//                .andExpect(jsonPath("name", is(equalTo("John Doe"))))
-//                .andExpect(jsonPath("patientCategory", is(equalTo("GENERAL"))))
-//                .andExpect(jsonPath("patientNumber", is(equalTo("10-1002"))))
-//                .andExpect(jsonPath("phoneNumber", is(equalTo("0123456789"))))
-//                .andExpect(jsonPath("residentialAddress", is(equalTo("Guesthouse"))))
-//                .andDo(document("patients-create-normal"));
+        var patient = patientService.createPatient(new JohnDoe());
+        mockMvc.perform(
+                post(String.format("/api/patients/%s/visits", patient.getId()))
+                        .content(new TestResource("start-visit.json").readString())
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON)
+                        .characterEncoding("UTF-8")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("_id", is(notNullValue())))
+                .andDo(document("visit.start-visit"));
     }
 
     @Test

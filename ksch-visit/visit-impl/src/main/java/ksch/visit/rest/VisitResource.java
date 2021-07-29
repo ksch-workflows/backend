@@ -24,6 +24,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.hateoas.RepresentationModel;
@@ -43,13 +44,16 @@ class VisitResource extends RepresentationModel<VisitResource> implements Visit 
     @JsonProperty("_id")
     private UUID id;
 
+    @NonNull
     private String opdNumber;
 
     @JsonIgnore
     private UUID patientId;
 
+    @NonNull
     private VisitType type;
 
+    @NonNull
     private LocalDateTime timeStart;
 
     private LocalDateTime timeEnd;

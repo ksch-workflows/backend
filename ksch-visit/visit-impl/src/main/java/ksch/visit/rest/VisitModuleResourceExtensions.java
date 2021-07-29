@@ -46,14 +46,16 @@ public class VisitModuleResourceExtensions extends ResourceExtensions {
 
     @Override
     public void init() {
-        registerLink(Patient.class, patient -> createStartVisitLink(patient));
+        registerLink(Patient.class, this::createStartVisitLink);
     }
 
     private Optional<Link> createStartVisitLink(Patient patient) {
         if (visitRepository.hasActiveVisit(patient.getId())) {
             return Optional.empty();
         } else {
-            var link = linkTo(methodOn(VisitController.class).startVisit(patient.getId())).withRel("start-visit");
+            var link = linkTo(
+                    methodOn(VisitController.class).startVisit(patient.getId(), null)
+            ).withRel("start-visit");
             return Optional.of(link);
         }
     }

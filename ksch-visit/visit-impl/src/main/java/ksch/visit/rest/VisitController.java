@@ -19,9 +19,11 @@ import ksch.visit.VisitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -32,8 +34,11 @@ public class VisitController {
     private final VisitService visitService;
 
     @PostMapping("/patients/{patientId}/visits")
-    public VisitResource startVisit(@PathVariable("patientId") UUID patientId) {
-        var visit = visitService.startVisit(patientId);
+    public VisitResource startVisit(
+            @PathVariable("patientId") UUID patientId,
+            @RequestBody @Valid StartVisitPayload payload
+    ) {
+        var visit = visitService.startVisit(patientId, payload.getType());
         return VisitResource.from(visit);
     }
 }
