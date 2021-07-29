@@ -15,10 +15,10 @@
  */
 package ksch.visit.rest;
 
-import ksch.commons.http.ResourceExtensionsRegistry;
 import ksch.commons.http.ResourceExtensions;
+import ksch.commons.http.ResourceExtensionsRegistry;
 import ksch.patientmanagement.Patient;
-import ksch.visit.infrastructure.VisitJpaRepository;
+import ksch.visit.domain.VisitRepository;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
@@ -33,11 +33,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class VisitModuleResourceExtensions extends ResourceExtensions {
 
-    private final VisitJpaRepository visitRepository;
+    private final VisitRepository visitRepository;
 
     public VisitModuleResourceExtensions(
             ResourceExtensionsRegistry resourceExtensionsRegistry,
-            VisitJpaRepository visitRepository
+            VisitRepository visitRepository
     ) {
         super(resourceExtensionsRegistry);
 

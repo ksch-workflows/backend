@@ -27,7 +27,6 @@ class VisitResourceAssembler implements RepresentationModelAssembler<Visit, Visi
     @Override
     public VisitResource toModel(Visit visit) {
         var result = VisitResource.from(visit);
-        // TODO Self link needs to point to patient/visit
         var selfLink = linkTo(VisitController.class).slash(visit.getId()).withSelfRel();
         result.add(selfLink);
         return result;

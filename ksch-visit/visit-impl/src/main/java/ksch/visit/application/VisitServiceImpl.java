@@ -3,8 +3,8 @@ package ksch.visit.application;
 import ksch.visit.Visit;
 import ksch.visit.VisitService;
 import ksch.visit.domain.VisitCannotBeStartedException;
+import ksch.visit.domain.VisitRepository;
 import ksch.visit.infrastructure.VisitDao;
-import ksch.visit.infrastructure.VisitJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import static java.time.LocalDateTime.now;
 @Transactional
 public class VisitServiceImpl implements VisitService {
 
-    private final VisitJpaRepository visitRepository;
+    private final VisitRepository visitRepository;
 
     @Override
     public Visit startVisit(UUID patientId) {

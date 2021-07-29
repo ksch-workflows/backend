@@ -1,7 +1,7 @@
 package ksch.visit.application;
 
 import ksch.visit.domain.VisitCannotBeStartedException;
-import ksch.visit.infrastructure.VisitJpaRepository;
+import ksch.visit.domain.VisitRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,11 +21,11 @@ public class VisitServiceTest {
     VisitServiceImpl visitService;
 
     @Mock
-    VisitJpaRepository visitJpaRepository;
+    VisitRepository visitRepository;
 
     @Test
     public void should_reject_to_start_visit_if_there_is_already_an_active_visit() {
-        when(visitJpaRepository.hasActiveVisit(any(UUID.class))).thenReturn(true);
+        when(visitRepository.hasActiveVisit(any(UUID.class))).thenReturn(true);
 
         assertThrows(
                 VisitCannotBeStartedException.class,

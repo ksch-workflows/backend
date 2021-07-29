@@ -3,7 +3,7 @@ package ksch.visit.rest;
 import ksch.commons.http.ResourceExtensionsRegistry;
 import ksch.patientmanagement.Patient;
 import ksch.visit.domain.JohnDoe;
-import ksch.visit.infrastructure.VisitJpaRepository;
+import ksch.visit.domain.VisitRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ class VisitModuleResourceExtensionsTest {
     private final ResourceExtensionsRegistry resourceExtensionsRegistry = new ResourceExtensionsRegistry();
 
     @Mock
-    private VisitJpaRepository visitJpaRepository;
+    private VisitRepository visitJpaRepository;
 
     private VisitModuleResourceExtensions resourceExtensions;
 

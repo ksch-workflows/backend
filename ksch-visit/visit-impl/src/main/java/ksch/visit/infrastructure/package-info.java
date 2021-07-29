@@ -13,7 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@InfrastructureLayer
 package ksch.visit.infrastructure;
-
-import org.jmolecules.architecture.layered.InfrastructureLayer;

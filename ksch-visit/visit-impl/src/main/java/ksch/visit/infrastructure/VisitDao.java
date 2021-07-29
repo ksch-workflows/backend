@@ -41,4 +41,15 @@ public class VisitDao implements Visit {
     private LocalDateTime timeStart;
 
     private LocalDateTime timeEnd;
+
+    public static VisitDao from(Visit visit) {
+        return VisitDao.builder()
+                .id(visit.getId())
+                .opdNumber(visit.getOpdNumber())
+                .patientId(visit.getPatientId())
+                .type(visit.getType())
+                .timeStart(visit.getTimeStart())
+                .timeEnd(visit.getTimeEnd())
+                .build();
+    }
 }
