@@ -23,6 +23,10 @@ import org.opentest4j.AssertionFailedError;
 @NoArgsConstructor
 public class ObjectVerifier {
 
+    /**
+     * This method helps to check that no optional field gets forgotten in the test setup for the data type
+     * converter function tests.
+     */
     @SneakyThrows
     public static void verifyAllFieldsAreSet(Object object) {
         var objectMapper = new ObjectMapper();

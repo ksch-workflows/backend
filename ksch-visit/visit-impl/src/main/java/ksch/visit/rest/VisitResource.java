@@ -15,17 +15,20 @@
  */
 package ksch.visit.rest;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
 import ksch.visit.Visit;
+import ksch.visit.VisitType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.hateoas.RepresentationModel;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -33,26 +36,32 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
-class VisitResource extends RepresentationModel<VisitResource> implements Patient {
+@ToString
+@EqualsAndHashCode(callSuper = false)
+class VisitResource extends RepresentationModel<VisitResource> implements Visit {
 
     @JsonProperty("_id")
     private UUID id;
 
-    private String patientNumber;
+    private String opdNumber;
 
-    private String name;
+    @JsonIgnore
+    private UUID patientId;
 
-    private Integer age;
+    private VisitType type;
 
-    private Gender gender;
+    private LocalDateTime timeStart;
 
-    private String phoneNumber;
-
-    private String residentialAddress;
-
-    private String patientCategory;
+    private LocalDateTime timeEnd;
 
     static VisitResource from(Visit visit) {
-        return null; // FIXME
+        return VisitResource.builder()
+                .id(visit.getId())
+                .opdNumber(visit.getOpdNumber())
+                .patientId(visit.getPatientId())
+                .type(visit.getType())
+                .timeStart(visit.getTimeStart())
+                .timeEnd(visit.getTimeEnd())
+                .build();
     }
 }

@@ -22,6 +22,8 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public Visit startVisit(UUID patientId) {
+        // TODO Check that patient actually exists
+
         if (visitRepository.hasActiveVisit(patientId)) {
             var message = "Visit cannot be started because there is already an active visit.";
             throw new VisitCannotBeStartedException(message);

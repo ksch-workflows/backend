@@ -1,4 +1,4 @@
-package ksch.visit.infrastructure;
+package ksch.visit.rest;
 
 import ksch.visit.VisitType;
 import org.junit.jupiter.api.Test;
@@ -11,11 +11,11 @@ import static ksch.testing.ObjectVerifier.verifyAllFieldsAreSet;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-class VisitDaoTest {
+class VisitResourceTest {
 
     @Test
     public void should_create_object_from_interface() {
-        var originalObject = VisitDao.builder()
+        var originalObject = VisitResource.builder()
                 .id(UUID.randomUUID())
                 .opdNumber("10-1234")
                 .patientId(UUID.randomUUID())
@@ -25,7 +25,7 @@ class VisitDaoTest {
                 .build();
         verifyAllFieldsAreSet(originalObject);
 
-        var convertedObject = VisitDao.from(originalObject);
+        var convertedObject = VisitResource.from(originalObject);
 
         assertThat(convertedObject, equalTo(originalObject));
     }

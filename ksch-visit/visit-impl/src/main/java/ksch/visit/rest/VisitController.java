@@ -25,15 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/api/patients")
+@RequestMapping(value = "/api")
 @RequiredArgsConstructor
 public class VisitController {
 
     private final VisitService visitService;
 
-    @PostMapping("/{patientId}/visits")
-    public Object startVisit(@PathVariable("patientId") UUID patientId) {
-
-        return visitService.startVisit(patientId); // TODO Return proper REST resource
+    @PostMapping("/patients/{patientId}/visits")
+    public VisitResource startVisit(@PathVariable("patientId") UUID patientId) {
+        var visit = visitService.startVisit(patientId);
+        return VisitResource.from(visit);
     }
 }
