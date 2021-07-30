@@ -7,14 +7,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class JacksonConfiguration {
 
     @Bean
-    @Primary
-    public ObjectMapper objectMapper2() {
+    public ObjectMapper objectMapper() {
         JavaTimeModule module = new JavaTimeModule();
         module.addSerializer(LocalDateTimeSerializer.INSTANCE);
         var result = new ObjectMapper()
