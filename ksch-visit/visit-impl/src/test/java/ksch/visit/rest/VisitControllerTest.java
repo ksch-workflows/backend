@@ -46,12 +46,12 @@ public class VisitControllerTest extends RestControllerTest {
     private PatientService patientService;
 
     @Autowired
-    private ObjectMapper objectMapper2; // TODO Use actual object mapper
+    private ObjectMapper objectMapper; // TODO Use actual object mapper
 
     @Test
     @SneakyThrows
     public void should_deserialize_date() {
-        var result = objectMapper2.convertValue(LocalDateTime.now(), String.class);
+        var result = objectMapper.convertValue(LocalDateTime.now(), String.class);
 
         assertThat(result, matchesRegex(ISO_8601_PATTERN));
     }
