@@ -18,7 +18,6 @@ package ksch.visit.application;
 import ksch.visit.Visit;
 import ksch.visit.VisitService;
 import ksch.visit.VisitType;
-import ksch.visit.domain.OpdNumberGenerator;
 import ksch.visit.domain.VisitCannotBeStartedException;
 import ksch.visit.domain.VisitRepository;
 import ksch.visit.infrastructure.VisitDao;
@@ -41,7 +40,6 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public Visit startVisit(UUID patientId, VisitType type) {
-        // TODO Check that patient actually exists
 
         if (visitRepository.hasActiveVisit(patientId)) {
             var message = "Visit cannot be started because there is already an active visit for patient with ID '" +

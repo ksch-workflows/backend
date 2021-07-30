@@ -1,5 +1,7 @@
-package ksch.visit.domain;
+package ksch.visit.application;
 
+import ksch.visit.domain.NumericValue;
+import ksch.visit.domain.OpdNumberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

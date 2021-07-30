@@ -15,6 +15,7 @@
  */
 package ksch.visit.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ksch.patientmanagement.PatientService;
 import ksch.testing.RestControllerTest;
 import ksch.testing.TestResource;
@@ -22,20 +23,38 @@ import ksch.visit.domain.JohnDoe;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDateTime;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.Matchers.matchesRegex;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class VisitControllerTest extends RestControllerTest {
 
+    public static final String ISO_8601_PATTERN = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d*";
+
     @Autowired
     private PatientService patientService;
+
+    @Autowired
+    private ObjectMapper objectMapper2; // TODO Use actual object mapper
+
+    @Test
+    @SneakyThrows
+    public void should_deserialize_date() {
+        var result = objectMapper2.convertValue(LocalDateTime.now(), String.class);
+
+        assertThat(result, matchesRegex(ISO_8601_PATTERN));
+    }
 
     @Test
     @SneakyThrows
@@ -50,14 +69,10 @@ public class VisitControllerTest extends RestControllerTest {
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("_id", is(notNullValue())))
-                .andDo(document("visit.start-visit"));
-        // TODO Check that start time is rendered as ISO string
-    }
-
-    @Test
-    @SneakyThrows
-    public void should_fail_to_start_visit_if_there_is_already_a_visit() {
-
+                .andExpect(jsonPath("_id", is(notNullValue())))
+                .andExpect(jsonPath("timeStart", matchesPattern(ISO_8601_PATTERN)))
+                .andDo(document("visit_start-visit"));
+        // TODO Assert for all visit properties
+        // TODO Include visit snippets in API docs
     }
 }

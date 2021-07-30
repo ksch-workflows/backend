@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.visit.domain;
+package ksch.visit.application;
 
+import ksch.visit.domain.NumericValue;
+import ksch.visit.domain.OpdNumberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 
-// TODO Unit test for OPD number generator
 @Service
 @RequiredArgsConstructor
 public class OpdNumberGenerator {

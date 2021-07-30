@@ -48,4 +48,16 @@ public class VisitServiceTest {
                 () -> visitService.startVisit(UUID.randomUUID(), VisitType.IPD)
         );
     }
+
+    // TODO Implement test
+    @Test
+    public void should_fail_to_start_visit_for_non_existing_patient() {
+
+    }
+
+    // TODO Implement test
+    @Test
+    public void should_fail_to_start_visit_if_there_is_already_a_visit() {
+
+    }
 }

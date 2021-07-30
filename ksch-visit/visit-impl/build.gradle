@@ -1,6 +1,8 @@
 dependencies {
     api project(':ksch-visit:visit-api')
 
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
     implementation project(':commons:config')
     implementation project(':commons:http')
     implementation project(':ksch-patient-management')
