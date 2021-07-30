@@ -1,4 +1,4 @@
-package ksch.visit.config;
+package ksch.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-// TODO Move class into commons
 @Configuration
 public class JacksonConfiguration {
 
@@ -25,11 +24,4 @@ public class JacksonConfiguration {
         ;
         return result;
     }
-
-//    @Bean
-//    public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
-//        return new Jackson2ObjectMapperBuilder()
-//                .serializers(LocalDateTimeSerializer.INSTANCE)
-//                .serializationInclusion(JsonInclude.Include.NON_NULL);
-//    }
 }

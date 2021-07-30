@@ -24,12 +24,8 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.matchesPattern;
-import static org.hamcrest.Matchers.matchesRegex;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -46,15 +42,7 @@ public class VisitControllerTest extends RestControllerTest {
     private PatientService patientService;
 
     @Autowired
-    private ObjectMapper objectMapper; // TODO Use actual object mapper
-
-    @Test
-    @SneakyThrows
-    public void should_deserialize_date() {
-        var result = objectMapper.convertValue(LocalDateTime.now(), String.class);
-
-        assertThat(result, matchesRegex(ISO_8601_PATTERN));
-    }
+    private ObjectMapper objectMapper;
 
     @Test
     @SneakyThrows
