@@ -55,6 +55,7 @@ public class ResourceExtensionsRegistry {
         } else {
             return entries.get(cls).stream()
                     .map(link -> (Optional<Link>) link.linkProvider.apply(entity))
+                    .filter(Optional::isPresent)
                     .map(Optional::get)
                     .collect(toList());
         }
