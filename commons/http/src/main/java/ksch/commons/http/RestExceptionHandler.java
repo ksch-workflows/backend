@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.config;
+package ksch.commons.http;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class RestExceptionHandler {
+class RestExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

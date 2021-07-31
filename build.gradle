@@ -73,9 +73,6 @@ configure(subprojects.findAll { it.name.endsWith('-impl') } ) {
         implementation 'org.springframework.boot:spring-boot-starter-validation'
         runtimeOnly 'com.h2database:h2'
 
-        // Shared dependencies
-        implementation project(':commons:config')
-
         // Test
         testImplementation project(':commons:testing')
         testImplementation 'org.springframework.boot:spring-boot-starter-test'

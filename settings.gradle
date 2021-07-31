@@ -16,7 +16,6 @@ rootProject.name = "ksch-workflows-backend"
 
 include "server"
 
-include("commons:config")
 include("commons:http")
 include("commons:testing")
 include("commons:util")

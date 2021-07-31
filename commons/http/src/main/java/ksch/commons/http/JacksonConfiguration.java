@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.config;
+package ksch.commons.http;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,17 +24,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JacksonConfiguration {
+class JacksonConfiguration {
 
     @Bean
     public ObjectMapper objectMapper() {
         JavaTimeModule module = new JavaTimeModule();
         module.addSerializer(LocalDateTimeSerializer.INSTANCE);
-        var result = new ObjectMapper()
+        return new ObjectMapper()
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                 .registerModule(module)
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
         ;
-        return result;
     }
 }

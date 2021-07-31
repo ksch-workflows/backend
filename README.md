@@ -57,13 +57,13 @@ The following list gives an overview of the contents in the project's directorie
 
 ### Online tutorials
 
-The online tutorials for the used technologies and be found in the project wiki:
+The online tutorials for the used technologies can be found in the project wiki:
 
 https://github.com/ksch-workflows/backend/wiki
 
 ### Add license comments
 
-In order to add license header comments to all Java files which don't have them yet, you
+To add license header comments to all Java files which don't have them yet, you
 can call the following shell script:
 
 ```
