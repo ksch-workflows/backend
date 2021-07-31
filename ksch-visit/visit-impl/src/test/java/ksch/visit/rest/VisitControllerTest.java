@@ -58,9 +58,9 @@ public class VisitControllerTest extends RestControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("_id", is(notNullValue())))
+                .andExpect(jsonPath("opdNumber", is(notNullValue())))
+                .andExpect(jsonPath("type", is("OPD")))
                 .andExpect(jsonPath("timeStart", matchesPattern(ISO_8601_PATTERN)))
-                .andDo(document("visit_start-visit"));
-        // TODO Assert for all visit properties
-        // TODO Include visit snippets in API docs
+                .andDo(document("start-visit"));
     }
 }

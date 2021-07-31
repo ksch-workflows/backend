@@ -2,3 +2,5 @@
 :toc: left
 
 include::../../ksch-patient-management/patient-management-impl/src/docs/patient-management.adoc[]
+
+include::../../ksch-visit/visit-impl/src/docs/visit.adoc[]
