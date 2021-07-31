@@ -15,8 +15,8 @@
  */
 package ksch.visit.application;
 
-import ksch.visit.domain.NumericValue;
-import ksch.visit.domain.OpdNumberRepository;
+import ksch.visit.domain.OpdSerialNumber;
+import ksch.visit.domain.OpdSerialNumberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +28,10 @@ public class OpdNumberGenerator {
 
     private static final int currentYearWithTwoDigits = Calendar.getInstance().get(Calendar.YEAR) % 100;
 
-    private final OpdNumberRepository opdNumberRepository;
+    private final OpdSerialNumberRepository opdSerialNumberRepository;
 
     public synchronized String generateOpdNumber() {
-        NumericValue numericValue = opdNumberRepository.save(new NumericValue());
-        return String.format("%s-%s", currentYearWithTwoDigits, numericValue);
+        var opdSerialNumber = opdSerialNumberRepository.save(new OpdSerialNumber());
+        return String.format("%s-%s", currentYearWithTwoDigits, opdSerialNumber);
     }
 }

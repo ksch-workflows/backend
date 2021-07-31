@@ -36,7 +36,7 @@ import javax.persistence.TableGenerator;
 @Getter
 @Setter
 @TableGenerator(name = "numeric_part_of_opd_number", initialValue = 999)
-public class NumericValue {
+public class OpdSerialNumber {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "numeric_part_of_opd_number")

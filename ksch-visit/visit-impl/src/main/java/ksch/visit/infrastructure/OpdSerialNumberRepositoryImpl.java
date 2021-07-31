@@ -15,19 +15,19 @@
  */
 package ksch.visit.infrastructure;
 
-import ksch.visit.domain.NumericValue;
-import ksch.visit.domain.OpdNumberRepository;
+import ksch.visit.domain.OpdSerialNumber;
+import ksch.visit.domain.OpdSerialNumberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class OpdNumberRepositoryImpl implements OpdNumberRepository {
+public class OpdSerialNumberRepositoryImpl implements OpdSerialNumberRepository {
 
     private final OpdNumberJpaRepository opdNumberJpaRepository;
 
     @Override
-    public NumericValue save(NumericValue numericValue) {
-        return opdNumberJpaRepository.save(numericValue);
+    public OpdSerialNumber save(OpdSerialNumber opdSerialNumber) {
+        return opdNumberJpaRepository.save(opdSerialNumber);
     }
 }

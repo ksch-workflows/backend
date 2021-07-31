@@ -1,7 +1,7 @@
 package ksch.visit.application;
 
-import ksch.visit.domain.NumericValue;
-import ksch.visit.domain.OpdNumberRepository;
+import ksch.visit.domain.OpdSerialNumber;
+import ksch.visit.domain.OpdSerialNumberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,14 +24,14 @@ class OpdNumberGeneratorTest {
     private OpdNumberGenerator opdNumberGenerator;
 
     @Mock
-    private OpdNumberRepository opdNumberRepository;
+    private OpdSerialNumberRepository opdSerialNumberRepository;
 
     private final int currentYearWithTwoDigits = Calendar.getInstance().get(Calendar.YEAR) % 100;
 
     @BeforeEach
     public void setup() {
-        when(opdNumberRepository.save(any(NumericValue.class)))
-                .thenReturn(new NumericValue(NUMERIC_VALUE));
+        when(opdSerialNumberRepository.save(any(OpdSerialNumber.class)))
+                .thenReturn(new OpdSerialNumber(NUMERIC_VALUE));
     }
 
     @Test

@@ -15,7 +15,7 @@
  */
 package ksch.visit.domain;
 
-public interface OpdNumberRepository {
+public interface OpdSerialNumberRepository {
 
-    NumericValue save(NumericValue numericValue);
+    OpdSerialNumber save(OpdSerialNumber opdSerialNumber);
 }
