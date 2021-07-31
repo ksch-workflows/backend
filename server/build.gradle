@@ -29,6 +29,8 @@ dependencies {
 
     implementation project(':ksch-administration')
     implementation project(':ksch-patient-management')
+    implementation project(':ksch-billing')
+    implementation project(':ksch-visit')
 }
 
 test {

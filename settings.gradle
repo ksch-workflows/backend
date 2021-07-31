@@ -34,3 +34,6 @@ include("ksch-reporting:reporting-impl")
 
 include("ksch-scheduling:scheduling-api")
 include("ksch-scheduling:scheduling-impl")
+
+include("ksch-visit:visit-api")
+include("ksch-visit:visit-impl")

@@ -13,21 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.rest;
+package ksch.visit.rest;
 
-import ksch.patientmanagement.Patient;
+import ksch.visit.Visit;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Component
-class PatientModelAssembler implements RepresentationModelAssembler<Patient, PatientModel> {
+class VisitResourceAssembler implements RepresentationModelAssembler<Visit, VisitResource> {
 
     @Override
-    public PatientModel toModel(Patient patient) {
-        var result = PatientModel.from(patient);
-        var selfLink = linkTo(PatientController.class).slash(patient.getId()).withSelfRel();
+    public VisitResource toModel(Visit visit) {
+        var result = VisitResource.from(visit);
+        var selfLink = linkTo(VisitController.class).slash(visit.getId()).withSelfRel();
         result.add(selfLink);
         return result;
     }

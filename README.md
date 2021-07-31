@@ -55,6 +55,22 @@ The following list gives an overview of the contents in the project's directorie
 
 ## Development
 
+### Online tutorials
+
+The online tutorials for the used technologies can be found in the project wiki:
+
+https://github.com/ksch-workflows/backend/wiki
+
+### Add license comments
+
+To add license header comments to all Java files which don't have them yet, you
+can call the following shell script:
+
+```
+./docs/license/add-license-notices.sh
+git add . && git commit -m "Add license notices"
+```
+
 ### Problems with module dependencies
 
 If IntelliJ cannot resolve the dependencies between modules, then most likely this can be fixed by resetting

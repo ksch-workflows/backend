@@ -20,15 +20,21 @@ import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import org.opentest4j.AssertionFailedError;
 
-@NoArgsConstructor
+import static lombok.AccessLevel.PRIVATE;
+
+@NoArgsConstructor(access = PRIVATE)
 public class ObjectVerifier {
 
+    /**
+     * This method helps to check that no optional field gets forgotten when writing tests for data type
+     * converter methods.
+     */
     @SneakyThrows
     public static void verifyAllFieldsAreSet(Object object) {
         var objectMapper = new ObjectMapper();
         var json = objectMapper.writeValueAsString(object);
         if (json.contains("null")) {
-            var message = "The provided object contains one or more fields which are not initialized: " + json;
+            var message = "The provided object contains one or more fields that are not initialized: " + json;
             throw new AssertionFailedError(message);
         }
     }

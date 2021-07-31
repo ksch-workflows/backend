@@ -16,19 +16,11 @@
 package ksch.patientmanagement.rest;
 
 import ksch.patientmanagement.PatientService;
+import ksch.testing.RestControllerTest;
 import ksch.testing.TestResource;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -36,42 +28,17 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.startsWith;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.restdocs.cli.CliDocumentation.curlRequest;
-import static org.springframework.restdocs.http.HttpDocumentation.httpResponse;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-public class PatientControllerTest {
+public class PatientControllerTest extends RestControllerTest {
 
     @Autowired
     private PatientService patientService;
-
-    @Autowired
-    private WebApplicationContext context;
-
-    private MockMvc mockMvc;
-
-    @BeforeEach
-    public void setUp(
-            WebApplicationContext webApplicationContext,
-            RestDocumentationContextProvider restDocumentation
-    ) {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                .apply(documentationConfiguration(restDocumentation)
-                        .snippets()
-                        .withDefaults(
-                                curlRequest(),
-                                httpResponse()
-                        )
-                ).build();
-    }
 
     @Test
     @SneakyThrows
@@ -101,7 +68,6 @@ public class PatientControllerTest {
                 .andExpect(jsonPath("gender", is(equalTo("MALE"))))
                 .andExpect(jsonPath("name", is(equalTo("John Doe"))))
                 .andExpect(jsonPath("patientCategory", is(equalTo("GENERAL"))))
-                .andExpect(jsonPath("patientNumber", is(equalTo("10-1002"))))
                 .andExpect(jsonPath("phoneNumber", is(equalTo("0123456789"))))
                 .andExpect(jsonPath("residentialAddress", is(equalTo("Guesthouse"))))
                 .andDo(document("patients-create-normal"));
