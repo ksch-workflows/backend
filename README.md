@@ -1,7 +1,5 @@
 # K.S.C.H. Workflows Backend
 
-[![Join the chat at https://gitter.im/ksch-workflows/community](https://badges.gitter.im/ksch-workflows/community.svg)](https://gitter.im/ksch-workflows/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 This repository contains the source code for the backend of web browser, desktop, and mobile clients.
 They can access the queries and commands which they need via a RESTful API.
 
