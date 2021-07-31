@@ -68,6 +68,7 @@ can call the following shell script:
 
 ```
 ./docs/license/add-license-notices.sh
+git add . && git commit -m "Add license notices"
 ```
 
 ### Problems with module dependencies
