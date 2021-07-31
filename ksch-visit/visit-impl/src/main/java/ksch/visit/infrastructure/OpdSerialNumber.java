@@ -28,7 +28,9 @@ import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
 /**
- * Utility class for generation of the numeric part of new OPD numbers.
+ * {@link OpdSerialNumber} is a utility class for the generation of OPD numbers.
+ *
+ * It represents the numeric part of an OPD number which gets incremented every time a visit gets created.
  */
 @Entity
 @NoArgsConstructor

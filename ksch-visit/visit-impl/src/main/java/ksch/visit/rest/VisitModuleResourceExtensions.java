@@ -28,7 +28,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
- * This class is responsible to register the visit related links in related REST resources.
+ * This class is responsible for the registration of visit-related links in REST resources provided by other modules.
  */
 @Component
 public class VisitModuleResourceExtensions extends ResourceExtensions {

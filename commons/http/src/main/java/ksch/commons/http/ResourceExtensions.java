@@ -24,9 +24,8 @@ import java.util.function.Function;
 
 /**
  * A resource extension is a link to a related REST resource.
- * Later on, the possibility for embedded resources may be added.
  *
- * This class is intended to be used as base class for those classes which perform the extension registration.
+ * This class is intended to be used as the base class for those classes which perform the extension registration.
  */
 @RequiredArgsConstructor
 public abstract class ResourceExtensions {
@@ -42,7 +41,7 @@ public abstract class ResourceExtensions {
     protected abstract void init();
 
     /**
-     * Registers a callback function which generates links in REST resources for entities
+     * This method registers a callback function that generates links in REST resources for entities
      * of the provided type.
      */
     protected final <T> void registerLink(Class<T> cls, Function<T, Optional<Link>> linkProvider) {
