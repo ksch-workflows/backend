@@ -15,10 +15,9 @@
  */
 package ksch.visit.infrastructure;
 
-import ksch.visit.domain.OpdSerialNumber;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface OpdNumberJpaRepository extends CrudRepository<OpdSerialNumber, Integer> {
+public interface OpdSerialNumberRepository extends CrudRepository<OpdSerialNumber, Integer> {
 }

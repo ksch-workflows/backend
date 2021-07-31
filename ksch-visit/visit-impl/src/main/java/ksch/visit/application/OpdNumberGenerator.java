@@ -15,8 +15,8 @@
  */
 package ksch.visit.application;
 
-import ksch.visit.domain.OpdSerialNumber;
-import ksch.visit.domain.OpdSerialNumberRepository;
+import ksch.visit.infrastructure.OpdSerialNumber;
+import ksch.visit.infrastructure.OpdSerialNumberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

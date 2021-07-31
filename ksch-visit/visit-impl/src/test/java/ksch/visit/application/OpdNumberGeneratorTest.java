@@ -1,7 +1,7 @@
 package ksch.visit.application;
 
-import ksch.visit.domain.OpdSerialNumber;
-import ksch.visit.domain.OpdSerialNumberRepository;
+import ksch.visit.infrastructure.OpdSerialNumber;
+import ksch.visit.infrastructure.OpdSerialNumberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
