@@ -31,7 +31,7 @@ subprojects {
     }
 }
 
-configure(subprojects.findAll { !it.name.endsWith('-api') } ) {
+configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
     apply plugin: 'io.spring.dependency-management'
 
     dependencies {
@@ -60,7 +60,7 @@ configure(subprojects.findAll { !it.name.endsWith('-api') } ) {
     }
 }
 
-configure(subprojects.findAll { it.name.endsWith('-impl') } ) {
+configure(subprojects.findAll { it.name.endsWith('.impl') } ) {
 
     dependencies {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")

@@ -1,0 +1,4 @@
+dependencies {
+    api project(':ksch.billing:ksch.billing.api')
+    implementation project(':ksch.billing:ksch.billing.impl')
+}
