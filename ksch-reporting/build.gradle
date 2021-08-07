@@ -1,4 +1,0 @@
-dependencies {
-    api project(':ksch-reporting:reporting-api')
-    implementation project(':ksch-reporting:reporting-impl')
-}

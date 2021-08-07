@@ -1,0 +1,4 @@
+dependencies {
+    api project(':ksch.patientmanagement:ksch.patientmanagement.api')
+    implementation project(':ksch.patientmanagement:ksch.patientmanagement.impl')
+}
