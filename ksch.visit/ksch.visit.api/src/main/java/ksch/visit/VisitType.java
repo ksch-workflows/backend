@@ -27,5 +27,5 @@ public enum VisitType {
      */
     IPD,
 
-    PHYSIO_THERAPY
+    EMERGENCY,
 }
