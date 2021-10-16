@@ -25,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static java.time.LocalDateTime.now;
@@ -54,5 +55,10 @@ public class VisitServiceImpl implements VisitService {
                 .type(type)
                 .timeStart(now())
                 .build());
+    }
+
+    @Override
+    public Optional<Visit> getVisit(UUID patientId, UUID visitId) {
+        return visitRepository.get(patientId, visitId);
     }
 }

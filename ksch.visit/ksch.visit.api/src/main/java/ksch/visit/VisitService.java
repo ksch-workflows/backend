@@ -15,9 +15,12 @@
  */
 package ksch.visit;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface VisitService {
 
     Visit startVisit(UUID patientId, VisitType type);
+
+    Optional<Visit> getVisit(UUID patientId, UUID visitId);
 }

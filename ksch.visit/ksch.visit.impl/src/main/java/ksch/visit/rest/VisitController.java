@@ -15,8 +15,10 @@
  */
 package ksch.visit.rest;
 
+import ksch.commons.http.NotFoundException;
 import ksch.visit.VisitService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -40,5 +43,21 @@ public class VisitController {
     ) {
         var visit = visitService.startVisit(patientId, payload.getType());
         return VisitResource.from(visit);
+    }
+
+    @GetMapping("/patients/{patientId}/visits/{visitId}")
+    public VisitResource getVisit(
+            @PathVariable("patientId") UUID patientId,
+            @PathVariable("visitId") UUID visitId
+    ) {
+        var visit = visitService.getVisit(patientId, visitId).orElseThrow(visitNotFoundException(patientId, visitId));
+        return VisitResource.from(visit);
+    }
+
+    private Supplier<NotFoundException> visitNotFoundException(UUID patientId, UUID visitId) {
+        return () -> new NotFoundException(
+                String.format("Could not find visit with ID '%s' for patient '%s'.", visitId, patientId
+                )
+        );
     }
 }
