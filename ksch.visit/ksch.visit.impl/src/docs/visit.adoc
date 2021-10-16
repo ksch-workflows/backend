@@ -11,3 +11,13 @@ include::../../build/generated-snippets/start-visit/curl-request.adoc[]
 *Response*
 
 include::../../build/generated-snippets/start-visit/http-response.adoc[]
+
+=== Get visit
+
+*Request*
+
+include::../../build/generated-snippets/get-visit/curl-request.adoc[]
+
+*Response*
+
+include::../../build/generated-snippets/get-visit/http-response.adoc[]

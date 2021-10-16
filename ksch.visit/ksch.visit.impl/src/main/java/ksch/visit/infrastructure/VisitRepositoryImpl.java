@@ -20,6 +20,7 @@ import ksch.visit.domain.VisitRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -36,5 +37,10 @@ public class VisitRepositoryImpl implements VisitRepository {
     @Override
     public Visit save(Visit visit) {
         return visitJpaRepository.save(VisitDao.from(visit));
+    }
+
+    @Override
+    public Optional<Visit> get(UUID patientId, UUID visitId) {
+        return visitJpaRepository.findByIdAndPatientId(visitId, patientId);
     }
 }

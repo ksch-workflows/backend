@@ -453,6 +453,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_visits">Visits</a>
 <ul class="sectlevel2">
 <li><a href="#_start_visit">Start visit</a></li>
+<li><a href="#_get_visit">Get visit</a></li>
 </ul>
 </li>
 </ul>
@@ -491,7 +492,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 Content-Type: application/json
 Content-Length: 270
 
-{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/60ca690f-a58a-4c19-9572-7712d57b9d57"}},"_id":"60ca690f-a58a-4c19-9572-7712d57b9d57"}</code></pre>
+{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/04b41ce0-3c02-4ff9-9eb0-83b7291eb2ce"}},"_id":"04b41ce0-3c02-4ff9-9eb0-83b7291eb2ce"}</code></pre>
 </div>
 </div>
 </div>
@@ -519,7 +520,7 @@ even if some or all information about the patient is missing.</p>
 Content-Type: application/json
 Content-Length: 147
 
-{"_links":{"self":{"href":"http://localhost:8080/api/patients/984fc163-aed7-4f23-838c-af034ebe335c"}},"_id":"984fc163-aed7-4f23-838c-af034ebe335c"}</code></pre>
+{"_links":{"self":{"href":"http://localhost:8080/api/patients/5fa04b7d-befa-43e4-bb44-176b0c258d76"}},"_id":"5fa04b7d-befa-43e4-bb44-176b0c258d76"}</code></pre>
 </div>
 </div>
 </div>
@@ -543,7 +544,7 @@ Content-Length: 147
 Content-Type: application/json
 Content-Length: 1044
 
-{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/a63eee37-36e9-414c-8883-9651a28f71a7"}},"_id":"a63eee37-36e9-414c-8883-9651a28f71a7"},{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/60ca690f-a58a-4c19-9572-7712d57b9d57"}},"_id":"60ca690f-a58a-4c19-9572-7712d57b9d57"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/984fc163-aed7-4f23-838c-af034ebe335c"}},"_id":"984fc163-aed7-4f23-838c-af034ebe335c"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/a9d12840-49e3-4c72-b1ed-d386f1a72a74"}},"_id":"a9d12840-49e3-4c72-b1ed-d386f1a72a74"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/1ed4c586-ff41-4e77-8610-9d28130cca7f"}},"_id":"1ed4c586-ff41-4e77-8610-9d28130cca7f"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients?page=0&amp;size=20"}},"page":{"size":20,"totalElements":5,"totalPages":1,"number":0}}</code></pre>
+{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/81874bf4-6617-4251-9d70-e790f226529d"}},"_id":"81874bf4-6617-4251-9d70-e790f226529d"},{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/04b41ce0-3c02-4ff9-9eb0-83b7291eb2ce"}},"_id":"04b41ce0-3c02-4ff9-9eb0-83b7291eb2ce"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/5fa04b7d-befa-43e4-bb44-176b0c258d76"}},"_id":"5fa04b7d-befa-43e4-bb44-176b0c258d76"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/68889e4f-b874-4025-b217-edc26f05a935"}},"_id":"68889e4f-b874-4025-b217-edc26f05a935"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/4e60a1b3-2912-4a92-8c12-826306fceeb3"}},"_id":"4e60a1b3-2912-4a92-8c12-826306fceeb3"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients?page=0&amp;size=20"}},"page":{"size":20,"totalElements":5,"totalPages":1,"number":0}}</code></pre>
 </div>
 </div>
 </div>
@@ -570,7 +571,7 @@ Content-Length: 1044
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/search?q=a63eee37-36e9-414c-8883-9651a28f71a7' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/search?q=81874bf4-6617-4251-9d70-e790f226529d' -i -X GET \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -583,7 +584,7 @@ Content-Length: 1044
 Content-Type: application/json
 Content-Length: 375
 
-{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/a63eee37-36e9-414c-8883-9651a28f71a7"}},"_id":"a63eee37-36e9-414c-8883-9651a28f71a7"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients/search?q=a63eee37-36e9-414c-8883-9651a28f71a7&amp;page=0&amp;size=20"}},"page":{"size":20,"totalElements":1,"totalPages":1,"number":0}}</code></pre>
+{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/81874bf4-6617-4251-9d70-e790f226529d"}},"_id":"81874bf4-6617-4251-9d70-e790f226529d"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients/search?q=81874bf4-6617-4251-9d70-e790f226529d&amp;page=0&amp;size=20"}},"page":{"size":20,"totalElements":1,"totalPages":1,"number":0}}</code></pre>
 </div>
 </div>
 </div>
@@ -602,7 +603,7 @@ Content-Length: 375
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/e3f95c67-3818-41d0-8c48-401c98fa5b4c/visits' -i -X POST \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/c094fba1-c8a5-4be9-b8b8-fe5ca52ec68e/visits' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -H 'Accept: application/json' \
     -d '{
@@ -620,7 +621,31 @@ Content-Length: 375
 Content-Type: application/json
 Content-Length: 122
 
-{"opdNumber":"21-1000","type":"OPD","timeStart":"2021-07-31T10:31:35.138661","_id":"50511889-b27b-4205-aab0-c087cea2be8e"}</code></pre>
+{"opdNumber":"21-1000","type":"OPD","timeStart":"2021-10-16T17:51:39.889944","_id":"4eedb568-f84d-4d33-bf1d-b2a780a93d79"}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_visit">Get visit</h3>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/17568e77-0a1e-4a4b-91b1-b58528c552c5/visits/34e9b4d9-e31a-47db-9daa-fef462f7d6da' -i -X GET \
+    -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 128
+
+{"opdNumber":"21-1001","type":"EMERGENCY","timeStart":"2021-10-16T17:51:40.007737","_id":"34e9b4d9-e31a-47db-9daa-fef462f7d6da"}</code></pre>
 </div>
 </div>
 </div>
@@ -629,7 +654,7 @@ Content-Length: 122
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-07-31 10:28:04 +0200
+Last updated 2021-10-16 17:54:11 +0200
 </div>
 </div>
 </body>
