@@ -17,41 +17,51 @@ package ksch.visit.rest;
 
 import ksch.commons.http.ResourceExtensionsRegistry;
 import ksch.patientmanagement.Patient;
+import ksch.visit.Visit;
 import ksch.visit.domain.JohnDoe;
 import ksch.visit.domain.VisitRepository;
+import ksch.visit.infrastructure.VisitDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
+import static ksch.testing.ResourceExtensionMatchers.containsLinkWithRel;
+import static ksch.testing.ResourceExtensionMatchers.containsNoLinkWithRel;
+import static ksch.visit.VisitType.IPD;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
-class VisitModuleResourceExtensionsTest {
+class VisitResourceExtensionsTest {
 
     private final ResourceExtensionsRegistry resourceExtensionsRegistry = new ResourceExtensionsRegistry();
 
     @Mock
     private VisitRepository visitJpaRepository;
 
-    private VisitModuleResourceExtensions resourceExtensions;
+    private VisitResourceExtensions resourceExtensions;
 
     @BeforeEach
     public void setup() {
-        resourceExtensions = new VisitModuleResourceExtensions(resourceExtensionsRegistry, visitJpaRepository);
+        resourceExtensions = new VisitResourceExtensions(resourceExtensionsRegistry, visitJpaRepository);
     }
 
     @Test
     public void should_create_start_visit_link() {
-        given(visitJpaRepository.hasActiveVisit(any(UUID.class))).willReturn(false);
+        given(visitJpaRepository.findCurrentVisit(any(UUID.class))).willReturn(Optional.empty());
         var patient = new JohnDoe();
 
         resourceExtensions.init();
@@ -65,12 +75,43 @@ class VisitModuleResourceExtensionsTest {
 
     @Test
     public void should_not_create_start_visit_link() {
-        given(visitJpaRepository.hasActiveVisit(any(UUID.class))).willReturn(true);
+        given(visitJpaRepository.findCurrentVisit(any(UUID.class))).willReturn(Optional.of(mock(Visit.class)));
         var patient = new JohnDoe();
 
         resourceExtensions.init();
 
         var links = resourceExtensionsRegistry.getLinks(Patient.class, patient);
-        assertThat(links, empty());
+        assertThat(links, containsNoLinkWithRel("start-visit"));
+    }
+
+    @Test
+    public void should_add_current_visit_link() {
+        var patient = new JohnDoe();
+        given(visitJpaRepository.findCurrentVisit(eq(patient.getId()))).willReturn(
+                Optional.of(VisitDao.builder()
+                        .id(UUID.randomUUID())
+                        .opdNumber("10-12345")
+                        .patientId(patient.getId())
+                        .timeStart(LocalDateTime.now().minusDays(5))
+                        .type(IPD)
+                        .build()
+                )
+        );
+
+        resourceExtensions.init();
+
+        var links = resourceExtensionsRegistry.getLinks(Patient.class, patient);
+        assertThat(links, containsLinkWithRel("current-visit"));
+    }
+
+    @Test
+    public void should_not_include_past_visit_as_current_visit() {
+        var patient = new JohnDoe();
+        given(visitJpaRepository.findCurrentVisit(eq(patient.getId()))).willReturn(Optional.empty());
+
+        resourceExtensions.init();
+
+        var links = resourceExtensionsRegistry.getLinks(Patient.class, patient);
+        assertThat(links, containsNoLinkWithRel("current-visit"));
     }
 }

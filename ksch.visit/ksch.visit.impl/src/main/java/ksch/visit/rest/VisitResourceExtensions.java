@@ -31,11 +31,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  * This class is responsible for the registration of visit-related links in REST resources provided by other modules.
  */
 @Component
-public class VisitModuleResourceExtensions extends ResourceExtensions {
+public class VisitResourceExtensions extends ResourceExtensions {
 
     private final VisitRepository visitRepository;
 
-    public VisitModuleResourceExtensions(
+    public VisitResourceExtensions(
             ResourceExtensionsRegistry resourceExtensionsRegistry,
             VisitRepository visitRepository
     ) {
@@ -47,10 +47,12 @@ public class VisitModuleResourceExtensions extends ResourceExtensions {
     @Override
     public void init() {
         registerLink(Patient.class, this::createStartVisitLink);
+        registerLink(Patient.class, this::createCurrentVisitLink);
     }
 
     private Optional<Link> createStartVisitLink(Patient patient) {
-        if (visitRepository.hasActiveVisit(patient.getId())) {
+        var currentVisit = visitRepository.findCurrentVisit(patient.getId());
+        if (currentVisit.isPresent()) {
             return Optional.empty();
         } else {
             var link = linkTo(
@@ -58,5 +60,15 @@ public class VisitModuleResourceExtensions extends ResourceExtensions {
             ).withRel("start-visit");
             return Optional.of(link);
         }
+    }
+
+    private Optional<Link> createCurrentVisitLink(Patient patient) {
+        var currentVisit = visitRepository.findCurrentVisit(patient.getId());
+        return currentVisit.map(v -> {
+            var link = linkTo(
+                    methodOn(VisitController.class).getVisit(patient.getId(), v.getId())
+            ).withRel("current-visit");
+            return Optional.of(link);
+        }).orElse(Optional.empty());
     }
 }

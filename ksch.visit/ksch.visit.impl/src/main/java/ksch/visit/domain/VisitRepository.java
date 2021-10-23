@@ -22,7 +22,7 @@ import java.util.UUID;
 
 public interface VisitRepository {
 
-    boolean hasActiveVisit(UUID patientId);
+    Optional<Visit> findCurrentVisit(UUID patientId);
 
     Visit save(Visit visit);
 

@@ -29,9 +29,10 @@ public class VisitRepositoryImpl implements VisitRepository {
 
     private final VisitJpaRepository visitJpaRepository;
 
+    // TODO Is a test for the repository method needed? Maybe it is sufficient to test this on a controller level.
     @Override
-    public boolean hasActiveVisit(UUID patientId) {
-        return visitJpaRepository.hasActiveVisit(patientId);
+    public Optional<Visit> findCurrentVisit(UUID patientId) {
+        return visitJpaRepository.findCurrentVisit(patientId);
     }
 
     @Override
