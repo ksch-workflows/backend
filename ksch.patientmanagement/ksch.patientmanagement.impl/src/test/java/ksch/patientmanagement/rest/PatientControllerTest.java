@@ -75,6 +75,17 @@ public class PatientControllerTest extends RestControllerTest {
 
     @Test
     @SneakyThrows
+    public void should_get_patient() {
+        var patient = patientService.createPatient();
+
+        mockMvc.perform(get("/api/patients/{patientId}", patient.getId()).accept(APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("patients-get"));
+    }
+
+    @Test
+    @SneakyThrows
     public void should_list_patients() {
         patientService.createPatient();
         patientService.createPatient();

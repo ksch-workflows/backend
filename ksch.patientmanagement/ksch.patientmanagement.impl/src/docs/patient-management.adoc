@@ -23,6 +23,16 @@ include::../../build/generated-snippets/patients-create-emergency/curl-request.a
 
 include::../../build/generated-snippets/patients-create-emergency/http-response.adoc[]
 
+=== Get patient details
+
+*Request*
+
+include::../../build/generated-snippets/patients-get/curl-request.adoc[]
+
+*Response*
+
+include::../../build/generated-snippets/patients-get/http-response.adoc[]
+
 === List all patients
 
 *Request*

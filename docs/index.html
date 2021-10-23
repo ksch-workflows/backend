@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.10">
+<meta name="generator" content="Asciidoctor 2.0.13">
 <title>REST API Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -47,7 +47,7 @@ textarea{overflow:auto;vertical-align:top}
 table{border-collapse:collapse;border-spacing:0}
 *,*::before,*::after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
 html,body{font-size:100%}
-body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
 a:hover{cursor:pointer}
 img,object,embed{max-width:100%;height:auto}
 object,embed{height:100%}
@@ -62,10 +62,8 @@ img{-ms-interpolation-mode:bicubic}
 img,object,svg{display:inline-block;vertical-align:middle}
 textarea{height:auto;min-height:50px}
 select{width:100%}
-.center{margin-left:auto;margin-right:auto}
-.stretch{width:100%}
 .subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
-div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
 a{color:#2156a5;text-decoration:underline;line-height:inherit}
 a:hover,a:focus{color:#1d4b8f}
 a img{border:0}
@@ -96,28 +94,28 @@ dl dd{margin-bottom:1.25em}
 abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
 abbr{text-transform:none}
 blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
-blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
-blockquote cite::before{content:"\2014 \0020"}
-blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
 blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
 @media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
 h1{font-size:2.75em}
 h2{font-size:2.3125em}
 h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
 h4{font-size:1.4375em}}
-table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede;word-wrap:normal}
 table thead,table tfoot{background:#f7f8f7}
 table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
 table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
 table tr.even,table tr.alt{background:#f8f8f7}
-table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
 h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
 h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
 .clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
 .clearfix::after,.float-group::after{clear:both}
-:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
-:not(pre)>code.nobreak{word-wrap:normal}
-:not(pre)>code.nowrap{white-space:nowrap}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
 pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
 pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
 pre>code{display:block}
@@ -182,7 +180,7 @@ body.toc2.toc-right{padding-left:0;padding-right:20em}}
 #content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
 #content #toc>:first-child{margin-top:0}
 #content #toc>:last-child{margin-bottom:0}
-#footer{max-width:100%;background:rgba(0,0,0,.8);padding:1.25em}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
 #footer-text{color:rgba(255,255,255,.8);line-height:1.44}
 #content{margin-bottom:.625em}
 .sect1{padding-bottom:.625em}
@@ -205,7 +203,7 @@ table.tableblock #preamble>.sectionbody>[class="paragraph"]:first-of-type p{font
 .admonitionblock>table td.icon{text-align:center;width:80px}
 .admonitionblock>table td.icon img{max-width:none}
 .admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
-.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
 .exampleblock>.content>:first-child{margin-top:0}
@@ -215,7 +213,7 @@ table.tableblock #preamble>.sectionbody>[class="paragraph"]:first-of-type p{font
 .sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
 .exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
-.literalblock pre,.listingblock>.content>pre{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;overflow-x:auto;padding:1em;font-size:.8125em}
+.literalblock pre,.listingblock>.content>pre{-webkit-border-radius:4px;border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
 .literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class="highlight"],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
@@ -260,22 +258,21 @@ pre.pygments .lineno::before{content:"";margin-right:-.125em}
 .quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
 .quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
 .quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
-.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;text-align:left;margin-right:0}
-table.tableblock{max-width:100%;border-collapse:separate}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
 p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
 td.tableblock>.content>:last-child{margin-bottom:-1.25em}
-td.tableblock>.content>:last-child.sidebarblock{margin-bottom:0}
 table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
-table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
-table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
-table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
-table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px}
-table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0}
-table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
-table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
 table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
 table.frame-sides{border-width:0 1px}
-table.frame-topbot,table.frame-ends{border-width:1px 0}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
 table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
 th.halign-left,td.halign-left{text-align:left}
 th.halign-right,td.halign-right{text-align:right}
@@ -284,7 +281,7 @@ th.valign-top,td.valign-top{vertical-align:top}
 th.valign-bottom,td.valign-bottom{vertical-align:bottom}
 th.valign-middle,td.valign-middle{vertical-align:middle}
 table thead th,table tfoot th{font-weight:bold}
-tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th{background:#f7f8f7}
 tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
 p.tableblock>code:only-child{background:none;padding:0}
 p.tableblock{font-size:1em}
@@ -313,6 +310,7 @@ ol.lowergreek{list-style-type:lower-greek}
 .hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
 td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
 td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
 .literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
 .colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
 .colist td:not([class]):first-child img{max-width:none}
@@ -385,7 +383,7 @@ a span.icon>.fa{cursor:inherit}
 .admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
 .admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
 .admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
-.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);-webkit-border-radius:50%;border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
 .conum[data-value] *{color:#fff!important}
 .conum[data-value]+b{display:none}
 .conum[data-value]::after{content:attr(data-value)}
@@ -412,6 +410,7 @@ thead{display:table-header-group}
 svg{max-width:100%}
 p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
 h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
 #toc,.sidebarblock,.exampleblock>.content{background:none!important}
 #toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
 body.book #header{text-align:center}
@@ -446,6 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_create_a_patient">Create a patient</a></li>
 <li><a href="#_create_a_patient_in_emergency">Create a patient in emergency</a></li>
+<li><a href="#_get_patient_details">Get patient details</a></li>
 <li><a href="#_list_all_patients">List all patients</a></li>
 <li><a href="#_search_patient">Search patient</a></li>
 </ul>
@@ -492,7 +492,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 Content-Type: application/json
 Content-Length: 270
 
-{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/04b41ce0-3c02-4ff9-9eb0-83b7291eb2ce"}},"_id":"04b41ce0-3c02-4ff9-9eb0-83b7291eb2ce"}</code></pre>
+{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/4ca38a66-25a7-47e5-bb1a-140427086a9f"}},"_id":"4ca38a66-25a7-47e5-bb1a-140427086a9f"}</code></pre>
 </div>
 </div>
 </div>
@@ -520,7 +520,31 @@ even if some or all information about the patient is missing.</p>
 Content-Type: application/json
 Content-Length: 147
 
-{"_links":{"self":{"href":"http://localhost:8080/api/patients/5fa04b7d-befa-43e4-bb44-176b0c258d76"}},"_id":"5fa04b7d-befa-43e4-bb44-176b0c258d76"}</code></pre>
+{"_links":{"self":{"href":"http://localhost:8080/api/patients/ca3237f4-e982-4187-a145-7a7d0c8130f4"}},"_id":"ca3237f4-e982-4187-a145-7a7d0c8130f4"}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_patient_details">Get patient details</h3>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/7d61ed83-dab4-4481-8f51-4c9543b22122' -i -X GET \
+    -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 147
+
+{"_links":{"self":{"href":"http://localhost:8080/api/patients/7d61ed83-dab4-4481-8f51-4c9543b22122"}},"_id":"7d61ed83-dab4-4481-8f51-4c9543b22122"}</code></pre>
 </div>
 </div>
 </div>
@@ -542,9 +566,9 @@ Content-Length: 147
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1044
+Content-Length: 1192
 
-{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/81874bf4-6617-4251-9d70-e790f226529d"}},"_id":"81874bf4-6617-4251-9d70-e790f226529d"},{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/04b41ce0-3c02-4ff9-9eb0-83b7291eb2ce"}},"_id":"04b41ce0-3c02-4ff9-9eb0-83b7291eb2ce"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/5fa04b7d-befa-43e4-bb44-176b0c258d76"}},"_id":"5fa04b7d-befa-43e4-bb44-176b0c258d76"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/68889e4f-b874-4025-b217-edc26f05a935"}},"_id":"68889e4f-b874-4025-b217-edc26f05a935"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/4e60a1b3-2912-4a92-8c12-826306fceeb3"}},"_id":"4e60a1b3-2912-4a92-8c12-826306fceeb3"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients?page=0&amp;size=20"}},"page":{"size":20,"totalElements":5,"totalPages":1,"number":0}}</code></pre>
+{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/9047d618-7388-4df1-8635-c1e717c09d84"}},"_id":"9047d618-7388-4df1-8635-c1e717c09d84"},{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/4ca38a66-25a7-47e5-bb1a-140427086a9f"}},"_id":"4ca38a66-25a7-47e5-bb1a-140427086a9f"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/ca3237f4-e982-4187-a145-7a7d0c8130f4"}},"_id":"ca3237f4-e982-4187-a145-7a7d0c8130f4"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/7d61ed83-dab4-4481-8f51-4c9543b22122"}},"_id":"7d61ed83-dab4-4481-8f51-4c9543b22122"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/65e41c9c-fa8c-4582-a068-7f8d32d74f94"}},"_id":"65e41c9c-fa8c-4582-a068-7f8d32d74f94"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/43e15834-efa4-45dd-a9f2-e1344ac7aa1d"}},"_id":"43e15834-efa4-45dd-a9f2-e1344ac7aa1d"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients?page=0&amp;size=20"}},"page":{"size":20,"totalElements":6,"totalPages":1,"number":0}}</code></pre>
 </div>
 </div>
 </div>
@@ -571,7 +595,7 @@ Content-Length: 1044
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/search?q=81874bf4-6617-4251-9d70-e790f226529d' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/search?q=9047d618-7388-4df1-8635-c1e717c09d84' -i -X GET \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -584,7 +608,7 @@ Content-Length: 1044
 Content-Type: application/json
 Content-Length: 375
 
-{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/81874bf4-6617-4251-9d70-e790f226529d"}},"_id":"81874bf4-6617-4251-9d70-e790f226529d"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients/search?q=81874bf4-6617-4251-9d70-e790f226529d&amp;page=0&amp;size=20"}},"page":{"size":20,"totalElements":1,"totalPages":1,"number":0}}</code></pre>
+{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/9047d618-7388-4df1-8635-c1e717c09d84"}},"_id":"9047d618-7388-4df1-8635-c1e717c09d84"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients/search?q=9047d618-7388-4df1-8635-c1e717c09d84&amp;page=0&amp;size=20"}},"page":{"size":20,"totalElements":1,"totalPages":1,"number":0}}</code></pre>
 </div>
 </div>
 </div>
@@ -603,7 +627,7 @@ Content-Length: 375
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/c094fba1-c8a5-4be9-b8b8-fe5ca52ec68e/visits' -i -X POST \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/32678e38-7c09-405f-8c73-0f888494406c/visits' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -H 'Accept: application/json' \
     -d '{
@@ -621,7 +645,7 @@ Content-Length: 375
 Content-Type: application/json
 Content-Length: 122
 
-{"opdNumber":"21-1000","type":"OPD","timeStart":"2021-10-16T17:51:39.889944","_id":"4eedb568-f84d-4d33-bf1d-b2a780a93d79"}</code></pre>
+{"opdNumber":"21-1000","type":"OPD","timeStart":"2021-10-23T16:28:08.001308","_id":"fde6f557-a05d-49e1-8cb9-5ce25292aca7"}</code></pre>
 </div>
 </div>
 </div>
@@ -632,7 +656,7 @@ Content-Length: 122
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/17568e77-0a1e-4a4b-91b1-b58528c552c5/visits/34e9b4d9-e31a-47db-9daa-fef462f7d6da' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/70f1e18c-afd4-4919-822f-3bac82e94654/visits/490f8e29-4261-4060-9ba4-c78d805f14fb' -i -X GET \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -645,7 +669,7 @@ Content-Length: 122
 Content-Type: application/json
 Content-Length: 128
 
-{"opdNumber":"21-1001","type":"EMERGENCY","timeStart":"2021-10-16T17:51:40.007737","_id":"34e9b4d9-e31a-47db-9daa-fef462f7d6da"}</code></pre>
+{"opdNumber":"21-1001","type":"EMERGENCY","timeStart":"2021-10-23T16:28:08.095631","_id":"490f8e29-4261-4060-9ba4-c78d805f14fb"}</code></pre>
 </div>
 </div>
 </div>
@@ -654,7 +678,7 @@ Content-Length: 128
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-10-16 17:54:11 +0200
+Last updated 2021-10-23 15:56:14 +0200
 </div>
 </div>
 </body>
