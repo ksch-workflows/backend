@@ -42,7 +42,7 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public Visit startVisit(UUID patientId, VisitType type) {
 
-        if (visitRepository.hasActiveVisit(patientId)) {
+        if (visitRepository.findCurrentVisit(patientId).isPresent()) {
             var message = "Visit cannot be started because there is already an active visit for patient with ID '" +
                     patientId + "'.";
             throw new VisitCannotBeStartedException(message);

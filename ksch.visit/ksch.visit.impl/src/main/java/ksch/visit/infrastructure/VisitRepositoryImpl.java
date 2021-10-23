@@ -30,8 +30,8 @@ public class VisitRepositoryImpl implements VisitRepository {
     private final VisitJpaRepository visitJpaRepository;
 
     @Override
-    public boolean hasActiveVisit(UUID patientId) {
-        return visitJpaRepository.hasActiveVisit(patientId);
+    public Optional<Visit> findCurrentVisit(UUID patientId) {
+        return visitJpaRepository.findCurrentVisit(patientId);
     }
 
     @Override

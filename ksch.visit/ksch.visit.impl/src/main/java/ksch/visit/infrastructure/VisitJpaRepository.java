@@ -25,8 +25,8 @@ import java.util.UUID;
 
 interface VisitJpaRepository extends JpaRepository<VisitDao, UUID> {
 
-    @Query("select count(v) > 0 from VisitDao v where v.patientId = :patientId and v.timeEnd is null")
-    boolean hasActiveVisit(@Param("patientId") UUID patientId);
+    @Query("select v from VisitDao v where v.patientId = :patientId and v.timeEnd is null")
+    Optional<Visit> findCurrentVisit(@Param("patientId") UUID patientId);
 
     Optional<Visit> findByIdAndPatientId(UUID visitId, UUID patientId);
 }

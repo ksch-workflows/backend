@@ -38,6 +38,7 @@ public class PatientJpaRepositoryTest {
     @Autowired
     private PatientService patientService;
 
+    @SuppressWarnings("unused")
     private Patient janeDoe;
 
     private Patient johnDoe;
