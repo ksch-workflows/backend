@@ -38,7 +38,7 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
 
         // Testing libraries and frameworks
-        testImplementation "org.hamcrest:hamcrest-library:${hamcrestVersion}"
+        testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
         testImplementation 'org.junit.jupiter:junit-jupiter-api'
         testImplementation "org.mockito:mockito-core:${mockitoVersion}"
         testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
