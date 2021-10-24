@@ -76,6 +76,6 @@ configure(subprojects.findAll { it.name.endsWith('.impl') } ) {
         // Test
         testImplementation project(':commons:testing')
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
+        testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     }
 }
