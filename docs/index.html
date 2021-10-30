@@ -490,9 +490,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 270
+Content-Length: 330
 
-{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/4ca38a66-25a7-47e5-bb1a-140427086a9f"}},"_id":"4ca38a66-25a7-47e5-bb1a-140427086a9f"}</code></pre>
+{
+  "name" : "John Doe",
+  "gender" : "MALE",
+  "phoneNumber" : "0123456789",
+  "residentialAddress" : "Guesthouse",
+  "patientCategory" : "GENERAL",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/patients/e0c3e165-e8af-4783-ae78-8f4f77a7a8cb"
+    }
+  },
+  "_id" : "e0c3e165-e8af-4783-ae78-8f4f77a7a8cb"
+}</code></pre>
 </div>
 </div>
 </div>
@@ -518,9 +530,16 @@ even if some or all information about the patient is missing.</p>
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 147
+Content-Length: 182
 
-{"_links":{"self":{"href":"http://localhost:8080/api/patients/ca3237f4-e982-4187-a145-7a7d0c8130f4"}},"_id":"ca3237f4-e982-4187-a145-7a7d0c8130f4"}</code></pre>
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/patients/83727273-a71b-48a5-9371-a18c371e3af1"
+    }
+  },
+  "_id" : "83727273-a71b-48a5-9371-a18c371e3af1"
+}</code></pre>
 </div>
 </div>
 </div>
@@ -531,7 +550,7 @@ Content-Length: 147
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/7d61ed83-dab4-4481-8f51-4c9543b22122' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/630ee4d3-cff5-4d83-ad86-a622d3952a60' -i -X GET \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -542,9 +561,16 @@ Content-Length: 147
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 147
+Content-Length: 182
 
-{"_links":{"self":{"href":"http://localhost:8080/api/patients/7d61ed83-dab4-4481-8f51-4c9543b22122"}},"_id":"7d61ed83-dab4-4481-8f51-4c9543b22122"}</code></pre>
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/patients/630ee4d3-cff5-4d83-ad86-a622d3952a60"
+    }
+  },
+  "_id" : "630ee4d3-cff5-4d83-ad86-a622d3952a60"
+}</code></pre>
 </div>
 </div>
 </div>
@@ -566,9 +592,71 @@ Content-Length: 147
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1192
+Content-Length: 1703
 
-{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/9047d618-7388-4df1-8635-c1e717c09d84"}},"_id":"9047d618-7388-4df1-8635-c1e717c09d84"},{"name":"John Doe","gender":"MALE","phoneNumber":"0123456789","residentialAddress":"Guesthouse","patientCategory":"GENERAL","_links":{"self":{"href":"http://localhost:8080/api/patients/4ca38a66-25a7-47e5-bb1a-140427086a9f"}},"_id":"4ca38a66-25a7-47e5-bb1a-140427086a9f"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/ca3237f4-e982-4187-a145-7a7d0c8130f4"}},"_id":"ca3237f4-e982-4187-a145-7a7d0c8130f4"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/7d61ed83-dab4-4481-8f51-4c9543b22122"}},"_id":"7d61ed83-dab4-4481-8f51-4c9543b22122"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/65e41c9c-fa8c-4582-a068-7f8d32d74f94"}},"_id":"65e41c9c-fa8c-4582-a068-7f8d32d74f94"},{"_links":{"self":{"href":"http://localhost:8080/api/patients/43e15834-efa4-45dd-a9f2-e1344ac7aa1d"}},"_id":"43e15834-efa4-45dd-a9f2-e1344ac7aa1d"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients?page=0&amp;size=20"}},"page":{"size":20,"totalElements":6,"totalPages":1,"number":0}}</code></pre>
+{
+  "_embedded" : {
+    "patientResourceList" : [ {
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/patients/20335677-6a62-45f2-9e4e-c65b4b216ffb"
+        }
+      },
+      "_id" : "20335677-6a62-45f2-9e4e-c65b4b216ffb"
+    }, {
+      "name" : "John Doe",
+      "gender" : "MALE",
+      "phoneNumber" : "0123456789",
+      "residentialAddress" : "Guesthouse",
+      "patientCategory" : "GENERAL",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/patients/e0c3e165-e8af-4783-ae78-8f4f77a7a8cb"
+        }
+      },
+      "_id" : "e0c3e165-e8af-4783-ae78-8f4f77a7a8cb"
+    }, {
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/patients/83727273-a71b-48a5-9371-a18c371e3af1"
+        }
+      },
+      "_id" : "83727273-a71b-48a5-9371-a18c371e3af1"
+    }, {
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/patients/630ee4d3-cff5-4d83-ad86-a622d3952a60"
+        }
+      },
+      "_id" : "630ee4d3-cff5-4d83-ad86-a622d3952a60"
+    }, {
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/patients/43de0111-d334-49fd-8f8f-7eae21b0f6c2"
+        }
+      },
+      "_id" : "43de0111-d334-49fd-8f8f-7eae21b0f6c2"
+    }, {
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/patients/add3543a-9fb2-4fcb-bf1e-6701d3204ec2"
+        }
+      },
+      "_id" : "add3543a-9fb2-4fcb-bf1e-6701d3204ec2"
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/patients?page=0&amp;size=20"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 6,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
 </div>
 </div>
 </div>
@@ -595,7 +683,7 @@ Content-Length: 1192
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/search?q=9047d618-7388-4df1-8635-c1e717c09d84' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/search?q=20335677-6a62-45f2-9e4e-c65b4b216ffb' -i -X GET \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -606,9 +694,31 @@ Content-Length: 1192
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 375
+Content-Length: 521
 
-{"_embedded":{"patientResourceList":[{"_links":{"self":{"href":"http://localhost:8080/api/patients/9047d618-7388-4df1-8635-c1e717c09d84"}},"_id":"9047d618-7388-4df1-8635-c1e717c09d84"}]},"_links":{"self":{"href":"http://localhost:8080/api/patients/search?q=9047d618-7388-4df1-8635-c1e717c09d84&amp;page=0&amp;size=20"}},"page":{"size":20,"totalElements":1,"totalPages":1,"number":0}}</code></pre>
+{
+  "_embedded" : {
+    "patientResourceList" : [ {
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/patients/20335677-6a62-45f2-9e4e-c65b4b216ffb"
+        }
+      },
+      "_id" : "20335677-6a62-45f2-9e4e-c65b4b216ffb"
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/patients/search?q=20335677-6a62-45f2-9e4e-c65b4b216ffb&amp;page=0&amp;size=20"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 1,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
 </div>
 </div>
 </div>
@@ -627,7 +737,7 @@ Content-Length: 375
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/32678e38-7c09-405f-8c73-0f888494406c/visits' -i -X POST \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/119bafdd-877d-430c-98b0-9b6a5581a4d3/visits' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -H 'Accept: application/json' \
     -d '{
@@ -643,9 +753,14 @@ Content-Length: 375
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 122
+Content-Length: 143
 
-{"opdNumber":"21-1000","type":"OPD","timeStart":"2021-10-23T16:28:08.001308","_id":"fde6f557-a05d-49e1-8cb9-5ce25292aca7"}</code></pre>
+{
+  "opdNumber" : "21-1000",
+  "type" : "OPD",
+  "timeStart" : "2021-10-30T16:47:03.327535",
+  "_id" : "db95d8f3-ce8a-4f83-bc8d-33194a9e2205"
+}</code></pre>
 </div>
 </div>
 </div>
@@ -656,7 +771,7 @@ Content-Length: 122
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/70f1e18c-afd4-4919-822f-3bac82e94654/visits/490f8e29-4261-4060-9ba4-c78d805f14fb' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/patients/41998868-81c3-4739-a035-8f05fd0c93aa/visits/33d638b1-cbc8-4cc1-b0c9-abd983ec347d' -i -X GET \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -667,9 +782,14 @@ Content-Length: 122
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 128
+Content-Length: 148
 
-{"opdNumber":"21-1001","type":"EMERGENCY","timeStart":"2021-10-23T16:28:08.095631","_id":"490f8e29-4261-4060-9ba4-c78d805f14fb"}</code></pre>
+{
+  "opdNumber" : "21-1001",
+  "type" : "EMERGENCY",
+  "timeStart" : "2021-10-30T16:47:03.41671",
+  "_id" : "33d638b1-cbc8-4cc1-b0c9-abd983ec347d"
+}</code></pre>
 </div>
 </div>
 </div>
