@@ -101,6 +101,8 @@ git push
 ### Deploy to staging environment
 
 ```
+# sudo snap install google-cloud-sdk --classic
+
 gcloud init
 ./gradlew appengineDeploy
 ```
