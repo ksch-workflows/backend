@@ -28,6 +28,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    implementation project(':bff')
     implementation project(':ksch.administration')
     implementation project(':ksch.patientmanagement')
     implementation project(':ksch.billing')
