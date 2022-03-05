@@ -16,7 +16,7 @@ class LoginInterceptor implements HandlerInterceptor {
         var accessToken = session.getAttribute("accessToken");
         if (accessToken == null) {
             response.setStatus(303);
-            response.setHeader("Location", "https://ksch-workflows.eu.auth0.com/authorize?response_type=code" +
+            response.setHeader("Location", "https://noauth-ga2speboxa-ew.a.run.app/authorize?response_type=code" +
                 "&client_id=jnebdD0fczAHoEBVrr6lE7OAuYchc2ZR" +
                 "&redirect_uri=http://localhost:8080/bff/callback" +
                 "&scope=offline_access%20read%3Apatients" +
