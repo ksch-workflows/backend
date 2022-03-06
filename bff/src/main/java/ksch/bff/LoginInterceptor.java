@@ -1,5 +1,7 @@
 package ksch.bff;
 
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,8 +13,11 @@ class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        var requestURI = request.getRequestURI();
+        if (requestURI.startsWith("/api") || requestURI.startsWith("/bff") || requestURI.equals("/error") || requestURI.equals("/favicon.ico")) {
+            return true;
+        }
         var session = request.getSession();
-
         var accessToken = session.getAttribute("accessToken");
         if (accessToken == null) {
             response.setStatus(303);
