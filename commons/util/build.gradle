@@ -1,7 +1,4 @@
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
