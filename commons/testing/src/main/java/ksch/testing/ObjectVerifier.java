@@ -16,6 +16,7 @@
 package ksch.testing;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import org.opentest4j.AssertionFailedError;
@@ -32,6 +33,7 @@ public class ObjectVerifier {
     @SneakyThrows
     public static void verifyAllFieldsAreSet(Object object) {
         var objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         var json = objectMapper.writeValueAsString(object);
         if (json.contains("null")) {
             var message = "The provided object contains one or more fields that are not initialized: " + json;
