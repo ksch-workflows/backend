@@ -3,6 +3,8 @@ package ksch.bff;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kong.unirest.Unirest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static org.springframework.http.HttpStatus.FOUND;
 
 @RestController
 public class LoginController {
@@ -25,6 +28,13 @@ public class LoginController {
         var session = request.getSession();
         session.setAttribute("accessToken", tokenResponse.getAccessToken());
         session.setAttribute("refreshToken", tokenResponse.getRefreshToken());
+
+        var interceptedUri = session.getAttribute("interceptedUri");
+        if (interceptedUri != null) {
+            var headers = new HttpHeaders();
+            headers.add("location", String.valueOf(interceptedUri));
+            return new ResponseEntity<>(headers, FOUND);
+        }
 
         return ResponseEntity.ok().build();
     }

@@ -18,6 +18,7 @@ class LoginInterceptor implements HandlerInterceptor {
         var session = request.getSession();
         var accessToken = session.getAttribute("accessToken");
         if (accessToken == null) {
+            session.setAttribute("interceptedUri", request.getRequestURI());
             response.setStatus(303);
             response.setHeader("Location", "https://noauth-ga2speboxa-ew.a.run.app/authorize?response_type=code" +
                 "&client_id=jnebdD0fczAHoEBVrr6lE7OAuYchc2ZR" +
