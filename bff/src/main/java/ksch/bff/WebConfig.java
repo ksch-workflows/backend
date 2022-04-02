@@ -1,5 +1,6 @@
 package ksch.bff;
 
+import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -15,5 +16,8 @@ class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor);
+        
     }
+
+
 }
