@@ -53,6 +53,15 @@ The following list gives an overview of the contents in the project's directorie
 
 ## Development
 
+### Embedded database
+
+When you start the app with the `bootRun` Gradle task, the app will use an embedded H2 database.
+This database can be introspected under the following URL:
+
+http://localhost:8080/h2-console
+
+Use `sa` / `password` as login.
+
 ### Online tutorials
 
 The online tutorials for the used technologies can be found in the project wiki:
