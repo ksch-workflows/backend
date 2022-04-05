@@ -13,6 +13,7 @@ class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (!isWebPageRequest(request)) {
             return true; // Ignore any requested resources that are not HTML files.
+            // TODO Also skip error pages
         }
         var session = request.getSession();
         var accessToken = session.getAttribute("accessToken");

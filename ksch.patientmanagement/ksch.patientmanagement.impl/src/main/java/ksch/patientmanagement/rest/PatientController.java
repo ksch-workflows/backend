@@ -51,6 +51,7 @@ class PatientController {
 
     private final PatientResourceAssembler patientResourceAssembler;
 
+    // TODO Remove obsolete http header include
     @PostMapping
     PatientResource createPatient(@RequestBody Optional<PatientPayload> request, @RequestHeader HttpHeaders headers) {
         Patient patient = null;
