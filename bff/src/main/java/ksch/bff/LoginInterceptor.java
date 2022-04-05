@@ -11,9 +11,8 @@ class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        var requestURI = request.getRequestURI();
-        if (requestURI.startsWith("/api") || requestURI.startsWith("/bff") || requestURI.equals("/error") || requestURI.equals("/favicon.ico")) {
-            return true;
+        if (!isWebPageRequest(request)) {
+            return true; // Ignore any requested resources that are not HTML files.
         }
         var session = request.getSession();
         var accessToken = session.getAttribute("accessToken");
@@ -29,5 +28,10 @@ class LoginInterceptor implements HandlerInterceptor {
         } else {
             return true;
         }
+    }
+
+    private static boolean isWebPageRequest(HttpServletRequest request) {
+        var requestURI = request.getRequestURI();
+        return requestURI.endsWith("/") || requestURI.endsWith(".html");
     }
 }

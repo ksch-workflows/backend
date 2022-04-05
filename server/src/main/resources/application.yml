@@ -19,3 +19,8 @@ management:
   health:
     diskspace:
       enabled: false
+server:
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID
