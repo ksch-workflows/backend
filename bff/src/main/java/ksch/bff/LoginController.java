@@ -39,14 +39,15 @@ public class LoginController {
         return ResponseEntity.ok().build();
     }
 
+    // TODO Make service class for dealing with the HTTP request
     public TokenResponse exchangeAuthorizationGrant(String code) {
         var response = Unirest.post(TOKEN_URL)
                 .header("content-type", "application/x-www-form-urlencoded")
-                .field("client_id", "jnebdD0fczAHoEBVrr6lE7OAuYchc2ZR")
-                .field("client_secret", "xxx")
+                .field("client_id", "jnebdD0fczAHoEBVrr6lE7OAuYchc2ZR") // TODO Use client ID from env variable
+                .field("client_secret", "xxx") // TODO Use client secret from env variable
                 .field("grant_type", "authorization_code")
                 .field("redirect_uri", "http://localhost/callback")
-                .field("code", "xxx")
+                .field("code", code)
                 .asString();
 
         if (!response.isSuccess()) {
