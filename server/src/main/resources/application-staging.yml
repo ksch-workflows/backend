@@ -4,3 +4,5 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: https://ksch-workflows.eu.auth0.com/
+
+    filter-order: '5'
