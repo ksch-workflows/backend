@@ -34,6 +34,9 @@ public class TokenFilter implements Filter {
 
     private static boolean hasSessionCookie(HttpServletRequest request) {
         var cookies = request.getCookies();
+        if (cookies == null) {
+            return false;
+        }
         for (var cookie : cookies) {
             if (cookie.getName().equalsIgnoreCase("JSESSIONID")) {
                 return true;
