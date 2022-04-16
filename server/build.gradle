@@ -57,3 +57,7 @@ appengine {
         projectId = 'GCLOUD_CONFIG'
     }
 }
+
+bootRun {
+    jvmArgs=["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"]
+}

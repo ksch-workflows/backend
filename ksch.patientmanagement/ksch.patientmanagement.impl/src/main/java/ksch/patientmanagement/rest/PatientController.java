@@ -51,8 +51,9 @@ class PatientController {
 
     private final PatientResourceAssembler patientResourceAssembler;
 
+    // FIXME: Remove obsolete request header inclusion
     @PostMapping
-    PatientResource createPatient(@RequestBody Optional<PatientPayload> request) {
+    PatientResource createPatient(@RequestBody Optional<PatientPayload> request, @RequestHeader("Authorization") String authorization) {
         Patient patient = null;
         if (request.isPresent()) {
             patient = patientService.createPatient(request.get());
