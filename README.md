@@ -53,6 +53,15 @@ The following list gives an overview of the contents in the project's directorie
 
 ## Development
 
+### Start with dev profile
+
+With the `dev` profile the app will run with a mock authorization server which approves any valid [JWT](https://jwt.io/).
+
+```
+export SPRING_PROFILES_ACTIVE=dev
+./gradlew bootRun
+```
+
 ### Embedded database
 
 When you start the app with the `bootRun` Gradle task, the app will use an embedded H2 database.
@@ -108,6 +117,8 @@ git push
 ```
 
 ### Deploy to staging environment
+
+TODO: How to apply a profile for the app on the app engine?
 
 ```
 # sudo snap install google-cloud-sdk --classic

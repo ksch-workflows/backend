@@ -6,8 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@Profile("dev")
-public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
+@Profile("staging")
+public class StagingSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -17,7 +17,7 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .anyRequest()
             .authenticated()
         ;
-        http.oauth2ResourceServer().opaqueToken();
+        http.oauth2ResourceServer().jwt();
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

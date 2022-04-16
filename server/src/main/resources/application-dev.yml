@@ -1,0 +1,8 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        opaquetoken:
+          introspection-uri: https://noauth-ga2speboxa-ew.a.run.app/token-info
+          client-id: dev
+          client-secret: dev

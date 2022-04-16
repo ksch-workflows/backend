@@ -10,16 +10,6 @@ spring:
     console:
       enabled: true
 
-  # TODO Apply live authorization server
-  # TODO Move mock authorization server into dev profile
-  security:
-    oauth2:
-      resourceserver:
-        opaquetoken:
-          introspection-uri: https://noauth-ga2speboxa-ew.a.run.app/token-info
-          client-id: dev
-          client-secret: dev
-
 management:
   endpoints:
     web:
@@ -30,6 +20,7 @@ management:
   health:
     diskspace:
       enabled: false
+
 server:
   servlet:
     session:
