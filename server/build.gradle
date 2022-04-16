@@ -21,19 +21,27 @@ bootJar {
 }
 
 dependencies {
+    implementation project(':bff')
+    implementation project(':ksch.administration')
+    implementation project(':ksch.billing')
+    implementation project(':ksch.patientmanagement')
+    implementation project(':ksch.visit')
+
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    implementation project(':bff')
-    implementation project(':ksch.administration')
-    implementation project(':ksch.patientmanagement')
-    implementation project(':ksch.billing')
-    implementation project(':ksch.visit')
+    // This dependency is only needed for opaque token validating during development.
+    // It would be nice to exclude it in the live deployment.
+    implementation 'com.nimbusds:oauth2-oidc-sdk:9.33'
 }
 
 test {
