@@ -18,6 +18,8 @@ import static org.springframework.http.HttpStatus.FOUND;
 @RestController
 public class LoginController {
 
+    // TODO Use token url from profile configuration
+    // private static final String TOKEN_URL = "http://localhost:7777/oauth/token";
     private static final String TOKEN_URL = "https://noauth-ga2speboxa-ew.a.run.app/oauth/token";
 
     @GetMapping("/bff/callback")

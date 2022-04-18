@@ -3,6 +3,7 @@ spring:
     oauth2:
       resourceserver:
         opaquetoken:
+          # introspection-uri: http://localhost:7777/token-info
           introspection-uri: https://noauth-ga2speboxa-ew.a.run.app/token-info
           client-id: dev
           client-secret: dev

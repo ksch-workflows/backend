@@ -26,6 +26,7 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers("/").permitAll()
+            .antMatchers("/registration-desk/**").permitAll()
             .antMatchers("/bff/**").permitAll()
             .antMatchers("/h2-console/**").permitAll()
             .anyRequest()
