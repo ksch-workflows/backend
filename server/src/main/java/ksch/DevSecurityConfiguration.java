@@ -22,6 +22,7 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.cors();
         http.addFilterBefore(tokenFilter, BearerTokenAuthenticationFilter.class);
         http
             .authorizeRequests()
@@ -35,5 +36,6 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.oauth2ResourceServer().opaqueToken();
         http.csrf().disable();
         http.headers().frameOptions().disable();
+        // http.sessionManagement().sessionFixation().none();
     }
 }

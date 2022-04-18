@@ -26,7 +26,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @ComponentScan("ksch")
 @EntityScan("ksch")
 @EnableJpaRepositories("ksch")
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class BackendApplication {
 
     public static void main(String... args) {

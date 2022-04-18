@@ -26,3 +26,4 @@ server:
     session:
       cookie:
         name: JSESSIONID
+        same-site: None
