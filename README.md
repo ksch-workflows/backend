@@ -118,8 +118,6 @@ git push
 
 ### Deploy to staging environment
 
-TODO: How to apply a profile for the app on the app engine?
-
 ```
 # sudo snap install google-cloud-sdk --classic
 
