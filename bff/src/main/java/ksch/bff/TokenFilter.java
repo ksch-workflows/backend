@@ -40,7 +40,7 @@ public class TokenFilter implements Filter {
             var accessToken = session.getAttribute("accessToken");
             if (accessToken != null) {
                 // TODO Refresh access token if necessary
-                req.putHeader("Authorization", "Bearer " + accessToken);
+                req.addHeader("Authorization", "Bearer " + accessToken);
             }
         }
         chain.doFilter(req, response);

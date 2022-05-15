@@ -31,7 +31,7 @@ class CustomizedRequest extends HttpServletRequestWrapper {
         this.customHeaders = new HashMap<>();
     }
 
-    public void putHeader(String name, String value){
+    public void addHeader(String name, String value){
         this.customHeaders.put(name, value);
     }
 
