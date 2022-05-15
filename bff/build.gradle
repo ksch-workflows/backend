@@ -1,14 +1,12 @@
 dependencies {
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.session:spring-session-core'
     implementation 'org.springframework.session:spring-session-jdbc'
-    implementation "com.h2database:h2"
-
-    // TODO Move version declaration into "settings.gradle"
-    implementation 'com.konghq:unirest-java:3.13.7'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
-
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation "com.konghq:unirest-java:${unirestVersion}"
 }
