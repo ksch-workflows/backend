@@ -14,8 +14,7 @@ pluginManagement {
 
 rootProject.name = "ksch-workflows-backend"
 
-include "bff"
-include "server"
+include("bff")
 
 include("commons:http")
 include("commons:testing")
@@ -44,3 +43,5 @@ include("ksch.scheduling:ksch.scheduling.impl")
 include("ksch.visit")
 include("ksch.visit:ksch.visit.api")
 include("ksch.visit:ksch.visit.impl")
+
+include("server")
