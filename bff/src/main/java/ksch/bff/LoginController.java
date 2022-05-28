@@ -20,8 +20,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import static org.springframework.http.HttpStatus.FOUND;
 
@@ -34,8 +37,17 @@ public class LoginController {
         this.oAuthService = oAuthService;
     }
 
+    public static HttpSession session() {
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        return attr.getRequest().getSession(true); // true == allow create
+    }
+
     @GetMapping("/bff/callback")
     ResponseEntity<?> handleAuthorizationCallback(@RequestParam String code, HttpServletRequest request) {
+
+        var s = session();
+        var u = s.getAttribute("interceptedUri");
+
 
         var tokenResponse = oAuthService.exchangeAuthorizationGrant(code);
 

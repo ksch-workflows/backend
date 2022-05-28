@@ -55,6 +55,8 @@ The following list gives an overview of the contents in the project's directorie
 
 ### Testing
 
+- The test coverage should be at least 80%, better more.
+    - As a rule of thumb, every Java class which contains business logic should have a corresponding test class.
 - Use JUnit5 as test runner.
 - Prefer usage of [Hamcrest](http://hamcrest.org/JavaHamcrest/tutorial) for the test assertions.
 - Use [Wiremock](https://wiremock.org/docs/junit-jupiter/) for testing HTTP calls.

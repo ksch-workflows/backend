@@ -16,11 +16,13 @@
 package ksch.bff;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
+@Builder
 public class TokenResponse {
 
     @JsonProperty("access_token")
