@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.commons.http;
+package ksch.commons.http.error;
 
+import ksch.commons.http.error.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +29,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.context.request.WebRequest;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
+@Slf4j
 class RestExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -56,10 +58,33 @@ class RestExceptionHandler {
         return new ResponseEntity<>(responseBody, new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler({DeserializationException.class})
+    public ResponseEntity<Object> handleDeserializationException(DeserializationException exception) {
+        var responseBody = ErrorResponseBody.builder()
+                .errorId(exception.getErrorId())
+                .message(exception.getMessage())
+                .build();
+        return new ResponseEntity<>(responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // TODO Add test for handling of unknown error
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<Object> handleUnknownException(Exception exception) {
+        log.error("Missing error handler. The dev team should create an error handler, so that more details can be determined for the error which has happened.", exception);
+        var responseBody = ErrorResponseBody.builder()
+                .errorId("unknown-error")
+                .message("An error occurred.")
+                .build();
+        return new ResponseEntity<>(responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // TODO Map unhandled exception to 500 "unknown-error" "An error occurred."
+
     @AllArgsConstructor
     @Builder
     @Getter
     private static class ErrorResponseBody {
         private String message;
+        private String errorId;
     }
 }

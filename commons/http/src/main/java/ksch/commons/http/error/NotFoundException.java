@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.commons.http;
+package ksch.commons.http.error;
 
 import lombok.NoArgsConstructor;
 

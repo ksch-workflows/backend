@@ -15,7 +15,7 @@
  */
 package ksch.patientmanagement.rest;
 
-import ksch.commons.http.NotFoundException;
+import ksch.commons.http.error.NotFoundException;
 import ksch.patientmanagement.Patient;
 import ksch.patientmanagement.PatientService;
 import ksch.patientmanagement.infrastructure.PatientJpaRepository;
@@ -24,7 +24,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

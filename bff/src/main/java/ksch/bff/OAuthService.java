@@ -3,13 +3,16 @@ package ksch.bff;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kong.unirest.Unirest;
+import ksch.commons.http.error.DeserializationException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class OAuthService {
 
     private final OAuthProperties oauthProperties;
@@ -40,7 +43,8 @@ public class OAuthService {
         try {
             return objectMapper.readValue(responseBody, TokenResponse.class);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            log.error("Failed to deserialize HTTP response", e);
+            throw new DeserializationException();
         }
     }
 }
