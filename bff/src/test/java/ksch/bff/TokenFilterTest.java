@@ -31,7 +31,7 @@ public class TokenFilterTest {
     @BeforeEach
     public void setup() {
         verificationFilter = new VerificationFilter();
-        mockMvc = MockMvcBuilders.standaloneSetup(new TestController())
+        mockMvc = MockMvcBuilders.standaloneSetup(new TokenFilterTestController())
                 .addFilter(new TokenFilter())
                 .addFilter(verificationFilter)
                 .build();
@@ -73,7 +73,7 @@ public class TokenFilterTest {
     }
 
     @RestController
-    private class TestController {
+    private class TokenFilterTestController {
 
         @GetMapping("/api/test")
         Object test() {

@@ -15,10 +15,6 @@
  */
 package ksch.commons.http.error;
 
-import ksch.commons.http.error.NotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,7 +31,8 @@ import java.util.Map;
 
 @ControllerAdvice
 @Slf4j
-class RestExceptionHandler {
+public
+class HttpErrorConfiguration {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -80,11 +77,5 @@ class RestExceptionHandler {
 
     // TODO Map unhandled exception to 500 "unknown-error" "An error occurred."
 
-    @AllArgsConstructor
-    @Builder
-    @Getter
-    private static class ErrorResponseBody {
-        private String message;
-        private String errorId;
-    }
+
 }

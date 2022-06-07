@@ -1,0 +1,6 @@
+
+oauth:
+  baseUrl: http://authorization-server
+  clientId: example_client_id
+  clientSecret: example_client_secret
+  redirectUri: http://localhost/redirect

@@ -18,29 +18,46 @@ package ksch.bff;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 class CustomizedRequest extends HttpServletRequestWrapper {
-    private final Map<String, String> customHeaders;
+    private final Map<String, List<String>> customHeaders;
 
     public CustomizedRequest(ServletRequest request) {
         super((HttpServletRequest) request);
-        this.customHeaders = new HashMap<>();
+        customHeaders = new HashMap<>();
     }
 
-    public void addHeader(String name, String value){
-        this.customHeaders.put(name, value);
+    public void addHeader(String name, String value) {
+        final var normalizedName = name.toLowerCase();
+        if (customHeaders.containsKey(normalizedName)) {
+            var list = customHeaders.get(normalizedName);
+            if (!list.contains(value)) {
+                list.add(value);
+            }
+        } else {
+            var list = new ArrayList<String>(1);
+            list.add(value);
+            customHeaders.put(normalizedName, list);
+        }
     }
 
     @Override
     public String getHeader(String name) {
-        if (customHeaders.containsKey(name)) {
-            return customHeaders.get(name);
+        final var normalizedName = name.toLowerCase();
+        if (customHeaders.containsKey(normalizedName)) {
+            var list = customHeaders.get(normalizedName);
+            if (list.isEmpty()) {
+                throw new IllegalStateException("Cannot get header value from empty list");
+            }
+            return list.get(0);
         } else {
-            return super.getHeader(name);
+            return super.getHeader(normalizedName);
         }
     }
 
@@ -53,8 +70,12 @@ class CustomizedRequest extends HttpServletRequestWrapper {
 
     @Override
     public Enumeration<String> getHeaders(String name) {
-        var result = Collections.list(super.getHeaders(name));
-        result.add(customHeaders.get(name));
+        final var normalizedName = name.toLowerCase();
+        var result = Collections.list(super.getHeaders(normalizedName));
+        var values = customHeaders.get(normalizedName);
+        if (values != null) {
+            result.addAll(values);
+        }
         return Collections.enumeration(result);
     }
 }

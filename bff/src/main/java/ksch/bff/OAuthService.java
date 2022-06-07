@@ -15,6 +15,12 @@ import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKN
 @Slf4j
 public class OAuthService {
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    static {
+        objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
     private final OAuthProperties oauthProperties;
 
     public TokenResponse exchangeAuthorizationGrant(String code) {
@@ -22,26 +28,22 @@ public class OAuthService {
 
         var response = Unirest.post(tokenUrl)
                 .header("content-type", "application/x-www-form-urlencoded")
-                .field("client_id", "jnebdD0fczAHoEBVrr6lE7OAuYchc2ZR") // TODO Use client ID from env variable
-                .field("client_secret", "xxx") // TODO Use client secret from env variable
+                .field("client_id", oauthProperties.getClientId())
+                .field("client_secret", oauthProperties.getClientSecret())
                 .field("grant_type", "authorization_code")
-                .field("redirect_uri", "http://localhost/callback")
+                .field("redirect_uri", oauthProperties.getRedirectUri())
                 .field("code", code)
                 .asString();
 
         if (!response.isSuccess()) {
-            var msg = String.format("Status code: '%s', response body: '%s'.",
+            log.warn("Received status code '{}' and response body '{}' for authorization code exchange.",
                     response.getStatus(), response.getBody()
             );
-            throw new RuntimeException(msg);
+            throw new OAuthException();
         }
 
-        var responseBody = response.getBody();
-
-        var objectMapper = new ObjectMapper();
-        objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
-            return objectMapper.readValue(responseBody, TokenResponse.class);
+            return objectMapper.readValue(response.getBody(), TokenResponse.class);
         } catch (JsonProcessingException e) {
             log.error("Failed to deserialize HTTP response", e);
             throw new DeserializationException();

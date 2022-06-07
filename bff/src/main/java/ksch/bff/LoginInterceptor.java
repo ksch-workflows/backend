@@ -15,6 +15,7 @@
  */
 package ksch.bff;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -22,11 +23,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
+@RequiredArgsConstructor
 class LoginInterceptor implements HandlerInterceptor {
+
+    private final OAuthProperties props;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        if (!isWebPageRequest(request) && !isSessionRequest(request)) {
+        if (!isWebPageRequest(request)) {
             return true; // Ignore any requested resources that are not HTML files.
             // TODO Also skip error pages
         }
@@ -45,24 +49,23 @@ class LoginInterceptor implements HandlerInterceptor {
             response.setStatus(303);
             // TODO Apply authorization server from application properties
             // response.setHeader("Location", "http://localhost:7777/authorize?response_type=code" +
-            response.setHeader("Location", "https://noauth-ga2speboxa-ew.a.run.app/authorize?response_type=code" +
-                "&client_id=jnebdD0fczAHoEBVrr6lE7OAuYchc2ZR" +
-                "&redirect_uri=http://localhost:8080/bff/callback" +
-                "&scope=offline_access%20read%3Apatients" +
-                "&audience=https://ksch-workflows.github.io/api");
+            response.setHeader("Location", authorizeUrl());
             return false;
         } else {
             return true;
         }
     }
 
+    private String authorizeUrl() {
+        return props.getBaseUrl() + "/authorize?response_type=code" +
+                "&client_id=" + props.getClientId() +
+                "&redirect_uri=" + props.getRedirectUri() +
+                "&scope=offline_access%20read%3Apatients" +
+                "&audience=https://ksch-workflows.github.io/api";
+    }
+
     private static boolean isWebPageRequest(HttpServletRequest request) {
         var requestURI = request.getRequestURI();
         return requestURI.endsWith("/") || requestURI.endsWith(".html");
-    }
-
-    private static boolean isSessionRequest(HttpServletRequest request) {
-        var requestURI = request.getRequestURI();
-        return requestURI.startsWith("/bff/session");
     }
 }

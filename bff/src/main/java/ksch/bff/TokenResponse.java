@@ -18,6 +18,7 @@ package ksch.bff;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -26,8 +27,10 @@ import lombok.RequiredArgsConstructor;
 public class TokenResponse {
 
     @JsonProperty("access_token")
+    @NonNull
     private final String accessToken;
 
     @JsonProperty("refresh_token")
+    @NonNull
     private final String refreshToken;
 }
