@@ -32,7 +32,6 @@ class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (!isWebPageRequest(request)) {
             return true; // Ignore any requested resources that are not HTML files.
-            // TODO Also skip error pages
         }
         var session = request.getSession();
         var accessToken = session.getAttribute("accessToken");
@@ -47,8 +46,6 @@ class LoginInterceptor implements HandlerInterceptor {
 
             session.setAttribute("interceptedUri", interceptedUri);
             response.setStatus(303);
-            // TODO Apply authorization server from application properties
-            // response.setHeader("Location", "http://localhost:7777/authorize?response_type=code" +
             response.setHeader("Location", authorizeUrl());
             return false;
         } else {

@@ -1,6 +1,5 @@
 package ksch.bff;
 
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,23 +10,18 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.setup.SharedHttpSessionConfigurer.sharedHttpSession;
 
 @SpringBootTest
-// @ContextConfiguration(classes = )
 public class LoginInterceptorTest {
 
     @Autowired
@@ -42,8 +36,6 @@ public class LoginInterceptorTest {
     public void setUp() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
-                // TODO Is the line below needed?
-                .apply(sharedHttpSession()) // use this session across requests
                 .build();
     }
 
@@ -63,55 +55,63 @@ public class LoginInterceptorTest {
     }
 
     @Test
+    @SneakyThrows
     public void should_track_intercepted_uri_in_session() {
+        var session = new MockHttpSession();
 
+        var result = mockMvc.perform(get("/login-interceptor/test.html").session(session))
+                .andDo(print());
+
+        result.andExpect(status().is3xxRedirection());
+        assertThat(session.getAttribute("interceptedUri"), equalTo("/login-interceptor/test.html"));
+    }
+
+    @Test
+    @SneakyThrows
+    public void should_track_intercepted_uri_with_query_params_in_session() {
+        var session = new MockHttpSession();
+
+        var result = mockMvc.perform(get("/login-interceptor/test.html?key=value").session(session))
+                .andDo(print());
+
+        result.andExpect(status().is3xxRedirection());
+        assertThat(session.getAttribute("interceptedUri"), equalTo("/login-interceptor/test.html?key=value"));
     }
 
     @Test
     @SneakyThrows
     public void should_skip_session_with_access_token() {
+        var session = new MockHttpSession();
+        session.setAttribute("accessToken", "eyXXXXXXXX");
 
+        var result = mockMvc.perform(get("/login-interceptor/test.html").session(session))
+                .andDo(print());
+
+        result.andExpect(status().isOk());
+        assertThat(session.getAttribute("interceptedUri"), nullValue());
     }
 
     @Test
     @SneakyThrows
     public void should_skip_request_to_api() {
+        var session = new MockHttpSession();
 
+        var result = mockMvc.perform(get("/api/greeting").session(session))
+                .andDo(print());
+
+        result.andExpect(status().isOk());
+        assertThat(session.getAttribute("interceptedUri"), nullValue());
     }
 
     @Test
     @SneakyThrows
     public void should_skip_request_to_static_resource_file() {
+        var session = new MockHttpSession();
 
-    }
+        var result = mockMvc.perform(get("/login-interceptor/logo.png").session(session))
+                .andDo(print());
 
-    @Test
-    @SneakyThrows
-    public void should_skip_request_without_session() {
-
-    }
-
-    @Test
-    @SneakyThrows
-    public void should_skip_error_page() {
-
-    }
-
-    @RestController
-    private class LoginInterceptorTestController {
-
-        @GetMapping("/login-interceptor/test.html")
-        Object getHtmlPage() {
-            return "<html><body>Hello</body></html>";
-        }
-    }
-
-    @RequiredArgsConstructor
-    class LoginInterceptorVerifier implements HandlerInterceptor {
-
-        @Override
-        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-            return false;
-        }
+        result.andExpect(status().isOk());
+        assertThat(session.getAttribute("interceptedUri"), nullValue());
     }
 }
