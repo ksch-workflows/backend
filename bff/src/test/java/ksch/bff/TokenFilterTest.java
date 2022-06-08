@@ -63,7 +63,7 @@ public class TokenFilterTest {
 
     @Test
     @SneakyThrows
-    public void should_skip_request_without_session_cookie() {
+    public void should_skip_request_without_any_cookie() {
         var session = new MockHttpSession();
         session.setAttribute("accessToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTA3Mjk5MjYsImV4cCI6MTY1MDgxNjMyNiwiaXNzIjoiaHR0cHM6Ly9ub2F1dGgtZ2Eyc3BlYm94YS1ldy5hLnJ1bi5hcHAvIn0.HGQfzXCi278UImFOjZn_vdxAflti-OkycjTTXA5RS9Y");
 
@@ -72,8 +72,20 @@ public class TokenFilterTest {
         assertThat(verificationFilter.authorizationHeader, nullValue());
     }
 
+    @Test
+    @SneakyThrows
+    public void should_skip_request_without_session_cookie() {
+        var session = new MockHttpSession();
+        session.setAttribute("accessToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTA3Mjk5MjYsImV4cCI6MTY1MDgxNjMyNiwiaXNzIjoiaHR0cHM6Ly9ub2F1dGgtZ2Eyc3BlYm94YS1ldy5hLnJ1bi5hcHAvIn0.HGQfzXCi278UImFOjZn_vdxAflti-OkycjTTXA5RS9Y");
+        var miscellaneousCookie = new MockCookie("misc", "abcdefg");
+
+        mockMvc.perform(get("/api/test").session(session).cookie(miscellaneousCookie));
+
+        assertThat(verificationFilter.authorizationHeader, nullValue());
+    }
+
     @RestController
-    private class TokenFilterTestController {
+    private static class TokenFilterTestController {
 
         @GetMapping("/api/test")
         Object test() {
@@ -84,11 +96,10 @@ public class TokenFilterTest {
         Object bffTest() {
             return "Hello";
         }
-
     }
 
     @Getter
-    private class VerificationFilter implements Filter {
+    private static class VerificationFilter implements Filter {
 
         private String authorizationHeader;
 

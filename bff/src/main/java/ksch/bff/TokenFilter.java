@@ -15,6 +15,7 @@
  */
 package ksch.bff;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.Filter;
@@ -23,10 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
@@ -36,10 +34,9 @@ public class TokenFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         var req = new CustomizedRequest(request);
         if (isApiRequest(req) && hasSessionCookie(req)) {
-            var session = getSessionOrFail(req);
+            var session = req.getSession(false);
             var accessToken = session.getAttribute("accessToken");
             if (accessToken != null) {
-                // TODO Refresh access token if necessary
                 req.addHeader("Authorization", "Bearer " + accessToken);
             }
         }
@@ -61,13 +58,5 @@ public class TokenFilter implements Filter {
             }
         }
         return false;
-    }
-
-    private static HttpSession getSessionOrFail(HttpServletRequest request) {
-        var session = request.getSession(false);
-        if (session == null) {
-            throw new IllegalStateException("No existing session found.");
-        }
-        return session;
     }
 }

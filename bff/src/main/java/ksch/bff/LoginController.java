@@ -30,12 +30,12 @@ import static org.springframework.http.HttpStatus.FOUND;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final OAuthService oAuthService;
+    private final OAuthService oauthService;
 
     @GetMapping("/bff/callback")
     ResponseEntity<?> handleAuthorizationCallback(@RequestParam String code, HttpServletRequest request) {
 
-        var tokenResponse = oAuthService.exchangeAuthorizationGrant(code);
+        var tokenResponse = oauthService.exchangeAuthorizationGrant(code);
 
         var session = request.getSession();
         session.setAttribute("accessToken", tokenResponse.getAccessToken());
