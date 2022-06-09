@@ -55,7 +55,7 @@ The following list gives an overview of the contents in the project's directorie
 
 ### Start with dev profile
 
-With the `dev` profile the app will run with a mock authorization server which approves any valid [JWT](https://jwt.io/).
+With the `dev` profile, the app will run with a mock authorization server which approves any valid [JWT](https://jwt.io/).
 
 ```
 export SPRING_PROFILES_ACTIVE=dev
