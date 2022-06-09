@@ -69,6 +69,8 @@ This database can be introspected under the following URL:
 
 http://localhost:8080/h2-console
 
+`jdbc:h2:mem:ksch`
+
 Use `sa` / `password` as login.
 
 ### Online tutorials

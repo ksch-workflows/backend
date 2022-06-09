@@ -16,6 +16,7 @@
 package ksch.bff;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.FOUND;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class LoginController {
 
     private final OAuthService oauthService;
@@ -35,19 +38,24 @@ public class LoginController {
     @GetMapping("/bff/callback")
     ResponseEntity<?> handleAuthorizationCallback(@RequestParam String code, HttpServletRequest request) {
 
-        var tokenResponse = oauthService.exchangeAuthorizationGrant(code);
-
         var session = request.getSession();
-        session.setAttribute("accessToken", tokenResponse.getAccessToken());
-        session.setAttribute("refreshToken", tokenResponse.getRefreshToken());
-
         var interceptedUri = session.getAttribute("interceptedUri");
-        if (interceptedUri != null) {
-            var headers = new HttpHeaders();
-            headers.add("location", String.valueOf(interceptedUri));
-            return new ResponseEntity<>(headers, FOUND);
+
+        // Check that the client followed the intended usage flow
+        if (interceptedUri == null) {
+            log.warn("It has been attempted to invoke the OAuth callback URL outside of the intended usage flow.");
+            return ResponseEntity.status(FORBIDDEN).build();
         }
 
-        return ResponseEntity.ok().build();
+        // Generate and store OAuth tokens
+        var tokenResponse = oauthService.exchangeAuthorizationGrant(code);
+        session.setAttribute("accessToken", tokenResponse.getAccessToken());
+        session.setAttribute("refreshToken", tokenResponse.getRefreshToken());
+        session.setAttribute("interceptedUri", null);
+
+        // Redirect back to the originally intercepted URI
+        var headers = new HttpHeaders();
+        headers.add("location", String.valueOf(interceptedUri));
+        return new ResponseEntity<>(headers, FOUND);
     }
 }

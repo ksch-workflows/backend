@@ -1,4 +1,3 @@
-
 oauth:
   baseUrl: http://authorization-server
   clientId: example_client_id
