@@ -53,15 +53,6 @@ The following list gives an overview of the contents in the project's directorie
 
 ## Development
 
-### Testing
-
-- The test coverage should be at least 80%, better more.
-    - As a rule of thumb, every Java class which contains business logic should have a corresponding test class.
-- Use JUnit5 as test runner.
-- Prefer usage of [Hamcrest](http://hamcrest.org/JavaHamcrest/tutorial) for the test assertions.
-- Use [Wiremock](https://wiremock.org/docs/junit-jupiter/) for testing HTTP calls.
-- Use [Mockito](https://stackoverflow.com/a/40962941/2339010) to create mocks and stubs for unit tests.
-
 ### Start with dev profile
 
 With the `dev` profile the app will run with a mock authorization server which approves any valid [JWT](https://jwt.io/).
