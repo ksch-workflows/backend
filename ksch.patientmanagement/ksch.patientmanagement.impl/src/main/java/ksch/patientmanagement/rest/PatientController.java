@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,9 +49,8 @@ class PatientController {
 
     private final PatientResourceAssembler patientResourceAssembler;
 
-    // FIXME: Remove obsolete request header inclusion
     @PostMapping
-    PatientResource createPatient(@RequestBody Optional<PatientPayload> request, @RequestHeader("Authorization") String authorization) {
+    PatientResource createPatient(@RequestBody Optional<PatientPayload> request) {
         Patient patient = null;
         if (request.isPresent()) {
             patient = patientService.createPatient(request.get());
