@@ -31,7 +31,7 @@ import static org.springframework.http.HttpStatus.FOUND;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class LoginController {
+public class OAuthController {
 
     private final OAuthService oauthService;
 

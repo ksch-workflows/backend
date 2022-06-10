@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.SharedHttpSessionConfigurer.sharedHttpSession;
 
 @SpringBootTest
-public class LoginControllerTest {
+public class OAuthControllerTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;

@@ -19,8 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component("commonHttpErrorConfiguration")
 @ControllerAdvice
 @Slf4j
 public
@@ -64,6 +67,23 @@ class HttpErrorConfiguration {
         return new ResponseEntity<>(responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler({MissingServletRequestParameterException.class})
+    public JsonResponseEntity handleMissingServletRequestParameterException(
+            MissingServletRequestParameterException exception
+    ) {
+        var details = new HashMap<>();
+        details.put("name", exception.getParameterName());
+        details.put("type", exception.getParameterType());
+
+        var responseBody = ErrorResponseBody.builder()
+                .errorId("request-parameter-missing")
+                .message(exception.getMessage())
+                .details(details)
+                .build();
+
+        return new JsonResponseEntity(responseBody, HttpStatus.BAD_REQUEST);
+    }
+
     // TODO Add test for handling of unknown error
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleUnknownException(Exception exception) {
@@ -78,4 +98,16 @@ class HttpErrorConfiguration {
     // TODO Map unhandled exception to 500 "unknown-error" "An error occurred."
 
 
+    private static class JsonResponseEntity extends ResponseEntity {
+
+        public JsonResponseEntity(Object body, HttpStatus status) {
+            super(body, headers(), status);
+        }
+
+        private static HttpHeaders headers() {
+            var result = new HttpHeaders();
+            result.add("content-type", "application/json");
+            return result;
+        }
+    }
 }
