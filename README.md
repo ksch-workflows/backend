@@ -1,5 +1,7 @@
 # K.S.C.H. Workflows Backend
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ksch-workflows_backend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ksch-workflows_backend)
+
 This repository contains the source code for the backend of web browser, desktop, and mobile clients.
 They can access the queries and commands which they need via a RESTful API.
 
