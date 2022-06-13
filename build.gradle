@@ -1,20 +1,14 @@
 buildscript {
     repositories {
         mavenCentral()
-        
     }
 }
 
 plugins {
-    
-    
-    
     id 'idea'
     id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
     id 'org.sonarqube' version "${sonarcubeVersion}"
     id 'org.springframework.boot' version "${springBootVersion}"
-
-    
 }
 
 allprojects  {
