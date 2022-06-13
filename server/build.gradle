@@ -3,6 +3,8 @@ plugins {
     id 'io.spring.dependency-management'
     id 'java'
     id 'org.springframework.boot'
+    id 'jacoco'
+    id 'jacoco-report-aggregation'
 }
 
 configurations {
