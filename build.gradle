@@ -34,6 +34,7 @@ subprojects {
 
 configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'jacoco'
 
     dependencies {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
@@ -59,6 +60,13 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
     test {
         useJUnitPlatform()
     }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled true
+        }
+    }
+    test.finalizedBy jacocoTestReport
 }
 
 configure(subprojects.findAll { it.name.endsWith('.impl') } ) {
