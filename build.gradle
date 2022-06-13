@@ -1,14 +1,20 @@
 buildscript {
     repositories {
         mavenCentral()
+        
     }
 }
 
 plugins {
+    
+    
+    
     id 'idea'
     id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
     id 'org.sonarqube' version "${sonarcubeVersion}"
     id 'org.springframework.boot' version "${springBootVersion}"
+
+    
 }
 
 allprojects  {
@@ -94,5 +100,6 @@ sonarqube {
     property "sonar.projectKey", "ksch-workflows_backend"
     property "sonar.organization", "ksch-workflows"
     property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.coverage.jacoco.xmlReportPaths", "./server/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
   }
 }
