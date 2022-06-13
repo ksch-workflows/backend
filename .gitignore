@@ -15,6 +15,10 @@ out/
 .project
 .settings/
 
+# VS Code
+.vscode/
+**/bin
+
 # Miscellaneous
 .notes/
 .scannerwork/
