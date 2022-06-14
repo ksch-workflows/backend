@@ -1,7 +1,5 @@
 name: Java CI
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -28,10 +26,5 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
-      - name: Create code coverage report
-        run: ./gradlew check
-      - name: Finalize Build with Gradle
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonarqube --info
+      - name: Run tests
+        run: ./gradlew build
