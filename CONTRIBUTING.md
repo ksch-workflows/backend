@@ -1,5 +1,14 @@
 # Contribution guidelines
 
+## Creating pull requests
+
+For security reasons, pull requests need to be created from people with write permissions on the repository.
+
+**References**
+
+- https://securitylab.github.com/research/github-actions-preventing-pwn-requests
+- https://github.blog/2020-08-03-github-actions-improvements-for-fork-and-pull-request-workflows
+
 ## Commit messages
 
 The Git commit messages should follow the [Conventional Commits guideslines](https://www.conventionalcommits.org/en/v1.0.0/#summary).
