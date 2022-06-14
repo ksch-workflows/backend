@@ -1,5 +1,13 @@
 # Contribution guidelines
 
+## Branch name
+
+Use the date of the branch creation as prefix for the branch name, e.g.
+
+```
+git checkout -b 2022-06-14/branch-name
+```
+
 ## Creating pull requests
 
 For security reasons, pull requests need to be created from branches on the ksch-workflows/backend repository,
