@@ -1,14 +1,12 @@
-name: Java CI
+name: Java external PRs
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.repository == 'ksch-workflows/backend' && github.event.pull_request.draft == false
+    if: github.repository != 'ksch-workflows/backend' && github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -28,10 +26,5 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
-      - name: Create code coverage report
-        run: ./gradlew check
-      - name: Finalize Build with Gradle
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonarqube --info
+      - name: Run tests
+        run: ./gradlew build
