@@ -51,6 +51,20 @@ class PatientController {
 
     @PostMapping
     PatientResource createPatient(@RequestBody Optional<PatientPayload> request) {
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
         Patient patient = null;
         if (request.isPresent()) {
             patient = patientService.createPatient(request.get());
