@@ -2,7 +2,8 @@
 
 ## Creating pull requests
 
-For security reasons, pull requests need to be created from people with write permissions on the repository.
+For security reasons, pull requests need to be created from branches on the ksch-workflows/backend repository,
+i.e. they can only be created from people with write permissions for the project.
 
 **References**
 
