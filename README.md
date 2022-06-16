@@ -55,6 +55,13 @@ The following list gives an overview of the contents in the project's directorie
 
 ## Development
 
+### Generate test coverage report
+
+```
+./gradlew check
+open ./server/build/reports/jacoco/testCodeCoverageReport/html/index.html
+```
+
 ### Start with dev profile
 
 With the `dev` profile, the app will run with a mock authorization server which approves any valid [JWT](https://jwt.io/).
@@ -74,12 +81,6 @@ http://localhost:8080/h2-console
 `jdbc:h2:mem:ksch`
 
 Use `sa` / `password` as login.
-
-### Online tutorials
-
-The online tutorials for the used technologies can be found in the project wiki:
-
-https://github.com/ksch-workflows/backend/wiki
 
 ### Add license comments
 
