@@ -41,10 +41,25 @@ public class LoginInterceptorTest {
 
     @Test
     @SneakyThrows
-    public void should_redirect_to_authorization_server() {
+    public void should_redirect_html_page_to_authorization_server() {
         var session = new MockHttpSession();
 
         var result = mockMvc.perform(get("/login-interceptor/test.html").session(session))
+                .andDo(print());
+
+        result.andExpect(status().is3xxRedirection())
+                .andExpect(header().string("location", Matchers.startsWith("http://authorization-server")))
+                .andExpect(header().string("location", containsString("client_id=example_client_id")))
+                .andExpect(header().string("location", containsString("redirect_uri=http://localhost/redirect")))
+        ;
+    }
+
+    @Test
+    @SneakyThrows
+    public void should_redirect_trailing_slash_request_to_authorization_server() {
+        var session = new MockHttpSession();
+
+        var result = mockMvc.perform(get("/login-interceptor/example/").session(session))
                 .andDo(print());
 
         result.andExpect(status().is3xxRedirection())

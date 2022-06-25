@@ -1,4 +1,4 @@
-package ksch.commons.http.error;
+package ksch.bff;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,13 +10,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-public class HttpErrorConfigurationTest {
+public class BffHttpErrorConfigurationTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -32,15 +33,13 @@ public class HttpErrorConfigurationTest {
 
     @Test
     @SneakyThrows
-    public void should_fail_get_greeting() {
-        var result = mockMvc.perform(get("/commons/http-error-configuration/greeting"))
+    public void should_handle_oauth_failure() {
+        var result = mockMvc.perform(get("/bff/http-error-configuration/oauth-failure"))
                 .andDo(print());
 
-        result.andExpect(status().isBadRequest())
-                .andExpect(jsonPath("errorId", is("request-parameter-missing")))
-                .andExpect(jsonPath("message", is("Required request parameter 'name' for method parameter type String is not present")))
-                .andExpect(jsonPath("details.name", is("name")))
-                .andExpect(jsonPath("details.type", is("String")))
+        result.andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("errorId", is("oauth-failure")))
+                .andExpect(jsonPath("details", nullValue()))
         ;
     }
 }

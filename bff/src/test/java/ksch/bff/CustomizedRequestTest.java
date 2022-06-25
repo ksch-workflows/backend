@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -48,6 +50,17 @@ public class CustomizedRequestTest {
         expectedValues.add("example value 1");
         expectedValues.add("example value 2");
         assertThat(values, equalTo(expectedValues));
+    }
+
+    @Test
+    public void should_not_add_same_value_multiple_times() {
+        var request = new CustomizedRequest(new MockHttpServletRequest());
+        request.addHeader("X-EXAMPLE-KEY", "example value 1");
+        request.addHeader("X-EXAMPLE-KEY", "example value 1");
+
+        var values = toList(request.getHeaders("X-EXAMPLE-KEY"));
+
+        assertThat(values.size(), is(1));
     }
 
     @Test
@@ -93,6 +106,15 @@ public class CustomizedRequestTest {
 
     Set<String> toSet(Enumeration<String> enumeration) {
         var result = new HashSet<String>();
+        var it = enumeration.asIterator();
+        while (it.hasNext()) {
+            result.add(it.next());
+        }
+        return result;
+    }
+
+    List<String> toList(Enumeration<String> enumeration) {
+        var result = new ArrayList<String>();
         var it = enumeration.asIterator();
         while (it.hasNext()) {
             result.add(it.next());

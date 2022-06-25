@@ -51,11 +51,7 @@ class CustomizedRequest extends HttpServletRequestWrapper {
     public String getHeader(String name) {
         final var normalizedName = name.toLowerCase();
         if (customHeaders.containsKey(normalizedName)) {
-            var list = customHeaders.get(normalizedName);
-            if (list.isEmpty()) {
-                throw new IllegalStateException("Cannot get header value from empty list");
-            }
-            return list.get(0);
+            return customHeaders.get(normalizedName).get(0);
         } else {
             return super.getHeader(normalizedName);
         }

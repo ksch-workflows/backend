@@ -84,6 +84,17 @@ public class TokenFilterTest {
         assertThat(verificationFilter.authorizationHeader, nullValue());
     }
 
+    @Test
+    @SneakyThrows
+    public void should_skip_session_without_access_token() {
+        var session = new MockHttpSession();
+        var sessionCookie = new MockCookie("JSESSIONID", "123423234");
+
+        mockMvc.perform(get("/api/test").session(session).cookie(sessionCookie));
+
+        assertThat(verificationFilter.authorizationHeader, nullValue());
+    }
+
     @RestController
     private static class TokenFilterTestController {
 

@@ -19,41 +19,23 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
-import java.util.Map;
 
-@Component("commonHttpErrorConfiguration")
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+
 @ControllerAdvice
 @Slf4j
 public
-class HttpErrorConfiguration {
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseBody
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException exception) {
-        Map<String, String> errors = new HashMap<>();
-        exception.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
+class CommonHttpErrorConfiguration {
 
     @ExceptionHandler({NotFoundException.class})
     public ResponseEntity<Object> handleNotFoundException(Exception exception) {
         var responseBody = ErrorResponseBody.builder()
-                .message(exception.getMessage())
+                .errorId("entity-not-found")
                 .build();
         return new ResponseEntity<>(responseBody, new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
@@ -62,9 +44,8 @@ class HttpErrorConfiguration {
     public ResponseEntity<Object> handleDeserializationException(DeserializationException exception) {
         var responseBody = ErrorResponseBody.builder()
                 .errorId(exception.getErrorId())
-                .message(exception.getMessage())
                 .build();
-        return new ResponseEntity<>(responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(responseBody, new HttpHeaders(), INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler({MissingServletRequestParameterException.class})
@@ -77,26 +58,23 @@ class HttpErrorConfiguration {
 
         var responseBody = ErrorResponseBody.builder()
                 .errorId("request-parameter-missing")
-                .message(exception.getMessage())
                 .details(details)
                 .build();
 
         return new JsonResponseEntity(responseBody, HttpStatus.BAD_REQUEST);
     }
 
-    // TODO Add test for handling of unknown error
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleUnknownException(Exception exception) {
-        log.error("Missing error handler. The dev team should create an error handler, so that more details can be determined for the error which has happened.", exception);
+        log.error("Missing error handler for exception of type {}. The dev team should create an error handler, so " +
+                        "that more details can be determined for the error which has happened.",
+                exception.getClass().getTypeName(), exception
+        );
         var responseBody = ErrorResponseBody.builder()
                 .errorId("unknown-error")
-                .message("An error occurred.")
                 .build();
-        return new ResponseEntity<>(responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(responseBody, new HttpHeaders(), INTERNAL_SERVER_ERROR);
     }
-
-    // TODO Map unhandled exception to 500 "unknown-error" "An error occurred."
-
 
     private static class JsonResponseEntity extends ResponseEntity {
 

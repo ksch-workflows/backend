@@ -34,6 +34,7 @@ class JacksonConfiguration {
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                 .registerModule(module)
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .setDefaultPropertyInclusion(JsonInclude.Include.ALWAYS)
         ;
     }
 }

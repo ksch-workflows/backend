@@ -8,7 +8,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class ErrorResponseBody {
-    private String message;
     private String errorId;
     private Object details;
 }
