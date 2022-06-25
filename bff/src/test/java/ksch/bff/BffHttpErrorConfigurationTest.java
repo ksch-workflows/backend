@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-public class BffHttpErrorConfigurationTest {
+class BffHttpErrorConfigurationTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -48,7 +48,7 @@ public class BffHttpErrorConfigurationTest {
 
     @Test
     @SneakyThrows
-    public void should_handle_oauth_failure() {
+    void should_handle_oauth_failure() {
         var result = mockMvc.perform(get("/bff/http-error-configuration/oauth-failure"))
                 .andDo(print());
 

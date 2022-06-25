@@ -40,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.SharedHttpSessionConfigurer.sharedHttpSession;
 
 @SpringBootTest
-public class OAuthControllerTest {
+class OAuthControllerTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -61,7 +61,7 @@ public class OAuthControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_create_redirection(){
+    void should_create_redirection(){
         when(oauthService.exchangeAuthorizationGrant(any(String.class))).thenReturn(tokenResponse());
         var session = new MockHttpSession();
         session.setAttribute("interceptedUri", "http://intercepted");
@@ -76,7 +76,7 @@ public class OAuthControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_respond_with_server_error_on_deserialization_failure() {
+    void should_respond_with_server_error_on_deserialization_failure() {
         when(oauthService.exchangeAuthorizationGrant(any(String.class))).thenThrow(new DeserializationException());
         var session = new MockHttpSession();
         session.setAttribute("interceptedUri", "http://intercepted");
@@ -91,7 +91,7 @@ public class OAuthControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_forbid_token_generation_without_intercepted_uri() {
+    void should_forbid_token_generation_without_intercepted_uri() {
         var result = mockMvc.perform(
                 get("/bff/callback?code=123klsdf2")
         ).andDo(print());
@@ -101,7 +101,7 @@ public class OAuthControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_reset_intercepted_uri_after_redirect() {
+    void should_reset_intercepted_uri_after_redirect() {
         when(oauthService.exchangeAuthorizationGrant(any(String.class))).thenReturn(tokenResponse());
         var session = new MockHttpSession();
         session.setAttribute("interceptedUri", "http://intercepted");

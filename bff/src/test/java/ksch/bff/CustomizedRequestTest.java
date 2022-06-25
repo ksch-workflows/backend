@@ -31,11 +31,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-public class CustomizedRequestTest {
+class CustomizedRequestTest {
 
     @Test
     @SneakyThrows
-    public void should_get_single_header_value() {
+    void should_get_single_header_value() {
         var originalRequest = new MockHttpServletRequest();
 
         originalRequest.addHeader("X-EXAMPLE-KEY", "example value");
@@ -45,7 +45,7 @@ public class CustomizedRequestTest {
     }
 
     @Test
-    public void should_get_header_value_case_insensitive() {
+    void should_get_header_value_case_insensitive() {
         var request = new CustomizedRequest(new MockHttpServletRequest());
 
         request.addHeader("X-EXAMPLE-KEY", "example value");
@@ -54,7 +54,7 @@ public class CustomizedRequestTest {
     }
 
     @Test
-    public void should_get_multiple_header_values() {
+    void should_get_multiple_header_values() {
         var request = new CustomizedRequest(new MockHttpServletRequest());
         request.addHeader("X-EXAMPLE-KEY", "example value 1");
         request.addHeader("X-EXAMPLE-KEY", "example value 2");
@@ -68,7 +68,7 @@ public class CustomizedRequestTest {
     }
 
     @Test
-    public void should_not_add_same_value_multiple_times() {
+    void should_not_add_same_value_multiple_times() {
         var request = new CustomizedRequest(new MockHttpServletRequest());
         request.addHeader("X-EXAMPLE-KEY", "example value 1");
         request.addHeader("X-EXAMPLE-KEY", "example value 1");
@@ -79,7 +79,7 @@ public class CustomizedRequestTest {
     }
 
     @Test
-    public void should_get_empty_header_values() {
+    void should_get_empty_header_values() {
         var request = new CustomizedRequest(new MockHttpServletRequest());
 
         var values = toSet(request.getHeaders("X-EXAMPLE-KEY"));
@@ -88,7 +88,7 @@ public class CustomizedRequestTest {
     }
 
     @Test
-    public void should_provide_access_on_custom_header() {
+    void should_provide_access_on_custom_header() {
         var originalRequest = new MockHttpServletRequest();
 
         originalRequest.addHeader("X-ORIGINAL-KEY", "original value");
@@ -100,7 +100,7 @@ public class CustomizedRequestTest {
     }
 
     @Test
-    public void should_get_header_names() {
+    void should_get_header_names() {
         var expectedHeaderNames = new HashSet<String>();
         expectedHeaderNames.add("x-example-1");
         expectedHeaderNames.add("x-example-2");

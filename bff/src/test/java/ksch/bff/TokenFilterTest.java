@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.startsWith;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-public class TokenFilterTest {
+class TokenFilterTest {
 
     private MockMvc mockMvc;
 
@@ -54,7 +54,7 @@ public class TokenFilterTest {
 
     @Test
     @SneakyThrows
-    public void should_filter_api_request_with_session_cookie() {
+    void should_filter_api_request_with_session_cookie() {
         var session = new MockHttpSession();
         session.setAttribute("accessToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTA3Mjk5MjYsImV4cCI6MTY1MDgxNjMyNiwiaXNzIjoiaHR0cHM6Ly9ub2F1dGgtZ2Eyc3BlYm94YS1ldy5hLnJ1bi5hcHAvIn0.HGQfzXCi278UImFOjZn_vdxAflti-OkycjTTXA5RS9Y");
         var sessionCookie = new MockCookie("JSESSIONID", "123423234");
@@ -66,7 +66,7 @@ public class TokenFilterTest {
 
     @Test
     @SneakyThrows
-    public void should_skip_non_api_request() {
+    void should_skip_non_api_request() {
         var session = new MockHttpSession();
         session.setAttribute("accessToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTA3Mjk5MjYsImV4cCI6MTY1MDgxNjMyNiwiaXNzIjoiaHR0cHM6Ly9ub2F1dGgtZ2Eyc3BlYm94YS1ldy5hLnJ1bi5hcHAvIn0.HGQfzXCi278UImFOjZn_vdxAflti-OkycjTTXA5RS9Y");
         var sessionCookie = new MockCookie("JSESSIONID", "123423234");
@@ -78,7 +78,7 @@ public class TokenFilterTest {
 
     @Test
     @SneakyThrows
-    public void should_skip_request_without_any_cookie() {
+    void should_skip_request_without_any_cookie() {
         var session = new MockHttpSession();
         session.setAttribute("accessToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTA3Mjk5MjYsImV4cCI6MTY1MDgxNjMyNiwiaXNzIjoiaHR0cHM6Ly9ub2F1dGgtZ2Eyc3BlYm94YS1ldy5hLnJ1bi5hcHAvIn0.HGQfzXCi278UImFOjZn_vdxAflti-OkycjTTXA5RS9Y");
 
@@ -89,7 +89,7 @@ public class TokenFilterTest {
 
     @Test
     @SneakyThrows
-    public void should_skip_request_without_session_cookie() {
+    void should_skip_request_without_session_cookie() {
         var session = new MockHttpSession();
         session.setAttribute("accessToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTA3Mjk5MjYsImV4cCI6MTY1MDgxNjMyNiwiaXNzIjoiaHR0cHM6Ly9ub2F1dGgtZ2Eyc3BlYm94YS1ldy5hLnJ1bi5hcHAvIn0.HGQfzXCi278UImFOjZn_vdxAflti-OkycjTTXA5RS9Y");
         var miscellaneousCookie = new MockCookie("misc", "abcdefg");
@@ -101,7 +101,7 @@ public class TokenFilterTest {
 
     @Test
     @SneakyThrows
-    public void should_skip_session_without_access_token() {
+    void should_skip_session_without_access_token() {
         var session = new MockHttpSession();
         var sessionCookie = new MockCookie("JSESSIONID", "123423234");
 

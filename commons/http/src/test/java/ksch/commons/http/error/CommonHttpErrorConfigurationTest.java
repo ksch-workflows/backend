@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-public class CommonHttpErrorConfigurationTest {
+class CommonHttpErrorConfigurationTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -48,7 +48,7 @@ public class CommonHttpErrorConfigurationTest {
 
     @Test
     @SneakyThrows
-    public void should_fail_get_greeting() {
+    void should_fail_get_greeting() {
         var result = mockMvc.perform(get("/commons/http-error-configuration/greeting"))
                 .andDo(print());
 
@@ -61,7 +61,7 @@ public class CommonHttpErrorConfigurationTest {
 
     @Test
     @SneakyThrows
-    public void should_handle_unknown_error() {
+    void should_handle_unknown_error() {
         var result = mockMvc.perform(get("/commons/http-error-configuration/unknown-error"))
                 .andDo(print());
 
@@ -73,7 +73,7 @@ public class CommonHttpErrorConfigurationTest {
 
     @Test
     @SneakyThrows
-    public void should_handle_not_found_error() {
+    void should_handle_not_found_error() {
         var result = mockMvc.perform(get("/commons/http-error-configuration/not-found-error"))
                 .andDo(print());
 

@@ -30,7 +30,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @WireMockTest
-public class OAuthServiceTest {
+class OAuthServiceTest {
 
     OAuthProperties oauthProperties(WireMockRuntimeInfo wireMockRuntimeInfo) {
         return OAuthProperties.builder()
@@ -50,7 +50,7 @@ public class OAuthServiceTest {
     }
 
     @Test
-    public void should_exchange_authorization_code_to_token(WireMockRuntimeInfo wireMockRuntimeInfo) {
+    void should_exchange_authorization_code_to_token(WireMockRuntimeInfo wireMockRuntimeInfo) {
         stubFor(WireMock.post("/oauth/token").willReturn(ok().withBody(tokenResponseBody())));
         var oauthService = new OAuthService(oauthProperties(wireMockRuntimeInfo));
 
@@ -60,7 +60,7 @@ public class OAuthServiceTest {
     }
 
     @Test
-    public void should_handle_not_found_error_response(WireMockRuntimeInfo wireMockRuntimeInfo) {
+    void should_handle_not_found_error_response(WireMockRuntimeInfo wireMockRuntimeInfo) {
         stubFor(WireMock.post("/oauth/token").willReturn(badRequest()));
         var oauthService = new OAuthService(oauthProperties(wireMockRuntimeInfo));
 
@@ -70,7 +70,7 @@ public class OAuthServiceTest {
     }
 
     @Test
-    public void should_handle_unexpected_response_body(WireMockRuntimeInfo wireMockRuntimeInfo) {
+    void should_handle_unexpected_response_body(WireMockRuntimeInfo wireMockRuntimeInfo) {
         stubFor(WireMock.post("/oauth/token").willReturn(ok().withBody(unexpectedTokenResponseBody())));
         var oauthService = new OAuthService(oauthProperties(wireMockRuntimeInfo));
 

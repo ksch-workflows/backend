@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-public class LoginInterceptorTest {
+class LoginInterceptorTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -56,7 +56,7 @@ public class LoginInterceptorTest {
 
     @Test
     @SneakyThrows
-    public void should_redirect_html_page_to_authorization_server() {
+    void should_redirect_html_page_to_authorization_server() {
         var session = new MockHttpSession();
 
         var result = mockMvc.perform(get("/login-interceptor/test.html").session(session))
@@ -71,7 +71,7 @@ public class LoginInterceptorTest {
 
     @Test
     @SneakyThrows
-    public void should_redirect_trailing_slash_request_to_authorization_server() {
+    void should_redirect_trailing_slash_request_to_authorization_server() {
         var session = new MockHttpSession();
 
         var result = mockMvc.perform(get("/login-interceptor/example/").session(session))
@@ -86,7 +86,7 @@ public class LoginInterceptorTest {
 
     @Test
     @SneakyThrows
-    public void should_track_intercepted_uri_in_session() {
+    void should_track_intercepted_uri_in_session() {
         var session = new MockHttpSession();
 
         var result = mockMvc.perform(get("/login-interceptor/test.html").session(session))
@@ -98,7 +98,7 @@ public class LoginInterceptorTest {
 
     @Test
     @SneakyThrows
-    public void should_track_intercepted_uri_with_query_params_in_session() {
+    void should_track_intercepted_uri_with_query_params_in_session() {
         var session = new MockHttpSession();
 
         var result = mockMvc.perform(get("/login-interceptor/test.html?key=value").session(session))
@@ -110,7 +110,7 @@ public class LoginInterceptorTest {
 
     @Test
     @SneakyThrows
-    public void should_skip_session_with_access_token() {
+    void should_skip_session_with_access_token() {
         var session = new MockHttpSession();
         session.setAttribute("accessToken", "eyXXXXXXXX");
 
@@ -123,7 +123,7 @@ public class LoginInterceptorTest {
 
     @Test
     @SneakyThrows
-    public void should_skip_request_to_api() {
+    void should_skip_request_to_api() {
         var session = new MockHttpSession();
 
         var result = mockMvc.perform(get("/api/greeting").session(session))
@@ -135,7 +135,7 @@ public class LoginInterceptorTest {
 
     @Test
     @SneakyThrows
-    public void should_skip_request_to_static_resource_file() {
+    void should_skip_request_to_static_resource_file() {
         var session = new MockHttpSession();
 
         var result = mockMvc.perform(get("/login-interceptor/logo.png").session(session))

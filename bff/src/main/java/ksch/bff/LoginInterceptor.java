@@ -63,12 +63,6 @@ class LoginInterceptor implements HandlerInterceptor {
 
     private static boolean isWebPageRequest(HttpServletRequest request) {
         var requestURI = request.getRequestURI();
-        if (requestURI.endsWith("/")) {
-            return true;
-        }
-        if (requestURI.endsWith(".html")) {
-            return true;
-        }
-        return false;
+        return requestURI.endsWith(".html") || requestURI.endsWith("/");
     }
 }

@@ -36,7 +36,7 @@ public class OAuthController {
     private final OAuthService oauthService;
 
     @GetMapping("/bff/callback")
-    ResponseEntity<?> handleAuthorizationCallback(@RequestParam String code, HttpServletRequest request) {
+    Object handleAuthorizationCallback(@RequestParam String code, HttpServletRequest request) {
 
         var session = request.getSession();
         var interceptedUri = session.getAttribute("interceptedUri");

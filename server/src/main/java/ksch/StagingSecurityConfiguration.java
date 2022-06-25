@@ -22,6 +22,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @Profile("staging")
+@SuppressWarnings("squid:S4502") // CSRF handling will be tackled with https://github.com/ksch-workflows/backend/issues/51
 public class StagingSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override

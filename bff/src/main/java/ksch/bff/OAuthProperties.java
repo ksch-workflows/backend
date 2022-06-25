@@ -24,16 +24,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-// TODO Use token url from profile configuration
 @Component
 @ConfigurationProperties(prefix = "oauth")
-@NoArgsConstructor // TODO Is this really needed?
-@Setter // TODO Is this really needed?
+@NoArgsConstructor
+@Setter
 @AllArgsConstructor
 @Builder
 public class OAuthProperties {
-
-    private static final String DEFAULT_TOKEN_URL = "https://noauth-ga2speboxa-ew.a.run.app";
 
     private String baseUrl;
 
@@ -47,7 +44,7 @@ public class OAuthProperties {
      * @return protocol, hostname, and domain of the authorization server.
      */
     public String getBaseUrl() {
-        return Objects.requireNonNullElse(baseUrl, DEFAULT_TOKEN_URL);
+        return Objects.requireNonNull(baseUrl);
     }
 
     public String getClientId() {

@@ -49,7 +49,7 @@ class CommonHttpErrorConfiguration {
     }
 
     @ExceptionHandler({MissingServletRequestParameterException.class})
-    public JsonResponseEntity handleMissingServletRequestParameterException(
+    public JsonResponseEntity<ErrorResponseBody> handleMissingServletRequestParameterException(
             MissingServletRequestParameterException exception
     ) {
         var details = new HashMap<>();
@@ -61,7 +61,7 @@ class CommonHttpErrorConfiguration {
                 .details(details)
                 .build();
 
-        return new JsonResponseEntity(responseBody, HttpStatus.BAD_REQUEST);
+        return new JsonResponseEntity<>(responseBody, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({Exception.class})
@@ -76,9 +76,9 @@ class CommonHttpErrorConfiguration {
         return new ResponseEntity<>(responseBody, new HttpHeaders(), INTERNAL_SERVER_ERROR);
     }
 
-    private static class JsonResponseEntity extends ResponseEntity {
+    private static class JsonResponseEntity<T> extends ResponseEntity<T> {
 
-        public JsonResponseEntity(Object body, HttpStatus status) {
+        public JsonResponseEntity(T body, HttpStatus status) {
             super(body, headers(), status);
         }
 
