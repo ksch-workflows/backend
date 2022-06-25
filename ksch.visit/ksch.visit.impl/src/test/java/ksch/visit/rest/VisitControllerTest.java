@@ -23,10 +23,8 @@ import ksch.visit.VisitService;
 import ksch.visit.VisitType;
 import ksch.visit.domain.JohnDoe;
 import lombok.SneakyThrows;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -103,7 +101,6 @@ public class VisitControllerTest extends RestControllerTest {
                 )
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("message", Matchers.containsString("Could not find visit")))
         ;
     }
 }
