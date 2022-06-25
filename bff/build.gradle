@@ -1,18 +1,14 @@
 dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly 'org.projectlombok:lombok'
+    implementation "com.konghq:unirest-java:${unirestVersion}"
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.session:spring-session-core'
     implementation 'org.springframework.session:spring-session-jdbc'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    // TODO Use version number from gradle settings
-    testImplementation "com.github.tomakehurst:wiremock-jre8:2.33.2"
-
-    testImplementation project(':commons:testing')
     implementation project(':commons:http')
-
-    implementation "com.konghq:unirest-java:${unirestVersion}"
+    testImplementation "com.github.tomakehurst:wiremock-jre8:${wiremockVersion}"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation project(':commons:testing')
 }
