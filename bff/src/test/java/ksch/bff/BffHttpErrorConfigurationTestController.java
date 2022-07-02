@@ -15,6 +15,7 @@
  */
 package ksch.bff;
 
+import ksch.bff.util.OAuthException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

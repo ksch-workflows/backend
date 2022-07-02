@@ -15,6 +15,7 @@
  */
 package ksch.bff;
 
+import ksch.bff.util.CustomizedRequest;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;

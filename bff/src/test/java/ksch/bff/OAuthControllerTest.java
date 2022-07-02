@@ -15,6 +15,7 @@
  */
 package ksch.bff;
 
+import ksch.bff.util.TokenResponse;
 import ksch.commons.http.error.DeserializationException;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;

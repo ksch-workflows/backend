@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.bff;
+package ksch.bff.util;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class CustomizedRequest extends HttpServletRequestWrapper {
+public class CustomizedRequest extends HttpServletRequestWrapper {
     private final Map<String, List<String>> customHeaders;
 
     public CustomizedRequest(ServletRequest request) {
