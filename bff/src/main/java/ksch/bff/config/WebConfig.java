@@ -15,7 +15,7 @@
  */
 package ksch.bff.config;
 
-import ksch.bff.http.LoginInterceptor;
+import ksch.bff.LoginInterceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

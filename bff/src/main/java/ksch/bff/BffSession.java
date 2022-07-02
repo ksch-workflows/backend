@@ -1,4 +1,4 @@
-package ksch.bff.domain;
+package ksch.bff;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;

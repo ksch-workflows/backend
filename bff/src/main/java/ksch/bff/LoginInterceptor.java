@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.bff.http;
+package ksch.bff;
 
 import ksch.bff.config.OAuthProperties;
 import lombok.RequiredArgsConstructor;

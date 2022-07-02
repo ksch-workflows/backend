@@ -15,7 +15,7 @@
  */
 package ksch;
 
-import ksch.bff.http.TokenFilter;
+import ksch.bff.TokenFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
