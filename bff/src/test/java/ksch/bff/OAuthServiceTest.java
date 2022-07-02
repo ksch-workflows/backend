@@ -19,6 +19,7 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import ksch.bff.config.OAuthProperties;
+import ksch.bff.domain.OAuthService;
 import ksch.bff.util.OAuthException;
 import ksch.commons.http.error.DeserializationException;
 import ksch.testing.TestResource;

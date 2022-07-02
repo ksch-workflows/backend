@@ -15,6 +15,7 @@
  */
 package ksch.bff;
 
+import ksch.bff.domain.OAuthService;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;

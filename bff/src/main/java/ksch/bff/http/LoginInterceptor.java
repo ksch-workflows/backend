@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.bff;
+package ksch.bff.http;
 
 import ksch.bff.config.OAuthProperties;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (!isWebPageRequest(request)) {
-            return true; // Ignore any requested resources that are not HTML files.
+            return true; // Skip any requested resources that are not HTML files.
         }
         var session = request.getSession();
         var accessToken = session.getAttribute("accessToken");

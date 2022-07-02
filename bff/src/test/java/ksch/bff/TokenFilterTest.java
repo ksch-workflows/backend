@@ -15,6 +15,7 @@
  */
 package ksch.bff;
 
+import ksch.bff.http.TokenFilter;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
