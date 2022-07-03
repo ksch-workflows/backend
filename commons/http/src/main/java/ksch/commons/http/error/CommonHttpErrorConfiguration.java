@@ -42,8 +42,9 @@ class CommonHttpErrorConfiguration {
 
     @ExceptionHandler({DeserializationException.class})
     public ResponseEntity<Object> handleDeserializationException(DeserializationException exception) {
+        log.error("Payload could not be deserialized into a Java type.", exception);
         var responseBody = ErrorResponseBody.builder()
-                .errorId(exception.getErrorId())
+                .errorId( "deserialization-error")
                 .build();
         return new ResponseEntity<>(responseBody, new HttpHeaders(), INTERNAL_SERVER_ERROR);
     }
@@ -52,6 +53,7 @@ class CommonHttpErrorConfiguration {
     public JsonResponseEntity<ErrorResponseBody> handleMissingServletRequestParameterException(
             MissingServletRequestParameterException exception
     ) {
+        log.warn("Someone called the API in a way which is not intended.", exception);
         var details = new HashMap<>();
         details.put("name", exception.getParameterName());
         details.put("type", exception.getParameterType());
