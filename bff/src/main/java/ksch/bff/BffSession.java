@@ -15,6 +15,9 @@
  */
 package ksch.bff;
 
+import ksch.bff.util.TokenResponse;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
@@ -22,8 +25,25 @@ public class BffSession {
 
     private final HttpSession session;
 
+    public BffSession(HttpServletRequest request) {
+        this.session = request.getSession();
+    }
+
     public BffSession(HttpSession session) {
         this.session = session;
+    }
+
+    public static Optional<BffSession> from(HttpServletRequest request) {
+        var session = request.getSession(false);
+        if (session == null) {
+            return Optional.empty();
+        }
+        return Optional.of(new BffSession(session));
+    }
+
+    public void setTokens(TokenResponse tokenResponse) {
+        session.setAttribute("accessToken", tokenResponse.getAccessToken());
+        session.setAttribute("refreshToken", tokenResponse.getRefreshToken());
     }
 
     public Optional<String> getAccessToken() {
@@ -32,5 +52,25 @@ public class BffSession {
             return Optional.empty();
         }
         return Optional.of(accessToken.toString());
+    }
+
+    public boolean doesNotHaveAccessToken() {
+        return getAccessToken().isEmpty();
+    }
+
+    public void setInterceptedUri(String uri) {
+        session.setAttribute("interceptedUri", uri);
+    }
+
+    public void removeInterceptedUri() {
+        session.setAttribute("interceptedUri", null);
+    }
+
+    public Optional<String> getInterceptedUri() {
+        var uri = session.getAttribute("interceptedUri");
+        if (uri == null) {
+            return Optional.empty();
+        }
+        return Optional.of(uri.toString());
     }
 }

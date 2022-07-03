@@ -34,18 +34,15 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (!isWebPageRequest(request)) {
             return true; // Skip any requested resources that are not HTML files.
         }
-        var session = request.getSession();
-        var accessToken = session.getAttribute("accessToken");
-        if (accessToken == null) {
-
+        var session = new BffSession(request);
+        if (session.doesNotHaveAccessToken()) {
             String interceptedUri;
             if (request.getQueryString() != null) {
                 interceptedUri = request.getRequestURI() + "?" + request.getQueryString();
             } else {
                 interceptedUri = request.getRequestURI();
             }
-
-            session.setAttribute("interceptedUri", interceptedUri);
+            session.setInterceptedUri(interceptedUri);
             response.setStatus(303);
             response.setHeader("Location", authorizeUrl());
             return false;

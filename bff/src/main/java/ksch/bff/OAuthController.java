@@ -15,6 +15,7 @@
  */
 package ksch.bff;
 
+import ksch.bff.util.ProtocolViolationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.FOUND;
 
 @RestController
@@ -37,21 +37,15 @@ public class OAuthController {
 
     @GetMapping("/bff/callback")
     Object handleAuthorizationCallback(@RequestParam String code, HttpServletRequest request) {
-
-        var session = request.getSession();
-        var interceptedUri = session.getAttribute("interceptedUri");
-
-        // Check that the client followed the intended usage flow
-        if (interceptedUri == null) {
-            log.warn("It has been attempted to invoke the OAuth callback URL outside of the intended usage flow.");
-            return ResponseEntity.status(FORBIDDEN).build();
-        }
+        var session = new BffSession(request);
+        var interceptedUri = session.getInterceptedUri()
+                .orElseThrow(() -> new ProtocolViolationException("It has been attempted to invoke the OAuth" +
+                        "callback URL outside of the intended usage flow."));
 
         // Generate and store OAuth tokens
         var tokenResponse = oauthService.exchangeAuthorizationGrant(code);
-        session.setAttribute("accessToken", tokenResponse.getAccessToken());
-        session.setAttribute("refreshToken", tokenResponse.getRefreshToken());
-        session.setAttribute("interceptedUri", null);
+        session.setTokens(tokenResponse);
+        session.removeInterceptedUri();
 
         // Redirect back to the originally intercepted URI
         var headers = new HttpHeaders();

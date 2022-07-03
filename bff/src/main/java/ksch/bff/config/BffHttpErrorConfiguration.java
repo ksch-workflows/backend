@@ -16,6 +16,7 @@
 package ksch.bff.config;
 
 import ksch.bff.util.OAuthException;
+import ksch.bff.util.ProtocolViolationException;
 import ksch.commons.http.error.ErrorResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 /**
@@ -38,5 +40,15 @@ class BffHttpErrorConfiguration {
                 .errorId("oauth-failure")
                 .build();
         return new ResponseEntity<>(responseBody, new HttpHeaders(), UNAUTHORIZED);
+    }
+
+    @ExceptionHandler({ProtocolViolationException.class})
+    public ResponseEntity<Object> handleProtocolViolation(ProtocolViolationException exception) {
+        log.warn("This exception might indicate a client which doesn't know how to use the API correctly" +
+                "or an attaker trying to probe the system.", exception);
+        var responseBody = ErrorResponseBody.builder()
+                .errorId("protocol-violation")
+                .build();
+        return new ResponseEntity<>(responseBody, new HttpHeaders(), FORBIDDEN);
     }
 }

@@ -35,11 +35,9 @@ public class TokenFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         var req = new CustomizedRequest(request);
         if (isApiRequest(req) && hasSessionCookie(req)) {
-            var session = req.getSession(false);
-            var accessToken = session.getAttribute("accessToken");
-            if (accessToken != null) {
-                req.addHeader("Authorization", "Bearer " + accessToken);
-            }
+            var session = BffSession.from(req).orElseThrow();
+            var accessToken = session.getAccessToken();
+            accessToken.ifPresent(jwt -> req.addHeader("Authorization", "Bearer " + jwt));
         }
         chain.doFilter(req, response);
     }
