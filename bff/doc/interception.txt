@@ -1,0 +1,19 @@
+sequenceDiagram
+    autonumber
+
+    participant SPA
+    participant WS as Web Server
+    participant LoginInterceptor
+    participant AS as Authorization Server
+    participant LoginController
+
+
+    SPA ->> WS : GET /index.html
+    WS ->> LoginInterceptor : preHandle
+    alt if no access token in session
+      LoginInterceptor ->> AS : redirect: /authorize
+      AS ->> LoginController : redirect: /bff/callback
+      LoginController -->> SPA : redirect: /index.html
+    else
+      WS -->> SPA: /index.html
+    end
