@@ -3,20 +3,20 @@
 Modern web applications are often implemented as Single Page Application (SPA) where the server provides only the raw data instead of rendering the website.
 The frontend takes the raw data and dynamically generates the graphical user interface (GUI) of the website with JavaScript, the browser's scripting language.
 When a user interacts with the website, the SPA fetches data via the server's API.
-The Backend for Frontend (BFF) module allows SPAs to create a session in which the access tokens for the backend's [REST API][1] are stored.
+The Backend for Frontend (BFF) module allows SPAs to create a session in which the access tokens for the backend's [REST API][https://en.wikipedia.org/wiki/representational_state_transfer] are stored.
 
 ## Overview
 
 ### User authentication flow
 
 When the users initially request access to a workstation website, they are redirected to the login process of the authorization server.
-When the clients are redirected, their session contains an access token.
+When the clients are redirected back to the backend, their session contains an access token.
 Then they can proceed working with the website.
 
 ![Login flow](./doc/login-flow.png)
 
 1. The users request the workstation website, e.g. the one for the registration desk, in their browser.
-2. That request is intercepted by the [`LoginInterceptor`](#).
+2. That request is intercepted by the [`LoginInterceptor`](#). The session gets automatically created by the application server and managed with [Spring Session](https://docs.spring.io/spring-session/reference/index.html).
 3. If there is no access token available in the user's session, they are redirected to the authorize URL of the authorization server. The intercepted URL gets stored in the session attributes.
 4. After successful authentication and authorization, the authorization server redirects the client to the app's callback URL, with the authorization code as query parameter.
 5. With the authorization code grant and the app's client ID and client secret, the app calls the token endpoint of the authorization server to generate the access token.
@@ -76,5 +76,3 @@ The dummy authorization server then verifies the validity of any provided access
 - https://stackoverflow.com/questions/34229750/invoke-a-filter-before-spring-security-filter-chain-in-boot
 - https://www.youtube.com/watch?v=a2ZkCbTkH4Q
 - https://www.baeldung.com/spring-security-custom-filter
-
-[1]: https://en.wikipedia.org/wiki/Representational_state_transfer

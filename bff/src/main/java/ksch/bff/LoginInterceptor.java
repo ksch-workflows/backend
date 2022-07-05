@@ -16,6 +16,7 @@
 package ksch.bff;
 
 import ksch.bff.config.OAuthProperties;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -30,7 +31,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     private final OAuthProperties props;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle(
+            @NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler
+    ) {
         if (!isWebPageRequest(request)) {
             return true; // Skip any requested resources that are not HTML files.
         }
