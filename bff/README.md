@@ -1,21 +1,11 @@
 # Backend for Frontend
 
 Modern web applications are often implemented as Single Page Application (SPA) where the server provides only the raw data instead of rendering the website.
-The frontend is then taking the raw data and dynamically generates the graphical user interface (GUI) of the website with JavaScript, the browser's scripting language.
+The frontend takes the raw data and dynamically generates the graphical user interface (GUI) of the website with JavaScript, the browser's scripting language.
 When a user interacts with the website, the SPA fetches data via the server's API.
 The Backend for Frontend (BFF) module allows SPAs to create a session in which the access tokens for the backend's [REST API][1] are stored.
 
-## Terminology
-
-| Key                  | Value                                                                                                                                                        |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Cookie               | A key/value pair stored in the browser which is automatically sent to the backend with each API request.                                                     |
-| Frontend             | The part of a program which is focued on human-to-machine communication.                                                                                     |
-| IoT                  | Acronym for Internet of Things, small devices which are connected to the Internet, e.g. sensors or food delivery robots.                                     |
-| OAuth2               | A commonly used protocol for the delegation of authorities of resource owner to API clients.                                                                 |
-| SPA                  | Acronym for Single Page Application, a web application where the website is rendered in the frontend via JavaScript instead of being rendered on the server. |
-
-## Implementation
+## Overview
 
 ### User authentication flow
 
@@ -52,7 +42,7 @@ _Details_:
 4. It then checks whether the signature included in the access token matches with the public signing key of the authorization server. If not, it declines further processing.
 5. Eventually the request reaches the `PatientController` which call the busines logic required for the patient creation.
 
-## Development
+### Development
 
 During development, the server which hosts the SPA is a different one than the one which hosts the API, i.e. the SPA and the API are running on different domains.
 For security reasons, the browser restricts setting and sending of cookies to websites running on the same domain.
@@ -90,6 +80,16 @@ $ echo "token=$ACCESS_TOKEN" | curl -X POST --data @'-' -s localhost:7777/token-
 }
 ```
 
+## Terminology
+
+| Key      | Value                                                                                                                                                        |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Cookie   | A key/value pair stored in the browser which is automatically sent to the backend with each API request.                                                     |
+| Frontend | The part of a program which is focued on human-to-machine communication.                                                                                     |
+| IoT      | Acronym for Internet of Things, small devices which are connected to the Internet, e.g. sensors or food delivery robots.                                     |
+| OAuth2   | A commonly used protocol for the delegation of authorities of resource owner to API clients.                                                                 |
+| SPA      | Acronym for Single Page Application, a web application where the website is rendered in the frontend via JavaScript instead of being rendered on the server. |
+
 ## References
 
 **Register tokenfilter before spring security**
@@ -100,6 +100,5 @@ $ echo "token=$ACCESS_TOKEN" | curl -X POST --data @'-' -s localhost:7777/token-
 - https://stackoverflow.com/questions/34229750/invoke-a-filter-before-spring-security-filter-chain-in-boot
 - https://www.youtube.com/watch?v=a2ZkCbTkH4Q
 - https://www.baeldung.com/spring-security-custom-filter
-
 
 [1]: https://en.wikipedia.org/wiki/Representational_state_transfer
