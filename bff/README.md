@@ -1,9 +1,9 @@
 # Backend for Frontend
 
 Modern web applications are often implemented as Single Page Application (SPA) where the server provides only the raw data instead of rendering the website.
-The frontend takes the raw data and dynamically generates the graphical user interface (GUI) of the website with JavaScript, the browser's scripting language.
+The frontend takes the raw data and dynamically generates the graphical user interface of the website with JavaScript, the browser's scripting language.
 When a user interacts with the website, the SPA fetches data via the server's API.
-The Backend for Frontend (BFF) module allows SPAs to create a session in which the access tokens for the backend's [REST API][https://en.wikipedia.org/wiki/representational_state_transfer] are stored.
+The Backend for Frontend (BFF) module allows SPAs to create a session in which the access tokens for the backend's REST API are stored.
 
 ## Overview
 
@@ -58,13 +58,14 @@ The dummy authorization server then verifies the validity of any provided access
 
 ## Terminology
 
-| Key      | Value                                                                                                                                                        |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Cookie   | A key/value pair stored in the browser which is automatically sent to the backend with each API request.                                                     |
-| Frontend | The part of a program which is focued on human-to-machine communication.                                                                                     |
-| IoT      | Acronym for Internet of Things, small devices which are connected to the Internet, e.g. sensors or food delivery robots.                                     |
-| OAuth2   | A commonly used protocol for the delegation of authorities of resource owner to API clients.                                                                 |
-| SPA      | Acronym for Single Page Application, a web application where the website is rendered in the frontend via JavaScript instead of being rendered on the server. |
+| Key       | Value                                                                                                                                                        |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Cookie    | A key/value pair stored in the browser which is automatically sent to the backend with each API request.                                                     |
+| Frontend  | The part of a program which is focued on human-to-machine communication.                                                                                     |
+| IoT       | Acronym for Internet of Things, small devices which are connected to the Internet, e.g. sensors or food delivery robots.                                     |
+| OAuth2    | A commonly used protocol for the delegation of authorities of resource owner to API clients.                                                                 |
+| SPA       | Acronym for Single Page Application, a web application where the website is rendered in the frontend via JavaScript instead of being rendered on the server. |
+| REST API  |                                                                                                                                                              |
 
 ## References
 
