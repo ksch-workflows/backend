@@ -13,11 +13,7 @@ When the users initially request access to a workstation website, they are redir
 When the clients are redirected, their session contains an access token.
 Then they can proceed working with the website.
 
-_Diagram_:
-
 ![Login flow](./doc/login-flow.png)
-
-_Description_:
 
 1. The users request the workstation website, e.g. the one for the registration desk, in their browser.
 2. That request is intercepted by the [`LoginInterceptor`](#).
