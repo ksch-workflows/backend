@@ -16,7 +16,7 @@ Then they can proceed working with the website.
 ![Login flow](./doc/login-flow.png)
 
 1. The users request the workstation website, e.g. the one for the registration desk, in their browser.
-2. That request is intercepted by the [`LoginInterceptor`](#). The session gets automatically created and accessed via [Spring Session](https://docs.spring.io/spring-session/reference/index.html).
+2. That request is intercepted by the [`LoginInterceptor`](./src/main/java/ksch/bff/LoginInterceptor.java). The session gets automatically created and accessed via [Spring Session](https://docs.spring.io/spring-session/reference/index.html).
 3. If there is no access token available in the user's session, they are redirected to the authorize URL of the authorization server. The intercepted URL gets stored in the session attributes.
 4. After successful authentication and authorization, the authorization server redirects the client to the app's callback URL, with the authorization code as query parameter.
 5. With the authorization code grant and the app's client ID and client secret, the app calls the token endpoint of the authorization server to generate the access token.
@@ -33,7 +33,7 @@ _Diagram_:
 _Description_:
 
 1. When the users perform an action in the app, the app will make an HTTP call to the backend's API, e.g. `POST /patients` to create a new patient entity in the system.
-2. Before that request is handled by the [`PatientController`](#) which will take care of the patient creation, the request is pre-processed by the [`TokenFilter`](#). With the help of [Spring Session](#), it reads out the access token from the session belonging to the request. Then it adds the `Authorization` header with the access token to the request.
+2. Before that request is handled by the [`PatientController`](../ksch.patientmanagement/ksch.patientmanagement.impl/src/main/java/ksch/patientmanagement/http/PatientController.java) which will take care of the patient creation, the request is pre-processed by the [`TokenFilter`](./src/main/java/ksch/bff/TokenFilter.java). It reads out the access token from the session belonging to the request. Then it adds the `Authorization` header with the access token to the request.
 3. Afterwards, there will be yet another pre-processor befor the request can be handled by the `PatientController`. Spring Security reads out the `Authorization` header from the request.
 4. It then checks whether the signature included in the access token matches with the public signing key of the authorization server. If not, it declines further processing.
 5. Eventually the request reaches the `PatientController` which call the busines logic required for the patient creation.
@@ -68,9 +68,7 @@ The dummy authorization server then verifies the validity of any provided access
 
 ## References
 
-**Spring Session**
-
-- https://docs.spring.io/spring-session/reference/guides/java-rest.html
+- [Spring Session Reference documentation](https://docs.spring.io/spring-session/reference/index.html)
 
 **Register tokenfilter before spring security**
 
