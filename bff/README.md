@@ -16,7 +16,7 @@ Then they can proceed working with the website.
 ![Login flow](./doc/login-flow.png)
 
 1. The users request the workstation website, e.g. the one for the registration desk, in their browser.
-2. That request is intercepted by the [`LoginInterceptor`](#). The session gets automatically created by the application server and managed with [Spring Session](https://docs.spring.io/spring-session/reference/index.html).
+2. That request is intercepted by the [`LoginInterceptor`](#). The session gets automatically created and accessed via [Spring Session](https://docs.spring.io/spring-session/reference/index.html).
 3. If there is no access token available in the user's session, they are redirected to the authorize URL of the authorization server. The intercepted URL gets stored in the session attributes.
 4. After successful authentication and authorization, the authorization server redirects the client to the app's callback URL, with the authorization code as query parameter.
 5. With the authorization code grant and the app's client ID and client secret, the app calls the token endpoint of the authorization server to generate the access token.
@@ -67,6 +67,10 @@ The dummy authorization server then verifies the validity of any provided access
 | SPA      | Acronym for Single Page Application, a web application where the website is rendered in the frontend via JavaScript instead of being rendered on the server. |
 
 ## References
+
+**Spring Session**
+
+- https://docs.spring.io/spring-session/reference/guides/java-rest.html
 
 **Register tokenfilter before spring security**
 

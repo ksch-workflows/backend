@@ -39,19 +39,23 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         var session = new BffSession(request);
         if (session.doesNotHaveAccessToken()) {
-            String interceptedUri;
-            if (request.getQueryString() != null) {
-                interceptedUri = request.getRequestURI() + "?" + request.getQueryString();
-            } else {
-                interceptedUri = request.getRequestURI();
-            }
-            session.setInterceptedUri(interceptedUri);
+            session.setInterceptedUri(interceptedUri(request));
             response.setStatus(303);
             response.setHeader("Location", authorizeUrl());
             return false;
         } else {
             return true;
         }
+    }
+
+    private static String interceptedUri(HttpServletRequest request) {
+        String result;
+        if (request.getQueryString() != null) {
+            result = request.getRequestURI() + "?" + request.getQueryString();
+        } else {
+            result = request.getRequestURI();
+        }
+        return result;
     }
 
     private String authorizeUrl() {
