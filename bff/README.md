@@ -13,7 +13,11 @@ When the users initially request access to a workstation website, they are redir
 When the clients are redirected back to the backend, their session contains an access token.
 Then they can proceed working with the website.
 
+_Diagram_:
+
 ![Login flow](./doc/login-flow.png)
+
+_Details_:
 
 1. The users request the workstation website, e.g. the one for the registration desk, in their browser.
 2. That request is intercepted by the [`LoginInterceptor`](./src/main/java/ksch/bff/LoginInterceptor.java). The session gets automatically created and accessed via [Spring Session](https://docs.spring.io/spring-session/reference/index.html).
@@ -30,7 +34,7 @@ _Diagram_:
 
 ![API access flow](./doc/api-access-flow.png)
 
-_Description_:
+_Details_:
 
 1. When the users perform an action in the app, the app will make an HTTP call to the backend's API, e.g. `POST /patients` to create a new patient entity in the system.
 2. Before that request is handled by the [`PatientController`](../ksch.patientmanagement/ksch.patientmanagement.impl/src/main/java/ksch/patientmanagement/http/PatientController.java) which will take care of the patient creation, the request is pre-processed by the [`TokenFilter`](./src/main/java/ksch/bff/TokenFilter.java). It reads out the access token from the session belonging to the request. Then it adds the `Authorization` header with the access token to the request.
@@ -58,7 +62,7 @@ The dummy authorization server then verifies the validity of any provided access
 
 ## Terminology
 
-| Key       | Value                                                                                                                                                        |
+| Term      | Definition                                                                                                                                                   |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Cookie    | A key/value pair stored in the browser which is automatically sent to the backend with each API request.                                                     |
 | Frontend  | The part of a program which is focued on human-to-machine communication.                                                                                     |
