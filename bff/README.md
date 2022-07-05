@@ -13,11 +13,11 @@ When the users initially request access to a workstation website, they are redir
 When the clients are redirected, their session contains an access token.
 Then they can proceed working with the website.
 
-_Overview_:
+_Diagram_:
 
 ![Login flow](./doc/login-flow.png)
 
-_Details_:
+_Description_:
 
 1. The users request the workstation website, e.g. the one for the registration desk, in their browser.
 2. That request is intercepted by the [`LoginInterceptor`](#).
@@ -30,11 +30,11 @@ _Details_:
 
 After the users went through the authentification flow, their browser will have a session cookie with an identifier for the session which contains an access token. Whenever the SPA makes an HTTP request to the backend, the browser automatically adds the session cookie to the request. The BFF uses this session cookie to lookup the access token belonging to the session and adds it to the HTTP request. The API request handler then reads the access token from the authorization header, just as it would do for API clients which add the authorization header on their own.
 
-_Overview_:
+_Diagram_:
 
 ![API access flow](./doc/api-access-flow.png)
 
-_Details_:
+_Description_:
 
 1. When the users perform an action in the app, the app will make an HTTP call to the backend's API, e.g. `POST /patients` to create a new patient entity in the system.
 2. Before that request is handled by the [`PatientController`](#) which will take care of the patient creation, the request is pre-processed by the [`TokenFilter`](#). With the help of [Spring Session](#), it reads out the access token from the session belonging to the request. Then it adds the `Authorization` header with the access token to the request.
@@ -42,43 +42,23 @@ _Details_:
 4. It then checks whether the signature included in the access token matches with the public signing key of the authorization server. If not, it declines further processing.
 5. Eventually the request reaches the `PatientController` which call the busines logic required for the patient creation.
 
-### Development
+### Development flow
 
 During development, the server which hosts the SPA is a different one than the one which hosts the API, i.e. the SPA and the API are running on different domains.
 For security reasons, the browser restricts setting and sending of cookies to websites running on the same domain.
 Instead of trying to bend backwards to disable those security constraints during development, they are side-stepped altogether.
 Instead of relying on the BFF to enrich the API requests with the authorization header, during development, the SPA is sending the authorization header by itself.
-
 This process is enabled by a [dummy authorization server](https://github.com/ksch-workflows/noauth) which allows the generatation of access tokens without providing real credentials and which premits the usage of any access token that gets provided.
 
-_Example request for generation of access token_:
+_Diagram_:
 
-```text
-$ curl --request POST \
->   --header "content-type: application/x-www-form-urlencoded" \
->   --data "client_id=jnebdD0fczAHoEBVrr6lE7OAuYchc2ZR" \
->   --data "client_secret=xxxxx" \
->   --data "grant_type=authorization_code" \
->   --data "redirect_uri=http://localhost/callback" \
->   --data "code=W7S4aFZ" \
->   "http://localhost:7777/oauth/token"
-{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTYxNTU4ODIsImV4cCI6MTY1NjI0MjI4MiwiaXNzIjoiaHR0cHM6Ly9ub2F1dGgtZ2Eyc3BlYm94YS1ldy5hLnJ1bi5hcHAvIn0.odl615u30IcW9acGI1NL62E1D5e0wONHaeJk73tGWIE","refresh_token":"UrX8t8t0P0tCgBmahnfWV0TgSAwruCccgDzTbFvS18QopY","id_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6Impkb2UiLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6Impkb2VAbm9hdXRoLWdhMnNwZWJveGEtZXcuYS5ydW4uYXBwIiwic3ViIjoiYXV0aDB8NjFjMzA2MDYyMDY4MGQwMDY5NmUwOWEyIiwiYXVkIjoiam5lYmREMGZjekFIb0VCVnJyNmxFN09BdVljaGMyWlIiLCJpYXQiOjE2NTYxNTU4ODIsImV4cCI6MTY1NjI0MjI4MiwiaXNzIjoiaHR0cHM6Ly9ub2F1dGgtZ2Eyc3BlYm94YS1ldy5hLnJ1bi5hcHAvIn0.Na3uUYi-4VEA1FTmNqapTXcpCMRBJo0ZFUB-B3oEOa8","scope":"openid profile email offline_access","expires_in":86400,"token_type":"Bearer"}
-```
+TBD
+
+_Description_:
 
 When started in development mode, the Spring Boot application is configured to use opaque token validation.
 With this configuration, whenever an API request reaches the server, it asks the dummy authorization server whether the provided access token is valid.
 The dummy authorization server then verifies the validity of any provided access token.
-
-_Example request for verification of access token_:
-
-```text
-$ echo "token=$ACCESS_TOKEN" | curl -X POST --data @'-' -s localhost:7777/token-info
-{
-  "active": true,
-  "client_id": null,
-  "scope": null
-}
-```
 
 ## Terminology
 
