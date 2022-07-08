@@ -1,6 +1,6 @@
 # Backend for Frontend
 
-Modern web applications are often implemented as Single Page Application (SPA) where the server provides only an Application Programming Interface (API) for the raw data instead of rendering the contents website.
+Modern web applications are often implemented as Single Page Applications (SPA) where the server provides only an Application Programming Interface (API) for the raw data instead of rendering the contents website.
 The frontend takes this raw data and dynamically generates the graphical user interface of the website with JavaScript, the browser's scripting language.
 The Backend for Frontend (BFF) module allows SPAs to create a session in which the access tokens for the backend's REST API are stored.
 
@@ -10,7 +10,7 @@ The Backend for Frontend (BFF) module allows SPAs to create a session in which t
 
 When the users initially request access to a workstation website, they are redirected to the login process of the authorization server.
 When the clients are redirected back to the backend, their session contains an access token.
-Then they can proceed working with the website.
+Then they can proceed with working with the website.
 
 _Diagram_:
 
@@ -21,7 +21,7 @@ _Details_:
 1. The users request the workstation website, e.g. the one for the registration desk, in their browser.
 2. That request is intercepted by the [`LoginInterceptor`](./src/main/java/ksch/bff/LoginInterceptor.java). The session gets automatically created and accessed via [Spring Session](https://docs.spring.io/spring-session/reference/index.html).
 3. If there is no access token available in the user's session, they are redirected to the authorize URL of the authorization server. The intercepted URL gets stored in the session attributes.
-4. After successful authentication and authorization, the authorization server redirects the client to the app's callback URL, with the authorization code as query parameter.
+4. After successful authentication and authorization, the authorization server redirects the client to the app's callback URL, with the authorization code as a query parameter.
 5. With the authorization code grant and the app's client ID and client secret, the app calls the token endpoint of the authorization server to generate the access token.
 6. After the access token has been stored in the user session, the user is eventually redirected to the originally intercepted URL.
 
@@ -39,14 +39,14 @@ _Details_:
 2. Before that request is handled by the [`PatientController`](../ksch.patientmanagement/ksch.patientmanagement.impl/src/main/java/ksch/patientmanagement/http/PatientController.java) which will take care of the patient creation, the request is pre-processed by the [`TokenFilter`](./src/main/java/ksch/bff/TokenFilter.java). It reads the access token from the session belonging to the request. Then it adds the `Authorization` header with the access token to the request.
 3. Afterwards, there will be yet another pre-processor before the request can be handled by the `PatientController`. Spring Security reads out the `Authorization` header from the request.
 4. It then checks whether the signature included in the access token matches with the public signing key of the authorization server. If not, it declines further processing.
-5. Eventually the request reaches the `PatientController` which calls the busines logic required for the patient creation.
+5. Eventually the request reaches the `PatientController` which calls the business logic required for the patient creation.
 
 ### Development flow
 
 During development, the server which hosts the SPA is a different one than the one which hosts the API, i.e. the SPA and the API are running on different domains.
-For security reasons, the browser restricts setting and sending of cookies to websites running on the same domain and the concept described above is not applicable.
+For security reasons, the browser restricts the setting and sending of cookies to websites running on the same domain and the concept described above is not applicable.
 So, instead of relying on the BFF to enrich the API requests with the authorization header, the SPA is sending the authorization header by itself.
-This process is enabled by a [mock authorization server](https://github.com/ksch-workflows/noauth) (NoAuth) which allows the generatation of access tokens without providing real credentials and which premits the usage of any access token that gets provided.
+This process is enabled by a [mock authorization server](https://github.com/ksch-workflows/noauth) (NoAuth) which allows the generation of access tokens without providing real credentials and which permits the usage of any access token that gets provided.
 
 _Diagram_:
 
@@ -55,30 +55,13 @@ _Diagram_:
 _Description_:
 
 1. Using mock credentials, the SPA makes a POST request to the `/token` endpoint of the NoAuth server and receives an access token in response.
-2. When the SPA makes an HTTP call to the backend, it adds this access token as authorization header to the request.
+2. When the SPA makes an HTTP call to the backend, it adds this access token as the authorization header to the request.
 3. In development mode, the backend is configured to use [opaque token validation](https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/opaque-token.html#oauth2resourceserver-opaque-architecture). When it receives the token, it makes a POST request to the `/token-info` endpoint of the NoAuth server which confirms the validity of any provided token.
-
-## Terminology
-
-| Term      | Definition                                                                                                                                                   |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Cookie    | A key/value pair stored in the browser which is automatically sent to the backend with each API request.                                                     |
-| Frontend  | The part of a program which is focued on human-to-machine communication.                                                                                     |
-| IoT       | Acronym for Internet of Things, small devices which are connected to the Internet, e.g. sensors or food delivery robots.                                     |
-| OAuth2    | A commonly used protocol for the delegation of authorities of resource owner to API clients.                                                                 |
-| SPA       | Acronym for Single Page Application, a web application where the website is rendered in the frontend via JavaScript instead of being rendered on the server. |
-| REST API  |                                                                                                                                                              |
-| URL       |                                                                                                                                                              |
 
 ## References
 
-- [Spring Session Reference documentation](https://docs.spring.io/spring-session/reference/index.html)
-
-**Register tokenfilter before spring security**
-
-- https://stackoverflow.com/questions/61075273/java-lang-illegalargumentexception-cannot-register-after-unregistered-filter-cl
-- https://stackoverflow.com/questions/30855252/how-do-i-enable-logging-for-spring-security
-- https://stackoverflow.com/questions/34229750/invoke-a-filter-before-spring-security-filter-chain-in-boot
-- https://stackoverflow.com/questions/34229750/invoke-a-filter-before-spring-security-filter-chain-in-boot
-- https://www.youtube.com/watch?v=a2ZkCbTkH4Q
-- https://www.baeldung.com/spring-security-custom-filter
+- [Add Login Using the Authorization Code Flow | auth0.com](https://auth0.com/docs/login/authentication/add-login-auth-code-flow)
+- [Spring Session Reference documentation | docs.spring.io](https://docs.spring.io/spring-session/reference/index.html)
+- [A Custom Filter in the Spring Security Filter Chain | baeldung.com](https://www.baeldung.com/spring-security-custom-filter)
+- [Using HTTP cookies | developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
+- [Authoritative guide to CORS (Cross-Origin Resource Sharing) for REST APIs | moesif.com](https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/)
