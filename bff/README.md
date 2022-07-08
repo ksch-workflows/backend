@@ -1,8 +1,7 @@
 # Backend for Frontend
 
-Modern web applications are often implemented as Single Page Application (SPA) where the server provides only the raw data instead of rendering the website.
-The frontend takes the raw data and dynamically generates the graphical user interface of the website with JavaScript, the browser's scripting language.
-When a user interacts with the website, the SPA fetches data via the server's API.
+Modern web applications are often implemented as Single Page Application (SPA) where the server provides only an Application Programming Interface (API) for the raw data instead of rendering the contents website.
+The frontend takes this raw data and dynamically generates the graphical user interface of the website with JavaScript, the browser's scripting language.
 The Backend for Frontend (BFF) module allows SPAs to create a session in which the access tokens for the backend's REST API are stored.
 
 ## Overview
@@ -28,7 +27,7 @@ _Details_:
 
 ### API access flow
 
-After the users went through the authentification flow, their browser will have a session cookie with an identifier for the session which contains an access token. Whenever the SPA makes an HTTP request to the backend, the browser automatically adds the session cookie to the request. The BFF uses this session cookie to lookup the access token belonging to the session and adds it to the HTTP request. The API request handler then reads the access token from the authorization header, just as it would do for API clients which add the authorization header on their own.
+After the users went through the authentification flow, their browser will have a session cookie with an identifier for the session which contains an access token. Whenever the SPA makes an HTTP request to the backend, the browser automatically adds this session cookie to the request. The BFF uses this session cookie to lookup the access token belonging to the session and then adds it to the HTTP request. The API request handler eventually reads the access token from the authorization header, exactly as it would do for API clients which add the authorization header explicitly.
 
 _Diagram_:
 
@@ -37,28 +36,27 @@ _Diagram_:
 _Details_:
 
 1. When the users perform an action in the app, the app will make an HTTP call to the backend's API, e.g. `POST /patients` to create a new patient entity in the system.
-2. Before that request is handled by the [`PatientController`](../ksch.patientmanagement/ksch.patientmanagement.impl/src/main/java/ksch/patientmanagement/http/PatientController.java) which will take care of the patient creation, the request is pre-processed by the [`TokenFilter`](./src/main/java/ksch/bff/TokenFilter.java). It reads out the access token from the session belonging to the request. Then it adds the `Authorization` header with the access token to the request.
-3. Afterwards, there will be yet another pre-processor befor the request can be handled by the `PatientController`. Spring Security reads out the `Authorization` header from the request.
+2. Before that request is handled by the [`PatientController`](../ksch.patientmanagement/ksch.patientmanagement.impl/src/main/java/ksch/patientmanagement/http/PatientController.java) which will take care of the patient creation, the request is pre-processed by the [`TokenFilter`](./src/main/java/ksch/bff/TokenFilter.java). It reads the access token from the session belonging to the request. Then it adds the `Authorization` header with the access token to the request.
+3. Afterwards, there will be yet another pre-processor before the request can be handled by the `PatientController`. Spring Security reads out the `Authorization` header from the request.
 4. It then checks whether the signature included in the access token matches with the public signing key of the authorization server. If not, it declines further processing.
-5. Eventually the request reaches the `PatientController` which call the busines logic required for the patient creation.
+5. Eventually the request reaches the `PatientController` which calls the busines logic required for the patient creation.
 
 ### Development flow
 
 During development, the server which hosts the SPA is a different one than the one which hosts the API, i.e. the SPA and the API are running on different domains.
-For security reasons, the browser restricts setting and sending of cookies to websites running on the same domain.
-Instead of trying to bend backwards to disable those security constraints during development, they are side-stepped altogether.
-Instead of relying on the BFF to enrich the API requests with the authorization header, during development, the SPA is sending the authorization header by itself.
-This process is enabled by a [dummy authorization server](https://github.com/ksch-workflows/noauth) which allows the generatation of access tokens without providing real credentials and which premits the usage of any access token that gets provided.
+For security reasons, the browser restricts setting and sending of cookies to websites running on the same domain and the concept described above is not applicable.
+So, instead of relying on the BFF to enrich the API requests with the authorization header, the SPA is sending the authorization header by itself.
+This process is enabled by a [mock authorization server](https://github.com/ksch-workflows/noauth) (NoAuth) which allows the generatation of access tokens without providing real credentials and which premits the usage of any access token that gets provided.
 
 _Diagram_:
 
-TBD
+![dev flow](./doc/dev-flow.png)
 
 _Description_:
 
-When started in development mode, the Spring Boot application is configured to use opaque token validation.
-With this configuration, whenever an API request reaches the server, it asks the dummy authorization server whether the provided access token is valid.
-The dummy authorization server then verifies the validity of any provided access token.
+1. Using mock credentials, the SPA makes a POST request to the `/token` endpoint of the NoAuth server and receives an access token in response.
+2. When the SPA makes an HTTP call to the backend, it adds this access token as authorization header to the request.
+3. In development mode, the backend is configured to use [opaque token validation](https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/opaque-token.html#oauth2resourceserver-opaque-architecture). When it receives the token, it makes a POST request to the `/token-info` endpoint of the NoAuth server which confirms the validity of any provided token.
 
 ## Terminology
 
@@ -70,6 +68,7 @@ The dummy authorization server then verifies the validity of any provided access
 | OAuth2    | A commonly used protocol for the delegation of authorities of resource owner to API clients.                                                                 |
 | SPA       | Acronym for Single Page Application, a web application where the website is rendered in the frontend via JavaScript instead of being rendered on the server. |
 | REST API  |                                                                                                                                                              |
+| URL       |                                                                                                                                                              |
 
 ## References
 
