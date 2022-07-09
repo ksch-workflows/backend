@@ -39,7 +39,7 @@ public class StagingSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/registration-desk/**").permitAll()
                 .antMatchers("/bff/**").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/h2-console/**").denyAll()
                 .anyRequest()
                 .authenticated();
         http.oauth2ResourceServer().jwt();
