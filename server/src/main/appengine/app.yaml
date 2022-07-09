@@ -9,3 +9,6 @@ automatic_scaling:
 
 env_variables:
   SPRING_PROFILES_ACTIVE: "staging"
+
+includes:
+  - /Users/jmewes/.config/ksch-workflows/staging.yml
