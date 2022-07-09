@@ -43,7 +43,6 @@ public class OAuthService {
 
     public TokenResponse exchangeAuthorizationGrant(String code) {
         var tokenUrl = oauthProperties.getBaseUrl() + "/oauth/token";
-
         var response = Unirest.post(tokenUrl)
                 .header("content-type", "application/x-www-form-urlencoded")
                 .field("client_id", oauthProperties.getClientId())

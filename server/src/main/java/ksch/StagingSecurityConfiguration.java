@@ -15,24 +15,33 @@
  */
 package ksch;
 
+import ksch.bff.TokenFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter;
 
 @Configuration
 @Profile("staging")
 @SuppressWarnings("squid:S4502") // CSRF handling will be tackled with https://github.com/ksch-workflows/backend/issues/51
+@RequiredArgsConstructor
 public class StagingSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private final TokenFilter tokenFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.addFilterBefore(tokenFilter, BearerTokenAuthenticationFilter.class);
         http
-            .authorizeRequests()
-            .antMatchers("/h2-console/**").permitAll()
-            .anyRequest()
-            .authenticated()
-        ;
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/registration-desk/**").permitAll()
+                .antMatchers("/bff/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .anyRequest()
+                .authenticated();
         http.oauth2ResourceServer().jwt();
         http.csrf().disable();
         http.headers().frameOptions().disable();
