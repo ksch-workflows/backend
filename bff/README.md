@@ -75,11 +75,11 @@ _Description_:
 
 - https://datatracker.ietf.org/doc/html/rfc6749
 - [Add Login Using the Authorization Code Flow | auth0.com](https://auth0.com/docs/login/authentication/add-login-auth-code-flow)
-
 - https://curity.io/resources/learn/spa-best-practices/
 
 **Spring**
 
+- https://spring.io/projects/spring-security
 - [Spring Session Reference documentation | docs.spring.io](https://docs.spring.io/spring-session/reference/index.html)
 - [A Custom Filter in the Spring Security Filter Chain | baeldung.com](https://www.baeldung.com/spring-security-custom-filter)
 
