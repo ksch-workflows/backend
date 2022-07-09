@@ -60,8 +60,33 @@ _Description_:
 
 ## References
 
+**BFF pattern**
+
+- https://blog.bitsrc.io/bff-pattern-backend-for-frontend-an-introduction-e4fa965128bf
+- https://curity.io/resources/learn/the-token-handler-pattern/
+- https://samnewman.io/patterns/architectural/bff
+- https://thenewstack.io/secure-the-web-with-an-api-driven-backend-for-frontend/
+- https://www.youtube.com/watch?v=zazeGmFmUxg
+- https://github.com/IBM/spring-backend-for-frontend
+- https://www.thoughtworks.com/insights/blog/bff-soundcloud
+- https://www.youtube.com/watch?v=GCx0aouuEkU
+
+**OAuth**
+
+- https://datatracker.ietf.org/doc/html/rfc6749
 - [Add Login Using the Authorization Code Flow | auth0.com](https://auth0.com/docs/login/authentication/add-login-auth-code-flow)
+
+- https://curity.io/resources/learn/spa-best-practices/
+
+**Spring**
+
 - [Spring Session Reference documentation | docs.spring.io](https://docs.spring.io/spring-session/reference/index.html)
 - [A Custom Filter in the Spring Security Filter Chain | baeldung.com](https://www.baeldung.com/spring-security-custom-filter)
+
+**Miscellaneous**
+
+- https://blog.ropnop.com/storing-tokens-in-browser
 - [Using HTTP cookies | developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
 - [Authoritative guide to CORS (Cross-Origin Resource Sharing) for REST APIs | moesif.com](https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/)
+- https://medium.com/@pantpriyamvada/session-management-and-security-in-spa-d96f4a9e817e
+- https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
