@@ -14,6 +14,7 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 bootJar {
@@ -22,17 +23,24 @@ bootJar {
 }
 
 dependencies {
+    implementation "com.github.ksch-workflows:registration-desk:${registrationDeskVersion}"
+
+    implementation project(':bff')
+    implementation project(':ksch.administration')
+    implementation project(':ksch.billing')
+    implementation project(':ksch.patientmanagement')
+    implementation project(':ksch.visit')
+
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+    implementation "com.nimbusds:oauth2-oidc-sdk:${oauth2oidcSdkVersion}" // This dependency is only needed for opaque token validating in the dev profile.
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    implementation project(':ksch.administration')
-    implementation project(':ksch.patientmanagement')
-    implementation project(':ksch.billing')
-    implementation project(':ksch.visit')
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 test {
@@ -47,6 +55,13 @@ appengine {
         version = 'GCLOUD_CONFIG'
         projectId = 'GCLOUD_CONFIG'
     }
+}
+
+def profiles = System.getenv('SPRING_PROFILES_ACTIVE') ?: 'dev'
+
+bootRun {
+    args = ["--spring.profiles.active=" + profiles]
+    jvmArgs=["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"]
 }
 
 tasks.named('check') {

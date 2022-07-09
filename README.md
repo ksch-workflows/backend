@@ -55,11 +55,32 @@ The following list gives an overview of the contents in the project's directorie
 
 ## Development
 
-### Online tutorials
+### Generate test coverage report
 
-The online tutorials for the used technologies can be found in the project wiki:
+```
+./gradlew check
+open ./server/build/reports/jacoco/testCodeCoverageReport/html/index.html
+```
 
-https://github.com/ksch-workflows/backend/wiki
+### Start with dev profile
+
+With the `dev` profile, the app will run with a mock authorization server which approves any valid [JWT](https://jwt.io/).
+
+```
+export SPRING_PROFILES_ACTIVE=dev
+./gradlew bootRun
+```
+
+### Embedded database
+
+When you start the app with the `bootRun` Gradle task, the app will use an embedded H2 database.
+This database can be introspected under the following URL:
+
+http://localhost:8080/h2-console
+
+`jdbc:h2:mem:ksch`
+
+Use `sa` / `password` as login.
 
 ### Add license comments
 
@@ -68,7 +89,7 @@ can call the following shell script:
 
 ```
 ./docs/license/add-license-notices.sh
-git add . && git commit -m "Add license notices"
+git add . && git commit -m "docs: add license notices"
 ```
 
 ### Problems with module dependencies

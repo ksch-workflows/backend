@@ -15,7 +15,7 @@
  */
 package ksch.visit.rest;
 
-import ksch.commons.http.NotFoundException;
+import ksch.commons.http.error.NotFoundException;
 import ksch.visit.VisitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

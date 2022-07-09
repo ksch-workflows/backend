@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 KS-plus e.V.
+ * Copyright 2022 KS-plus e.V.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.commons.http;
+package ksch.commons.http.error;
 
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
-@NoArgsConstructor
-public class NotFoundException extends RuntimeException {
-
-    public NotFoundException(String message) {
-        super(message);
-    }
+@AllArgsConstructor
+@Builder
+@Getter
+public class ErrorResponseBody {
+    private String errorId;
+    private Object details;
 }

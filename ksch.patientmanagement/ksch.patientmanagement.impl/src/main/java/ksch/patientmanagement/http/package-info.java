@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 @InterfaceLayer
-package ksch.patientmanagement.rest;
+package ksch.patientmanagement.http;
 
 import org.jmolecules.architecture.layered.InterfaceLayer;

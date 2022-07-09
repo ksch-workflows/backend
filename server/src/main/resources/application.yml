@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:ksch
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      cors:
+        allowedOrigins: '*'
+        allowedMethods: GET
+      basePath: /api/actuator
+  health:
+    diskspace:
+      enabled: false
+
+server:
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID
+        same-site: None

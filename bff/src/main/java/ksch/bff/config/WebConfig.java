@@ -13,34 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.rest;
+package ksch.bff.config;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
-import lombok.Getter;
-import lombok.Setter;
+import ksch.bff.LoginInterceptor;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 
-@Getter
-@Setter
-class PatientPayload implements Patient {
+@Component
+@RequiredArgsConstructor
+class WebConfig implements WebMvcConfigurer {
 
-    @JsonProperty("_id")
-    private UUID id;
+    private final LoginInterceptor loginInterceptor;
 
-    private String patientNumber;
-
-    private String name;
-
-    private Integer age;
-
-    private Gender gender;
-
-    private String phoneNumber;
-
-    private String residentialAddress;
-
-    private String patientCategory;
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginInterceptor);
+    }
 }
