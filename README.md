@@ -12,7 +12,7 @@ For further the big picture view, please refer to the [K.S.C.H. Workflows archit
 
 ### Technology stack
 
-- Java 11
+- Java
 - Spring Boot
 - MySQL
 - Hibernate
