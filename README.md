@@ -8,7 +8,6 @@ They can access the queries and commands which they need via a RESTful API.
 ## Architecture
 
 This section gives an overview of the code in this repository.
-For further the big picture view, please refer to the [K.S.C.H. Workflows architecture documentation](https://ksch-workflows.github.io/arc42).
 
 ### Technology stack
 
