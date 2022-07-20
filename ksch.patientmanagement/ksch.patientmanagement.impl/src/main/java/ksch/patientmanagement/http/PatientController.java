@@ -21,6 +21,7 @@ import ksch.patientmanagement.PatientService;
 import ksch.patientmanagement.infrastructure.PatientJpaRepository;
 import ksch.patientmanagement.infrastructure.PatientSearchSpecification;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
@@ -39,6 +40,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/patients")
 @RequiredArgsConstructor
+@Slf4j
 class PatientController {
 
     private final PatientService patientService;
@@ -51,6 +53,12 @@ class PatientController {
 
     @PostMapping
     PatientResource createPatient(@RequestBody Optional<PatientPayload> request) {
+        log.info("Hello");
+        log.info("Hello");
+        log.info("Hello");
+        log.info("Hello");
+        log.info("Hello");
+        log.info("Hello");
         Patient patient = null;
         if (request.isPresent()) {
             patient = patientService.createPatient(request.get());
