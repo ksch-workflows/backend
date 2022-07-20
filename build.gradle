@@ -61,11 +61,6 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
         useJUnitPlatform()
     }
 
-    jacocoTestReport {
-        reports {
-            xml.enabled true
-        }
-    }
     test.finalizedBy jacocoTestReport
 }
 
