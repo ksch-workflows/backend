@@ -2,8 +2,7 @@
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ksch-workflows_backend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ksch-workflows_backend)
 
-This repository contains the source code for the backend of web browser, desktop, and mobile clients.
-They can access the queries and commands which they need via a RESTful API.
+This repository contains the source code for the K.S.C.H. Workflows backend that offers a RESTful API to browser, desktop, and mobile clients.
 
 ## Architecture
 
@@ -57,7 +56,7 @@ The following list gives an overview of the contents in the project's directorie
 ### Generate test coverage report
 
 ```
-./gradlew check
+./gradlew clean check
 open ./server/build/reports/jacoco/testCodeCoverageReport/html/index.html
 ```
 
