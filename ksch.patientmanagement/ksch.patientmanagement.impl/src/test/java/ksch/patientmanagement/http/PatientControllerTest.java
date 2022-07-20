@@ -19,7 +19,6 @@ import ksch.patientmanagement.PatientService;
 import ksch.testing.RestControllerTest;
 import ksch.testing.TestResource;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,7 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class PatientControllerTest extends RestControllerTest {
 
     @Autowired
