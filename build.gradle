@@ -63,7 +63,7 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
 
     jacocoTestReport {
         reports {
-            xml.enabled true
+            xml.required = true
         }
     }
     test.finalizedBy jacocoTestReport
