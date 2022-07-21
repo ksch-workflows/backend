@@ -51,10 +51,6 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
         testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
         testImplementation "org.projectlombok:lombok:${lombokVersion}"
-
-        // Architecture documentation
-        compileOnly("org.jmolecules:jmolecules-ddd:${jmoleculesVersion}")
-        compileOnly("org.jmolecules:jmolecules-layered-architecture:${jmoleculesVersion}")
     }
 
     test {
@@ -72,28 +68,24 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
 configure(subprojects.findAll { it.name.endsWith('.impl') } ) {
 
     dependencies {
-        implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-
-        // Spring Boot managed dependencies
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-hateoas'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
         runtimeOnly 'com.h2database:h2'
-
-        // Test
-        testImplementation project(':commons:testing')
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+        testImplementation project(':commons:testing')
     }
 }
 
 sonarqube {
   properties {
-    property "sonar.projectKey", "ksch-workflows_backend"
-    property "sonar.organization", "ksch-workflows"
-    property "sonar.host.url", "https://sonarcloud.io"
     property "sonar.coverage.jacoco.xmlReportPaths", "./server/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
+    property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.organization", "ksch-workflows"
+    property "sonar.projectKey", "ksch-workflows_backend"
   }
 }
