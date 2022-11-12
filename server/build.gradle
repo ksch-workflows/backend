@@ -14,7 +14,13 @@ configurations {
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
+    maven {
+        url = uri('https://maven.pkg.github.com/ksch-workflows/registration-desk')
+        credentials {
+            username = project.findProperty('gpr.user')
+            password = project.findProperty('gpr.key')
+        }
+    }
 }
 
 bootJar {
@@ -23,7 +29,7 @@ bootJar {
 }
 
 dependencies {
-    implementation "com.github.ksch-workflows:registration-desk:${registrationDeskVersion}"
+    implementation "ksch:registration-desk:${registrationDeskVersion}"
 
     implementation project(':bff')
     implementation project(':ksch.administration')
