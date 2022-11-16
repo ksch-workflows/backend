@@ -2,10 +2,6 @@
 
 This file contains guideslines for making contributions in the `backend` repository of the KSCH Workflows project.
 
-## Contributors
-
-This project accepts contributions only from people inside the [KSCH Workflows](https://github.com/ksch-workflows) organisation.
-
 ## Testing
 
 - The test coverage should be at least 80%, better more.
