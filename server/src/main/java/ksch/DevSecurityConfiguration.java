@@ -45,18 +45,19 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final TokenFilter tokenFilter;
 
+    @SuppressWarnings("squid:S123") // IP address check has to be done first
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().disable();
         http.addFilterBefore(tokenFilter, BearerTokenAuthenticationFilter.class);
         http
             .authorizeRequests()
+            .antMatchers("**").hasIpAddress(LOCALHOST)
             .antMatchers(OPTIONS, "/api/**").permitAll()
             .antMatchers("/").permitAll()
             .antMatchers("/registration-desk/**").permitAll()
             .antMatchers("/bff/**").permitAll()
             .antMatchers("/h2-console/**").permitAll()
-            .antMatchers("**").hasIpAddress(LOCALHOST)
             .anyRequest()
             .authenticated()
         ;
