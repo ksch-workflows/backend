@@ -51,12 +51,12 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(tokenFilter, BearerTokenAuthenticationFilter.class);
         http
             .authorizeRequests()
-            .antMatchers("**").hasIpAddress(LOCALHOST)
             .antMatchers(OPTIONS, "/api/**").permitAll()
             .antMatchers("/").permitAll()
             .antMatchers("/registration-desk/**").permitAll()
             .antMatchers("/bff/**").permitAll()
             .antMatchers("/h2-console/**").permitAll()
+            .antMatchers("**").hasIpAddress(LOCALHOST)
             .anyRequest()
             .authenticated()
         ;
