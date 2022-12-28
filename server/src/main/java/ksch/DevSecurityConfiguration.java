@@ -45,7 +45,7 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final TokenFilter tokenFilter;
 
-    @SuppressWarnings("squid:S123") // IP address check has to be done first
+    @SuppressWarnings("squid:S4601") // IP address check has to be done first
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().disable();
