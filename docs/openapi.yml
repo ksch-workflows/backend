@@ -9,22 +9,11 @@ info:
     This website contains the HTTP endpoints that are offered by the [backend](https://github.com/ksch-workflows/backend) component for frontend components of the [K.S.C.H. Workflows](https://ksch-workflows.github.io/) project.
 servers:
   - url: "http://example.com/api"
-tags:
-  - name: Patient
-    description: People coming into the hospital for treatment.
-  - name: Visit
-    description: Data about a patient from the time of the registration in the hospital to the time of the discharge.
-
 paths:
-  "/patients":
+  /patients:
     post:
       operationId: createPatient
-      tags:
-        - Patient
       summary: Create a patient
-      security:
-        - main_auth:
-            - "write:patients"
       requestBody:
         description: Object containing the patient details
         content:
@@ -35,11 +24,11 @@ paths:
               registeredPatient:
                 summary: A patient that has been registered.
                 value:
-                  name: "John Doe"
+                  name: John Doe
                   gender: MALE
-                  patientCategory: "GENERAL"
+                  patientCategory: GENERAL
                   phoneNumber: "01234567890"
-                  residentialAddress: "Guesthouse"
+                  residentialAddress: Guesthouse
               emergency:
                 summary: In case of emergency a patient may be created with empty details.
                 value: {}
@@ -50,15 +39,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PatientResponse"
-
+      security:
+        - main_auth:
+            - "write:patients"
+      tags:
+        - Patient
     get:
       operationId: listAllPatients
-      tags:
-        - Patient
       summary: List all patients
-      security:
-        - main_auth:
-            - "read:patients"
       responses:
         "200":
           description: OK
@@ -66,33 +54,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PatientListResponse"
-
-  "/patients/search":
-    post:
-      operationId: searchPatients
+      security:
+        - main_auth:
+            - "read:patients"
       tags:
         - Patient
-      summary: Search for patients
-      security:
-        - main_auth:
-            - "read:patients"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PatientListResponse"
 
   "/patients/{patientId}":
     get:
       operationId: getPatientById
-      tags:
-        - Patient
       summary: Get the details of an individual patient
-      security:
-        - main_auth:
-            - "read:patients"
       parameters:
         - name: patientId
           in: path
@@ -109,20 +80,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/PatientResponse"
               example:
-                _id: "b5ac2f19-56c3-4db9-9d6d-76a821cff842"
-                name: "John Doe"
-                gender: "MALE"
-                patientCategory: "GENERAL"
+                _id: b5ac2f19-56c3-4db9-9d6d-76a821cff842
+                name: John Doe
+                gender: MALE
+                patientCategory: GENERAL
                 phoneNumber: "01234567890"
-                residentialAddress: "Guesthouse"
-
+                residentialAddress: Guesthouse
+      security:
+        - main_auth:
+            - "read:patients"
+      tags:
+        - Patient
   "/patients/{patientId}/visits":
     post:
       operationId: createVisit
       summary: Create a visit for a patient
-      security:
-        - main_auth:
-            - "write:visits"
       parameters:
         - name: patientId
           in: path
@@ -144,14 +116,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/VisitResponse"
-
+      security:
+        - main_auth:
+            - "write:visits"
   "/patients/{patientId}/visits/{visitId}":
     get:
       operationId: getVisitById
       summary: Get the details of an individual visit
-      security:
-        - main_auth:
-            - "read:visits"
       parameters:
         - name: patientId
           in: path
@@ -174,16 +145,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/VisitResponse"
-
+      security:
+        - main_auth:
+            - "read:visits"
+  /patients/search:
+    post:
+      operationId: searchPatients
+      summary: Search for patients
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientListResponse"
+      security:
+        - main_auth:
+            - "read:patients"
+      tags:
+        - Patient
 components:
-  securitySchemes:
-    main_auth:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: http://example.com/api/authorize
-          tokenUrl: https://ksch-workflows.eu.auth0.com/oauth/token
-          scopes: {}
   schemas:
     VisitType:
       type: string
@@ -217,15 +198,15 @@ components:
             opdNumber:
               description: OPD number of the visit
               type: string
-              example: "21-1001"
+              example: 21-1001
             timeStart:
-              type: string
-              format: date-time
               description: The time of the patient registration
-            timeEnd:
               type: string
               format: date-time
+            timeEnd:
               description: The time of the patient discharge
+              type: string
+              format: date-time
               example: "2019-08-27T08:07:22Z"
     Gender:
       type: string
@@ -243,10 +224,10 @@ components:
       type: object
       properties:
         name:
-          description: All the name parts, i.e. first name, middle name, and last name.
+          description: "All the name parts, i.e. first name, middle name, and last name."
           type: string
-          minLength: 1
           example: John Doe
+          minLength: 1
         gender:
           $ref: "#/components/schemas/Gender"
         patientCategory:
@@ -254,13 +235,13 @@ components:
         phoneNumber:
           description: Patient phone number
           type: string
-          minLength: 1
           example: "+1234567890"
+          minLength: 1
         residentialAddress:
           description: Patient residential address
           type: string
+          example: "1234 Main St, City, State 12345"
           minLength: 1
-          example: 1234 Main St, City, State 12345
     PatientResponse:
       allOf:
         - type: object
@@ -272,25 +253,6 @@ components:
               type: string
               format: uuid
         - $ref: "#/components/schemas/Patient"
-    Page:
-      type: object
-      properties:
-        size:
-          type: integer
-          description: The number of elements in the page
-          example: 20
-        totalElements:
-          type: integer
-          description: The total number of elements
-          example: 1
-        totalPages:
-          type: integer
-          description: The total number of pages
-          example: 1
-        number:
-          type: integer
-          description: The page number
-          example: 0
     PatientListResponse:
       type: object
       properties:
@@ -303,3 +265,35 @@ components:
                 $ref: "#/components/schemas/PatientResponse"
         page:
           $ref: "#/components/schemas/Page"
+    Page:
+      type: object
+      properties:
+        size:
+          description: The number of elements in the page
+          type: integer
+          example: 20
+        totalElements:
+          description: The total number of elements
+          type: integer
+          example: 1
+        totalPages:
+          description: The total number of pages
+          type: integer
+          example: 1
+        number:
+          description: The page number
+          type: integer
+          example: 0
+  securitySchemes:
+    main_auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: "http://example.com/api/authorize"
+          tokenUrl: "https://ksch-workflows.eu.auth0.com/oauth/token"
+          scopes: {}
+tags:
+  - name: Patient
+    description: People coming into the hospital for treatment.
+  - name: Visit
+    description: Data about a patient from the time of the registration in the hospital to the time of the discharge.
