@@ -116,16 +116,29 @@ It is planned to run the project's integration tests against this `openapi.yml` 
 When the Java code with new REST controllers is added, the OpenAPI spec should be updated along with it.
 Proposals to change the API should be done with draft PRs or the commit message "docs:", to avoid unnecessary execution of the Java tests.
 
-```
-npx @redocly/cli preview-docs docs/openapi.yml
-npx @redocly/cli lint docs/openapi.yml
+**OpenAPI preview**
+
+Run the following script to render a preview of the generated API documentation:
+
+```sh
+./docs/lib/openapi_preview/openapi_preview.sh
 ```
 
-```
-docker run --rm -p 5000:8080 --name swaggerui -v $(pwd)/docs:/open-apis -e SWAGGER_JSON=/open-apis/openapi.yml swaggerapi/swagger-ui
+**OpenAPI linting**
+
+Run the following script validate the semantics of the OpenAPI specification:
+
+```sh
+./docs/lib/openapi_lint/openapi_lint.sh
 ```
 
-WARNING: OpenAPI 3.1 not supported, yet. See https://swagger.io/blog/swagger-support-for-openapi-3-0-and-openapi-3-1/
+**OpenAPI formatting**
+
+Run the following script to normalize the formatting of the OpenAPI specification:
+
+```sh
+./docs/lib/openapi_format/openapi_format.sh
+```
 
 **Also see**
 

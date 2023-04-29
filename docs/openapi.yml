@@ -163,7 +163,6 @@ paths:
       security:
         - main_auth:
             - 'read:visits'
-
 components:
   schemas:
     Gender:
