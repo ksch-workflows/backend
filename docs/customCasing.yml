@@ -1,0 +1,7 @@
+# https://github.com/thim81/openapi-format#casing-options
+
+operationId: camelCase
+properties: camelCase
+
+componentsExamples: PascalCase
+componentsSchemas: PascalCase

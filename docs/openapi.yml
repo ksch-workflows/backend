@@ -10,55 +10,6 @@ info:
 servers:
   - url: 'http://example.com/api'
 paths:
-  /patients:
-    post:
-      operationId: createPatient
-      summary: Create a patient
-      requestBody:
-        description: Object containing the patient details
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Patient'
-            examples:
-              registeredPatient:
-                summary: A patient that has been registered.
-                value:
-                  name: John Doe
-                  gender: MALE
-                  patientCategory: GENERAL
-                  phoneNumber: '01234567890'
-                  residentialAddress: Guesthouse
-              emergency:
-                summary: In case of emergency a patient may be created with empty details.
-                value: {}
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PatientResponse'
-      security:
-        - main_auth:
-            - 'write:patients'
-      tags:
-        - Patient
-    get:
-      operationId: listAllPatients
-      summary: List all patients
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PatientListResponse'
-      security:
-        - main_auth:
-            - 'read:patients'
-      tags:
-        - Patient
   '/patients/{patientId}':
     get:
       operationId: getPatientById
@@ -147,6 +98,55 @@ paths:
       security:
         - main_auth:
             - 'read:visits'
+  /patients:
+    post:
+      operationId: createPatient
+      summary: Create a patient
+      requestBody:
+        description: Object containing the patient details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+            examples:
+              registeredPatient:
+                summary: A patient that has been registered.
+                value:
+                  name: John Doe
+                  gender: MALE
+                  patientCategory: GENERAL
+                  phoneNumber: '01234567890'
+                  residentialAddress: Guesthouse
+              emergency:
+                summary: In case of emergency a patient may be created with empty details.
+                value: {}
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientResponse'
+      security:
+        - main_auth:
+            - 'write:patients'
+      tags:
+        - Patient
+    get:
+      operationId: listAllPatients
+      summary: List all patients
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientListResponse'
+      security:
+        - main_auth:
+            - 'read:patients'
+      tags:
+        - Patient
   /patients/search:
     post:
       operationId: searchPatients
