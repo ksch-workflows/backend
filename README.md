@@ -105,10 +105,8 @@ find . -name "*.iml" -or -name "*.ipr" -or -name "*.iws" | xargs rm
 ### OpenAPI spec
 
 The Backend offers a [REST API](https://www.restapitutorial.com/lessons/whatisrest.html) for the frontend components to build graphical user interfaces.
-
 In an attempt to build on open standards, the REST API is using the [OpenAPI](https://www.openapis.org) specification format.
 The Backend's API is defined in the file [openapi.yml](./openapi.yml).
-
 Based on this `openapi.yml` the API documentation is generated.
 
 It is planned to run the project's integration tests against this `openapi.yml` file, with the help of the [swagger-request-validator](https://bitbucket.org/atlassian/swagger-request-validator/) library, to make sure that the documentation is correct.
@@ -143,25 +141,9 @@ Run the following script to normalize the formatting of the OpenAPI specificatio
 **Also see**
 
 - https://www.se-radio.net/2022/12/episode-542-brendan-callum-on-contract-driven-apis
-- https://github.com/Redocly/redocly-cli
 - https://github.com/ksch-workflows/backend/wiki/OpenAPI
 
 ## Maintenance
-
-### Update API documentation
-
-The [REST API documentation](https://ksch-workflows.github.io/backend/) for this project is hosted on GitHub
-Pages via the `/docs` directory in this repository.
-
-It can be updated by executing the following commands:
-
-```
-./gradlew test
-./docs/api/build.sh
-git add .
-git commit -m "Update API documentation"
-git push
-```
 
 ### Deploy to staging environment
 
