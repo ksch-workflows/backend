@@ -22,7 +22,7 @@ paths:
               $ref: '#/components/schemas/Patient'
             examples:
               RegisteredPatient:
-                summary: A patient that has been registered.
+                summary: Complete registration
                 value:
                   name: John Doe
                   gender: MALE
@@ -30,7 +30,7 @@ paths:
                   phoneNumber: '01234567890'
                   residentialAddress: Guesthouse
               Emergency:
-                summary: In case of emergency a patient may be created with empty details.
+                summary: Empty details
                 value: {}
       responses:
         '201':
@@ -134,6 +134,8 @@ paths:
       security:
         - main_auth:
             - 'write:visits'
+      tags:
+        - Visit
   '/patients/{patientId}/visits/{visitId}':
     get:
       operationId: getVisitById
@@ -163,6 +165,8 @@ paths:
       security:
         - main_auth:
             - 'read:visits'
+      tags:
+        - Visit
 components:
   schemas:
     Gender:
