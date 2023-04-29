@@ -12,12 +12,9 @@ servers:
 tags:
   - name: Patient
     description: People coming into the hospital for treatment.
-  - name: Echo
-    description: Example echo operations.
-  - name: User
-    description: Operations about users.
-  - name: Tag
-    description: This is a tag description.
+  - name: Visit
+    description: Data about a patient from the time of the registration in the hospital to the time of the discharge.
+
 paths:
   '/patients':
     post:
@@ -135,7 +132,7 @@ paths:
             format: uuid
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             application/json:
               schema:
@@ -148,228 +145,64 @@ paths:
                 phoneNumber: "01234567890"
                 residentialAddress: "Guesthouse"          
 
-  '/users/{username}':
-    parameters: 
-      - name: username
-        in: path
-        schema: 
-          $anchor: foo
-    get:
-      operationId: getUserByName
-      tags:
-        - User
-      summary: Get user by user name
-      description: |
-        Some description of the operation. test
-        You can use `markdown` here.
-      parameters:
-        - name: username
+  '/patients/{patientId}/visits':
+    post:
+      operationId: createVisit
+      summary: Create a visit for a patient
+      security: 
+        -  main_auth:
+            - 'write:visits'
+      parameters: 
+        - name: patientId
           in: path
-          description: The name that needs to be fetched
+          description: The ID of the affected patient
           required: true
           schema:
             type: string
-        - name: with_email
-          in: query
-          description: Filter users without email
-          schema:
-            type: boolean
-      security:
-        - main_auth:
-            - 'read:users'
-        - api_key: []
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              example:
-                username: user1
-                email: user@example.com
-        '403':
-          description: Forbidden
-        '404':
-          description: User not found
-    put:
-      tags:
-        - User
-      summary: Updated user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      parameters:
-        - name: username
-          in: path
-          description: The name that needs to be updated
-          required: true
-          schema:
-            type: string
-      security:
-        - main_auth:
-            - 'write:users'
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Invalid user supplied
-        '404':
-          description: User not found
-      requestBody:
+            format: uuid
+      requestBody: 
+        description: Object containing the visit details
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/User'
-        description: Updated user object
-        required: true
-  /echo:
-    post:
-      tags:
-        - Echo
-      summary: Echo test
-      description: Receive the exact message you've sent
-      operationId: echo
-      security:
-        - api_key: []
-        - basic_auth: []
-      responses:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - OPD
+                    - IPD
+                    - PHYSIOTHERAPY
+      responses: 
         '200':
           description: OK
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              $ref: '#/components/headers/ExpiresAfter'
           content:
             application/json:
               schema:
-                type: string
-              examples:
-                response:
-                  value: Hello world!
-            application/xml:
-              schema:
-                type: string
-            text/csv:
-              schema:
-                type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-              example: Hello world!
-          application/xml:
-            schema:
-              type: string
-              example: Hello world!
-        description: Echo payload
-        required: true
-      x-codeSamples:
-        - lang: C#
-          source: |
-            API.v1.Echo echo = new API.v1.Echo();
-            echo.message = "Hello World!");
-            EchoResponse response = echo.post();
-            if (response.statusCode == HttpStatusCode.Created)
-            {
-              // Success
-            }
-            else
-            {
-              // Something wrong -- check response for errors
-              Console.WriteLine(response.getRawResponse());
-            }
-        - lang: PHP
-          source: |
-            $form = new APIEntitiesEcho();
-            $form->setMessage("Hello World!");
-            try {
-                $pet = $client->echo()->post($form);
-            } catch (UnprocessableEntityException $e) {
-                var_dump($e->getErrors());
-            }
-  /pathItem:
-    post:
-      tags:
-        - Tag
-      summary: Operation summary
-      description: |
-        Operation description **markdown**.
-      operationId: operationId
-      security:
-        - api_key: []
-        - basic_auth: []
-      responses:
-        '200':
-          description: OK
-          headers:
-            X-Rate-Limit:
-              description: Calls per hour allowed by the user.
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              $ref: '#/components/headers/ExpiresAfter'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Schema'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Schema'
-        description: requestBody description
-        required: true
-  /pathItemWithExamples:
-    post:
-      tags:
-        - Tag
-      summary: Operation summary with examples
-      description: |
-        Operation description **markdown**.
-      operationId: postPathItemWithExamples
-      security:
-        - api_key: []
-        - basic_auth: []
-      responses:
-        '200':
-          description: OK
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              $ref: '#/components/headers/ExpiresAfter'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Schema'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Schema'
-            examples:
-              mapName:
-                summary: My first example
-                description: My first example's description.
-                value:
-                  stringProperty: tada
-              mapNameDoesNotShowInDocsUnlessSummaryIsNotProvided:
-                value:
-                  stringProperty: checkmark
-        description: requestBody description
-        required: true
+                type: object
+                required:
+                  - _id
+                  - type
+                  - timeStart
+                properties:
+                  _id:
+                    type: string
+                    format: uuid
+                  type:
+                    type: string
+                    enum:
+                      - OPD
+                      - IPD
+                      - PHYSIOTHERAPY
+                  timeStart:
+                    type: string
+                    format: date-time
+                  timeEnd:
+                    type: string
+                    format: date-time  
+                    example: "2019-08-27T08:07:22Z"            
+
+
 components:
   securitySchemes:
     main_auth:
@@ -438,165 +271,3 @@ components:
             type: string
             format: uuid
       - $ref: '#/components/schemas/Patient'
-
-    User:
-      type: object
-      properties:
-        username:
-          description: User supplied username
-          type: string
-          minLength: 4
-          example: John78
-        firstName:
-          description: User first name
-          type: string
-          minLength: 1
-          example: John
-        lastName:
-          description: User last name
-          type: string
-          minLength: 1
-          example: Smith
-        email:
-          $ref: '#/components/schemas/Email'
-    Schema:
-      type: object
-      title: Scalars
-      properties:
-        stringProperty:
-          description: Property name's description (type is string)1111
-          type: string
-          example: example
-        readOnlyStringProperty:
-          description: Notice this only appears in the response.
-          type: string
-          readOnly: true
-          example: example
-        writeOnlyStringProperty:
-          description: Notice this only appears in the request.
-          type: string
-          writeOnly: true
-          example: example
-        minLengthString:
-          description: Property name's description (type is string)
-          type: string
-          minLength: 4
-          example: example
-        maxLengthString:
-          description: Property name's description (type is string)
-          type: string
-          maxLength: 140
-          example: example
-        minAndMaxLengthString:
-          description: Property name's description (type is string)
-          type: string
-          minLength: 4
-          maxLength: 140
-          example: example
-        stringEnumValues:
-          description: Property name's description (type is string)
-          type: string
-          enum:
-            - sample
-            - example
-            - specimen
-            - case
-            - instance
-            - illustration
-        stringDateTime:
-          description: 'Property name''s description (type is string, format is date-time)'
-          type: string
-          format: date-time
-        stringDate:
-          description: 'Property name''s description (type is string, format is date-time)'
-          type: string
-          format: date
-        stringEmail:
-          description: 'Property name''s description (type is string, format is email)'
-          type: string
-          format: email
-        stringIpAddressV4:
-          description: 'Property name''s description (type is string, format is ipv4 address)'
-          type: string
-          format: ipv4
-        stringIpAddressV6:
-          description: 'Property name''s description (type is string, format is ipv6 address)'
-          type: string
-          format: ipv6
-        stringPassword:
-          description: 'Property name''s description (type is string, format is password)'
-          type: string
-          format: password
-        stringHostname:
-          description: 'Property name''s description (type is string, format is hostname)'
-          type: string
-          format: hostname
-        stringUri:
-          description: 'Property name''s description (type is string, format is uri)'
-          type: string
-          format: uri
-        stringUuid:
-          description: 'Property name''s description (type is string, format is uuid)'
-          type: string
-          format: uuid
-        numberProperty:
-          description: Property name's description (type is number)
-          type: number
-          example: 8
-        numberFloat:
-          description: 'Property name''s description (type is number, format is float)'
-          type: number
-          format: float
-        numberDouble:
-          description: 'Property name''s description (type is number, format is double)'
-          type: number
-          format: double
-        numberGreaterThanOrEquals:
-          description: Property name's description (type is number)
-          type: number
-          minimum: 5
-        numberGreaterThan:
-          description: Property name's description (type is number)
-          type: number
-        numberLessThan:
-          description: Property name's description (type is number)
-          type: number
-        numberLessThanOrEquals:
-          description: Property name's description (type is number)
-          type: number
-          maximum: 8
-        numberRange:
-          description: Property name's description (type is number)
-          type: number
-          minimum: 5
-          maximum: 8
-        numberRangeExclusiveMaximum:
-          description: Property name's description (type is number)
-          type: number
-        numberRangeExclusiveMinimumAndMaximum:
-          description: Property name's description (type is number)
-          type: number
-        numberMultipleOf:
-          description: Property name's description (type is number)
-          type: number
-          multipleOf: 2
-        integerType:
-          description: Property name's description (type is integer)
-          type: integer
-        integer32bit:
-          description: 'Property name''s description (type is integer, format is int32)'
-          type: integer
-          format: int32
-        integer64bit:
-          description: 'Property name''s description (type is integer, format is int64)'
-          type: integer
-          format: int64
-        booleanProperty:
-          description: Property name's description (type is boolean)
-          type: boolean
-  headers:
-    ExpiresAfter:
-      description: date in UTC when token expires
-      schema:
-        type: string
-        format: date-time
