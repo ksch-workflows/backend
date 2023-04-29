@@ -1,8 +1,0 @@
-= REST API Documentation
-:toc: left
-
-// TODO Document request authorization
-
-include::../../ksch.patientmanagement/ksch.patientmanagement.impl/src/docs/patient-management.adoc[]
-
-include::../../ksch.visit/ksch.visit.impl/src/docs/visit.adoc[]

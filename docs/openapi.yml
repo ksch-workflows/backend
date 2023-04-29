@@ -1,62 +1,167 @@
 openapi: 3.1.0
 info:
-  version: 1.0.0
+  version: 0.1.0
   title: K.S.C.H. Workflows
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   description: |
-    This is an **example** API to demonstrate features of the OpenAPI
-    specification.
-
-    # Introduction
-
-    This API definition is intended to to be a good starting point for
-    describing your API in [OpenAPI/Swaggerformat](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
-    It also demonstrates features of the
-    [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool and
-    the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
-    the standard OpenAPI syntax, we use a few [vendor extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).
-
-    # OpenAPI Specification
-
-    The goal of The OpenAPI Specification is to define a standard,
-    language-agnostic interface to REST APIs which
-    allows both humans and computers to discover and understand the capabilities
-    of the service without access to source
-    code, documentation, or through network traffic inspection. When properly
-    defined via OpenAPI, a consumer can understand and interact with the remote service with a minimal amount of implementation logic. Similar to what
-    interfaces have done for lower-level programming, OpenAPI removes the
-    guesswork in calling the service.
-externalDocs:
-  description: Find out how to create a GitHub repo for your OpenAPI definition.
-  url: 'https://github.com/Rebilly/generator-openapi-repo'
+    This website contains the HTTP endpoints that are offered by the [backend](https://github.com/ksch-workflows/backend) component for frontend components of the [K.S.C.H. Workflows](https://ksch-workflows.github.io/) project.
+servers:
+  - url: 'http://localhost/api'
 tags:
+  - name: Patient
+    description: People coming into the hospital for treatment.
   - name: Echo
     description: Example echo operations.
   - name: User
     description: Operations about users.
   - name: Tag
     description: This is a tag description.
-servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
 paths:
-  '/users/{username}':
-    parameters:
-      - name: pretty_print
-        in: query
-        description: Pretty print response
-        schema:
-          type: boolean
+  '/patients':
+    post:
+      operationId: createPatient
+      tags:
+        - Patient
+      summary: Create a patient
+      security:
+        - main_auth:
+            - 'write:patients'
+      requestBody: 
+        description: Object containing the patient details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+            examples:
+              registeredPatient:
+                summary: A patient that has been registered.
+                value: 
+                  name: "John Doe"
+                  gender: MALE
+                  patientCategory: "GENERAL"
+                  phoneNumber: "01234567890"
+                  residentialAddress: "Guesthouse"
+              emergency:
+                summary: In case of emergency a patient may be created with empty details.
+                value: {}
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientResponse'
+
     get:
+      operationId: listAllPatients
+      tags:
+        - Patient
+      summary: List all patients
+      security:
+        - main_auth:
+            - 'read:patients'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+              example:
+                name: "John Doe"
+                gender: "MALE"
+                patientCategory: "GENERAL"
+                phoneNumber: "01234567890"
+                residentialAddress: "Guesthouse"          
+
+  '/patients/search':
+    post:
+      operationId: searchPatients
+      tags:
+        - Patient
+      summary: Search for patients
+      security:
+        - main_auth:
+            - 'read:patients'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _embedded:
+                    type: object
+                    properties:
+                      patientResourceList:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PatientResponse'
+                  page:
+                    type: object
+                    properties: 
+                      size:
+                        type: integer
+                        example: 20
+                      totalElements:
+                        type: integer
+                        example: 1
+                      totalPages:
+                        type: integer
+                        example: 1
+                      number:
+                        type: integer
+                        example: 0
+
+  '/patients/{patientId}':
+    get:
+      operationId: getPatientById
+      tags:
+        - Patient
+      summary: Get the details of an individual patient
+      security:
+        - main_auth:
+            - 'read:patients'
+      parameters:
+        - name: patientId
+          in: path
+          description: The ID of the patient to retrieve
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientResponse'
+              example:
+                _id: "60f0a0b0c9b0a3b4a8b0a3b4"
+                name: "John Doe"
+                gender: "MALE"
+                patientCategory: "GENERAL"
+                phoneNumber: "01234567890"
+                residentialAddress: "Guesthouse"          
+
+  '/users/{username}':
+    parameters: 
+      - name: username
+        in: path
+        schema: 
+          $anchor: foo
+    get:
+      operationId: getUserByName
       tags:
         - User
       summary: Get user by user name
       description: |
         Some description of the operation. test
         You can use `markdown` here.
-      operationId: getUserByName
       parameters:
         - name: username
           in: path
@@ -288,6 +393,52 @@ components:
       type: string
       format: test
       example: john.smith@example.com
+    Gender:
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+        - OTHER
+    PatientCategory:
+      type: string
+      enum:
+        - GENERAL
+        - INPATIENT
+        - OUTPATIENT
+    Patient:
+      type: object
+      properties:
+        name:
+          description: All the name parts, i.e. first name, middle name, and last name.
+          type: string
+          minLength: 1
+          example: John Doe
+        gender:
+          $ref: '#/components/schemas/Gender'
+        patientCategory:
+          $ref: '#/components/schemas/PatientCategory'
+        phoneNumber:
+          description: Patient phone number
+          type: string
+          minLength: 1
+          example: "+1234567890"
+        residentialAddress:
+          description: Patient residential address
+          type: string
+          minLength: 1
+          example: 1234 Main St, City, State 12345
+    PatientResponse:
+      allOf:
+      - type: object
+        required:
+        - _id
+        properties:
+          _id:
+            description: Technical identifier of the patient
+            type: string
+            format: uuid
+      - $ref: '#/components/schemas/Patient'
+
     User:
       type: object
       properties:
