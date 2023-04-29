@@ -179,29 +179,38 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - _id
-                  - type
-                  - timeStart
-                properties:
-                  _id:
-                    type: string
-                    format: uuid
-                  type:
-                    type: string
-                    enum:
-                      - OPD
-                      - IPD
-                      - PHYSIOTHERAPY
-                  timeStart:
-                    type: string
-                    format: date-time
-                  timeEnd:
-                    type: string
-                    format: date-time  
-                    example: "2019-08-27T08:07:22Z"            
+                $ref: "#/components/schemas/VisitResponse"        
 
+  '/patients/{patientId}/visits/{visitId}':
+
+    get:
+      operationId: getVisitById
+      summary: Get the details of an individual visit
+      security: 
+        -  main_auth:
+            - 'read:visits'
+      parameters:
+        - name: patientId
+          in: path
+          description: The ID of the affected patient
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: visitId
+          in: path
+          description: The ID of the visit to retrieve
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitResponse'
 
 components:
   securitySchemes:
@@ -221,11 +230,48 @@ components:
       type: http
       scheme: basic
   schemas:
-    Email:
-      description: User email address
+    VisitType:
       type: string
-      format: test
-      example: john.smith@example.com
+      enum:
+        - OPD
+        - IPD
+        - PHYSIOTHERAPY
+        - EMERGENCY
+    VisitRequest:
+      type: object
+      properties:
+        type:
+          $ref: "#/components/schemas/VisitType"
+    VisitResponse:
+      allOf:
+      - type: object
+        required:
+        - _id
+        - type
+        - opdNumber
+        - timeStart
+        properties:
+          _id:
+            description: Technical identifier of the visit
+            type: string
+            format: uuid
+            example: ce1d3f10-eef8-4f3e-a598-928e6d6fcdb9
+      - $ref: '#/components/schemas/VisitRequest'
+      - type: object
+        properties:
+          opdNumber:
+            description: OPD number of the visit
+            type: string
+            example: "21-1001"
+          timeStart:
+            type: string
+            format: date-time
+            description: The time of the patient registration
+          timeEnd:
+            type: string
+            format: date-time
+            description: The time of the patient discharge
+            example: "2019-08-27T08:07:22Z"    
     Gender:
       type: string
       enum:
