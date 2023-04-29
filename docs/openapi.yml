@@ -8,7 +8,7 @@ info:
   description: |
     This website contains the HTTP endpoints that are offered by the [backend](https://github.com/ksch-workflows/backend) component for frontend components of the [K.S.C.H. Workflows](https://ksch-workflows.github.io/) project.
 servers:
-  - url: 'http://localhost/api'
+  - url: 'http://example.com/api'
 tags:
   - name: Patient
     description: People coming into the hospital for treatment.
@@ -109,7 +109,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PatientResponse'
               example:
-                _id: "60f0a0b0c9b0a3b4a8b0a3b4"
+                _id: "b5ac2f19-56c3-4db9-9d6d-76a821cff842"
                 name: "John Doe"
                 gender: "MALE"
                 patientCategory: "GENERAL"
@@ -136,14 +136,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                    - OPD
-                    - IPD
-                    - PHYSIOTHERAPY
+              $ref: "#/components/schemas/VisitRequest"
       responses: 
         '200':
           description: OK
@@ -153,7 +146,6 @@ paths:
                 $ref: "#/components/schemas/VisitResponse"        
 
   '/patients/{patientId}/visits/{visitId}':
-
     get:
       operationId: getVisitById
       summary: Get the details of an individual visit
