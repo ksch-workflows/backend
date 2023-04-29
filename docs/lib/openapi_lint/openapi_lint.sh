@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+OPENAPI_FILE="${SCRIPT_DIR}/../../openapi.yml"
 
-cd $SCRIPT_DIR
-
-asciidoctor --out-file ../../docs/index.html index.adoc
+npx @redocly/cli lint ${OPENAPI_FILE}
