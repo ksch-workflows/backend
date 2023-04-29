@@ -109,7 +109,7 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
             examples:
-              registeredPatient:
+              RegisteredPatient:
                 summary: A patient that has been registered.
                 value:
                   name: John Doe
@@ -117,7 +117,7 @@ paths:
                   patientCategory: GENERAL
                   phoneNumber: '01234567890'
                   residentialAddress: Guesthouse
-              emergency:
+              Emergency:
                 summary: In case of emergency a patient may be created with empty details.
                 value: {}
       responses:
@@ -221,7 +221,7 @@ components:
     PatientListResponse:
       type: object
       properties:
-        _embedded:
+        embedded:
           type: object
           properties:
             patientResourceList:
@@ -236,7 +236,7 @@ components:
           required:
             - _id
           properties:
-            _id:
+            id:
               description: Technical identifier of the patient
               type: string
               format: uuid
@@ -255,7 +255,7 @@ components:
             - opdNumber
             - timeStart
           properties:
-            _id:
+            id:
               description: Technical identifier of the visit
               type: string
               format: uuid
