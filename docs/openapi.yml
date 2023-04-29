@@ -4,11 +4,11 @@ info:
   title: K.S.C.H. Workflows
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
   description: |
     This website contains the HTTP endpoints that are offered by the [backend](https://github.com/ksch-workflows/backend) component for frontend components of the [K.S.C.H. Workflows](https://ksch-workflows.github.io/) project.
 servers:
-  - url: 'http://example.com/api'
+  - url: "http://example.com/api"
 tags:
   - name: Patient
     description: People coming into the hospital for treatment.
@@ -16,7 +16,7 @@ tags:
     description: Data about a patient from the time of the registration in the hospital to the time of the discharge.
 
 paths:
-  '/patients':
+  "/patients":
     post:
       operationId: createPatient
       tags:
@@ -24,17 +24,17 @@ paths:
       summary: Create a patient
       security:
         - main_auth:
-            - 'write:patients'
-      requestBody: 
+            - "write:patients"
+      requestBody:
         description: Object containing the patient details
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Patient'
+              $ref: "#/components/schemas/Patient"
             examples:
               registeredPatient:
                 summary: A patient that has been registered.
-                value: 
+                value:
                   name: "John Doe"
                   gender: MALE
                   patientCategory: "GENERAL"
@@ -44,12 +44,12 @@ paths:
                 summary: In case of emergency a patient may be created with empty details.
                 value: {}
       responses:
-        '201':
+        "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PatientResponse'
+                $ref: "#/components/schemas/PatientResponse"
 
     get:
       operationId: listAllPatients
@@ -58,16 +58,16 @@ paths:
       summary: List all patients
       security:
         - main_auth:
-            - 'read:patients'
+            - "read:patients"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PatientListResponse'       
+                $ref: "#/components/schemas/PatientListResponse"
 
-  '/patients/search':
+  "/patients/search":
     post:
       operationId: searchPatients
       tags:
@@ -75,16 +75,16 @@ paths:
       summary: Search for patients
       security:
         - main_auth:
-            - 'read:patients'
+            - "read:patients"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PatientListResponse'
+                $ref: "#/components/schemas/PatientListResponse"
 
-  '/patients/{patientId}':
+  "/patients/{patientId}":
     get:
       operationId: getPatientById
       tags:
@@ -92,7 +92,7 @@ paths:
       summary: Get the details of an individual patient
       security:
         - main_auth:
-            - 'read:patients'
+            - "read:patients"
       parameters:
         - name: patientId
           in: path
@@ -102,28 +102,28 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PatientResponse'
+                $ref: "#/components/schemas/PatientResponse"
               example:
                 _id: "b5ac2f19-56c3-4db9-9d6d-76a821cff842"
                 name: "John Doe"
                 gender: "MALE"
                 patientCategory: "GENERAL"
                 phoneNumber: "01234567890"
-                residentialAddress: "Guesthouse"          
+                residentialAddress: "Guesthouse"
 
-  '/patients/{patientId}/visits':
+  "/patients/{patientId}/visits":
     post:
       operationId: createVisit
       summary: Create a visit for a patient
-      security: 
-        -  main_auth:
-            - 'write:visits'
-      parameters: 
+      security:
+        - main_auth:
+            - "write:visits"
+      parameters:
         - name: patientId
           in: path
           description: The ID of the affected patient
@@ -131,27 +131,27 @@ paths:
           schema:
             type: string
             format: uuid
-      requestBody: 
+      requestBody:
         description: Object containing the visit details
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/VisitRequest"
-      responses: 
-        '200':
+      responses:
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VisitResponse"        
+                $ref: "#/components/schemas/VisitResponse"
 
-  '/patients/{patientId}/visits/{visitId}':
+  "/patients/{patientId}/visits/{visitId}":
     get:
       operationId: getVisitById
       summary: Get the details of an individual visit
-      security: 
-        -  main_auth:
-            - 'read:visits'
+      security:
+        - main_auth:
+            - "read:visits"
       parameters:
         - name: patientId
           in: path
@@ -168,12 +168,12 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VisitResponse'
+                $ref: "#/components/schemas/VisitResponse"
 
 components:
   securitySchemes:
@@ -199,34 +199,34 @@ components:
           $ref: "#/components/schemas/VisitType"
     VisitResponse:
       allOf:
-      - type: object
-        required:
-        - _id
-        - type
-        - opdNumber
-        - timeStart
-        properties:
-          _id:
-            description: Technical identifier of the visit
-            type: string
-            format: uuid
-            example: ce1d3f10-eef8-4f3e-a598-928e6d6fcdb9
-      - $ref: '#/components/schemas/VisitRequest'
-      - type: object
-        properties:
-          opdNumber:
-            description: OPD number of the visit
-            type: string
-            example: "21-1001"
-          timeStart:
-            type: string
-            format: date-time
-            description: The time of the patient registration
-          timeEnd:
-            type: string
-            format: date-time
-            description: The time of the patient discharge
-            example: "2019-08-27T08:07:22Z"    
+        - type: object
+          required:
+            - _id
+            - type
+            - opdNumber
+            - timeStart
+          properties:
+            _id:
+              description: Technical identifier of the visit
+              type: string
+              format: uuid
+              example: ce1d3f10-eef8-4f3e-a598-928e6d6fcdb9
+        - $ref: "#/components/schemas/VisitRequest"
+        - type: object
+          properties:
+            opdNumber:
+              description: OPD number of the visit
+              type: string
+              example: "21-1001"
+            timeStart:
+              type: string
+              format: date-time
+              description: The time of the patient registration
+            timeEnd:
+              type: string
+              format: date-time
+              description: The time of the patient discharge
+              example: "2019-08-27T08:07:22Z"
     Gender:
       type: string
       enum:
@@ -248,9 +248,9 @@ components:
           minLength: 1
           example: John Doe
         gender:
-          $ref: '#/components/schemas/Gender'
+          $ref: "#/components/schemas/Gender"
         patientCategory:
-          $ref: '#/components/schemas/PatientCategory'
+          $ref: "#/components/schemas/PatientCategory"
         phoneNumber:
           description: Patient phone number
           type: string
@@ -263,18 +263,18 @@ components:
           example: 1234 Main St, City, State 12345
     PatientResponse:
       allOf:
-      - type: object
-        required:
-        - _id
-        properties:
-          _id:
-            description: Technical identifier of the patient
-            type: string
-            format: uuid
-      - $ref: '#/components/schemas/Patient'
+        - type: object
+          required:
+            - _id
+          properties:
+            _id:
+              description: Technical identifier of the patient
+              type: string
+              format: uuid
+        - $ref: "#/components/schemas/Patient"
     Page:
       type: object
-      properties: 
+      properties:
         size:
           type: integer
           description: The number of elements in the page
@@ -300,6 +300,6 @@ components:
             patientResourceList:
               type: array
               items:
-                $ref: '#/components/schemas/PatientResponse'
+                $ref: "#/components/schemas/PatientResponse"
         page:
           $ref: "#/components/schemas/Page"
