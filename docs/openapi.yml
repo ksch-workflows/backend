@@ -188,18 +188,10 @@ components:
     main_auth:
       type: oauth2
       flows:
-        implicit:
-          authorizationUrl: 'http://example.com/api/oauth/dialog'
-          scopes:
-            'read:users': read users info
-            'write:users': modify or remove users
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
+        authorizationCode:
+          authorizationUrl: http://example.com/api/authorize
+          tokenUrl: https://ksch-workflows.eu.auth0.com/oauth/token
+          scopes: {}
   schemas:
     VisitType:
       type: string
