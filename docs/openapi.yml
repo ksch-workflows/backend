@@ -65,13 +65,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Patient'
-              example:
-                name: "John Doe"
-                gender: "MALE"
-                patientCategory: "GENERAL"
-                phoneNumber: "01234567890"
-                residentialAddress: "Guesthouse"          
+                $ref: '#/components/schemas/PatientListResponse'       
 
   '/patients/search':
     post:
@@ -88,30 +82,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  _embedded:
-                    type: object
-                    properties:
-                      patientResourceList:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/PatientResponse'
-                  page:
-                    type: object
-                    properties: 
-                      size:
-                        type: integer
-                        example: 20
-                      totalElements:
-                        type: integer
-                        example: 1
-                      totalPages:
-                        type: integer
-                        example: 1
-                      number:
-                        type: integer
-                        example: 0
+                $ref: '#/components/schemas/PatientListResponse'
 
   '/patients/{patientId}':
     get:
@@ -317,3 +288,34 @@ components:
             type: string
             format: uuid
       - $ref: '#/components/schemas/Patient'
+    Page:
+      type: object
+      properties: 
+        size:
+          type: integer
+          description: The number of elements in the page
+          example: 20
+        totalElements:
+          type: integer
+          description: The total number of elements
+          example: 1
+        totalPages:
+          type: integer
+          description: The total number of pages
+          example: 1
+        number:
+          type: integer
+          description: The page number
+          example: 0
+    PatientListResponse:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            patientResourceList:
+              type: array
+              items:
+                $ref: '#/components/schemas/PatientResponse'
+        page:
+          $ref: "#/components/schemas/Page"
