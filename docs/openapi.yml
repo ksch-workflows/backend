@@ -59,7 +59,6 @@ paths:
             - "read:patients"
       tags:
         - Patient
-
   "/patients/{patientId}":
     get:
       operationId: getPatientById
@@ -166,13 +165,6 @@ paths:
         - Patient
 components:
   schemas:
-    VisitType:
-      type: string
-      enum:
-        - OPD
-        - IPD
-        - PHYSIOTHERAPY
-        - EMERGENCY
     VisitRequest:
       type: object
       properties:
@@ -214,6 +206,13 @@ components:
         - MALE
         - FEMALE
         - OTHER
+    VisitType:
+      type: string
+      enum:
+        - OPD
+        - IPD
+        - PHYSIOTHERAPY
+        - EMERGENCY
     PatientCategory:
       type: string
       enum:
