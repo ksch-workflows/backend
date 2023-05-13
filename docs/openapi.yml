@@ -1,14 +1,14 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   version: 0.1.0
   title: K.S.C.H. Workflows
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
   description: |
     This website contains the HTTP endpoints that are offered by the [backend](https://github.com/ksch-workflows/backend) component for frontend components of the [K.S.C.H. Workflows](https://ksch-workflows.github.io/) project.
 servers:
-  - url: 'http://example.com/api'
+  - url: 'https://example.com/api'
 paths:
   /patients:
     post:
@@ -33,7 +33,8 @@ paths:
                 summary: Empty details
                 value: {}
       responses:
-        '201':
+        # TODO: Use status code 201
+        '200':
           description: Created
           content:
             application/json:
@@ -197,6 +198,18 @@ components:
     Patient:
       type: object
       properties:
+        patientNumber:
+          description: The identifier used by the hospital staff to correlate patients with their data.
+          type: string
+          nullable: true
+          example: '23-72362'
+          minLength: 1
+        age:
+          description: The number of years that have passed since the patient's date of birth.
+          type: integer
+          nullable: true
+          example: 23
+          minimum: 0
         name:
           description: 'All the name parts, i.e. first name, middle name, and last name.'
           type: string
@@ -214,7 +227,7 @@ components:
         residentialAddress:
           description: Patient residential address
           type: string
-          example: '1234 Main St, City, State 12345'
+          example: 'Guesthouse'
           minLength: 1
     PatientCategory:
       type: string
@@ -292,7 +305,7 @@ components:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: 'http://example.com/api/authorize'
+          authorizationUrl: 'https://example.com/api/authorize'
           tokenUrl: 'https://ksch-workflows.eu.auth0.com/oauth/token'
           scopes: {}
 tags:

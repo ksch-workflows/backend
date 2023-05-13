@@ -3,4 +3,7 @@ dependencies {
 
     implementation project(':commons:http')
     implementation project(':commons:util')
+
+    testImplementation('com.atlassian.oai:swagger-request-validator-core:2.34.1')
+    testImplementation('com.atlassian.oai:swagger-request-validator-mockmvc:2.34.1')
 }

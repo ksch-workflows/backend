@@ -15,6 +15,8 @@
  */
 package ksch.patientmanagement.http;
 
+
+import io.swagger.v3.parser.core.models.ParseOptions;
 import ksch.patientmanagement.PatientService;
 import ksch.testing.RestControllerTest;
 import ksch.testing.TestResource;
@@ -22,6 +24,7 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.atlassian.oai.validator.mockmvc.OpenApiValidationMatchers.openApi;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
@@ -35,7 +38,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.atlassian.oai.validator.OpenApiInteractionValidator;
+import com.atlassian.oai.validator.report.LevelResolver;
+import com.atlassian.oai.validator.report.ValidationReport;
+
 public class PatientControllerTest extends RestControllerTest {
+
+
+
 
     @Autowired
     private PatientService patientService;
@@ -53,6 +63,21 @@ public class PatientControllerTest extends RestControllerTest {
     @Test
     @SneakyThrows
     public void should_create_patient_with_payload() {
+        LevelResolver levelResolver = LevelResolver.create()
+            .withLevel("validation.schema.additionalProperties",ValidationReport.Level.IGNORE)
+            .build();
+        ParseOptions parseOptions = new ParseOptions();
+
+        parseOptions.setResolve(true);
+        parseOptions.setResolveFully(false);
+        parseOptions.setResolveCombinators(true);
+
+        final OpenApiInteractionValidator validator = OpenApiInteractionValidator
+            .createForSpecificationUrl("/Users/jmewes/src/ksch-workflows/backend/docs/openapi.yml")
+            .withLevelResolver(levelResolver)
+            .withParseOptions(parseOptions)
+            .build();
+
         var payload = new TestResource("create-patient.json").readString();
         mockMvc.perform(
                 post("/api/patients")
@@ -70,7 +95,9 @@ public class PatientControllerTest extends RestControllerTest {
                 .andExpect(jsonPath("patientCategory", is(equalTo("GENERAL"))))
                 .andExpect(jsonPath("phoneNumber", is(equalTo("0123456789"))))
                 .andExpect(jsonPath("residentialAddress", is(equalTo("Guesthouse"))))
-                .andDo(document("patients-create-normal"));
+                .andDo(document("patients-create-normal"))
+                .andExpect(openApi().isValid(validator))
+        ;
     }
 
     @Test
@@ -81,7 +108,8 @@ public class PatientControllerTest extends RestControllerTest {
         mockMvc.perform(get("/api/patients/{patientId}", patient.getId()).accept(APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("patients-get"));
+                .andDo(document("patients-get"))
+        ;
     }
 
     @Test
