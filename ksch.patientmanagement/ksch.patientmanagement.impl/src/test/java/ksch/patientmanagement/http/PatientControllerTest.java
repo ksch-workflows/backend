@@ -42,7 +42,9 @@ import lombok.SneakyThrows;
 
 public class PatientControllerTest extends RestControllerTest {
 
-    private static final OpenApiInteractionValidator validator = OasValidatorFactory.createValidator("../../docs/openapi.yml");
+    private static final OpenApiInteractionValidator validator = OasValidatorFactory.createValidator(
+        "../../docs/openapi.yml"
+    );
 
     @Autowired
     private PatientService patientService;
