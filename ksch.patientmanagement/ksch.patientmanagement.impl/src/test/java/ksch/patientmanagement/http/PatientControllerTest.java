@@ -44,8 +44,7 @@ import com.atlassian.oai.validator.report.ValidationReport;
 
 public class PatientControllerTest extends RestControllerTest {
 
-
-
+    final OpenApiInteractionValidator validator = OasValidatorFactory.getValidator();
 
     @Autowired
     private PatientService patientService;
@@ -57,27 +56,13 @@ public class PatientControllerTest extends RestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("_id", is(notNullValue())))
                 .andDo(print())
-                .andDo(document("patients-create-emergency"));
+                .andDo(document("patients-create-emergency"))
+        ;
     }
 
     @Test
     @SneakyThrows
     public void should_create_patient_with_payload() {
-        LevelResolver levelResolver = LevelResolver.create()
-            .withLevel("validation.schema.additionalProperties",ValidationReport.Level.IGNORE)
-            .build();
-        ParseOptions parseOptions = new ParseOptions();
-
-        parseOptions.setResolve(true);
-        parseOptions.setResolveFully(false);
-        parseOptions.setResolveCombinators(true);
-
-        final OpenApiInteractionValidator validator = OpenApiInteractionValidator
-            .createForSpecificationUrl("/Users/jmewes/src/ksch-workflows/backend/docs/openapi.yml")
-            .withLevelResolver(levelResolver)
-            .withParseOptions(parseOptions)
-            .build();
-
         var payload = new TestResource("create-patient.json").readString();
         mockMvc.perform(
                 post("/api/patients")
