@@ -172,6 +172,7 @@ components:
   schemas:
     Gender:
       type: string
+      nullable: true
       enum:
         - MALE
         - FEMALE
@@ -213,6 +214,7 @@ components:
         name:
           description: 'All the name parts, i.e. first name, middle name, and last name.'
           type: string
+          nullable: true
           example: John Doe
           minLength: 1
         gender:
@@ -222,15 +224,18 @@ components:
         phoneNumber:
           description: Patient phone number
           type: string
+          nullable: true
           example: '+1234567890'
           minLength: 1
         residentialAddress:
           description: Patient residential address
           type: string
+          nullable: true
           example: 'Guesthouse'
           minLength: 1
     PatientCategory:
       type: string
+      nullable: true
       enum:
         - GENERAL
         - INPATIENT

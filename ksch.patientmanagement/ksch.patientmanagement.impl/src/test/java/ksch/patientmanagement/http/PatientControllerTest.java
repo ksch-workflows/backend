@@ -94,6 +94,7 @@ public class PatientControllerTest extends RestControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("patients-get"))
+                .andExpect(openApi().isValid(validator))
         ;
     }
 
