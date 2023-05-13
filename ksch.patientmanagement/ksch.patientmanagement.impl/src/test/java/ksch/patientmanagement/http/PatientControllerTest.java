@@ -15,13 +15,7 @@
  */
 package ksch.patientmanagement.http;
 
-import ksch.patientmanagement.PatientService;
-import ksch.testing.RestControllerTest;
-import ksch.testing.TestResource;
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import static com.atlassian.oai.validator.mockmvc.OpenApiValidationMatchers.openApi;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
@@ -35,7 +29,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.atlassian.oai.validator.OpenApiInteractionValidator;
+
+import ksch.patientmanagement.PatientService;
+import ksch.testing.OasValidatorFactory;
+import ksch.testing.RestControllerTest;
+import ksch.testing.TestResource;
+import lombok.SneakyThrows;
+
 public class PatientControllerTest extends RestControllerTest {
+
+    private static final OpenApiInteractionValidator validator = OasValidatorFactory.createValidator(
+        "../../docs/openapi.yml"
+    );
 
     @Autowired
     private PatientService patientService;
@@ -47,7 +56,9 @@ public class PatientControllerTest extends RestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("_id", is(notNullValue())))
                 .andDo(print())
-                .andDo(document("patients-create-emergency"));
+                .andDo(document("patients-create-emergency"))
+                .andExpect(openApi().isValid(validator))
+        ;
     }
 
     @Test
@@ -70,7 +81,9 @@ public class PatientControllerTest extends RestControllerTest {
                 .andExpect(jsonPath("patientCategory", is(equalTo("GENERAL"))))
                 .andExpect(jsonPath("phoneNumber", is(equalTo("0123456789"))))
                 .andExpect(jsonPath("residentialAddress", is(equalTo("Guesthouse"))))
-                .andDo(document("patients-create-normal"));
+                .andDo(document("patients-create-normal"))
+                .andExpect(openApi().isValid(validator))
+        ;
     }
 
     @Test
@@ -81,7 +94,9 @@ public class PatientControllerTest extends RestControllerTest {
         mockMvc.perform(get("/api/patients/{patientId}", patient.getId()).accept(APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("patients-get"));
+                .andDo(document("patients-get"))
+                .andExpect(openApi().isValid(validator))
+        ;
     }
 
     @Test
@@ -94,7 +109,9 @@ public class PatientControllerTest extends RestControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("page.totalElements", is(greaterThanOrEqualTo(2))))
-                .andDo(document("patients-list"));
+                .andDo(document("patients-list"))
+                .andExpect(openApi().isValid(validator))
+        ;
     }
 
     @Test
@@ -107,6 +124,8 @@ public class PatientControllerTest extends RestControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("page.totalElements", is(equalTo(1))))
-                .andDo(document("patients-search"));
+                .andDo(document("patients-search"))
+                .andExpect(openApi().isValid(validator))
+        ;
     }
 }

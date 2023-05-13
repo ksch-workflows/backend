@@ -1,14 +1,14 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   version: 0.1.0
   title: K.S.C.H. Workflows
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
   description: |
     This website contains the HTTP endpoints that are offered by the [backend](https://github.com/ksch-workflows/backend) component for frontend components of the [K.S.C.H. Workflows](https://ksch-workflows.github.io/) project.
 servers:
-  - url: 'http://example.com/api'
+  - url: 'https://example.com/api'
 paths:
   /patients:
     post:
@@ -33,7 +33,7 @@ paths:
                 summary: Empty details
                 value: {}
       responses:
-        '201':
+        '200':
           description: Created
           content:
             application/json:
@@ -60,9 +60,26 @@ paths:
       tags:
         - Patient
   /patients/search:
-    post:
+    get:
       operationId: searchPatients
       summary: Search for patients
+      parameters:
+        - name: q
+          in: query
+          description: The query that specifies which patients are searched for.
+          required: true
+          schema:
+            type: string
+          examples:
+            Name:
+              summary: Search by patient name
+              value: John Doe
+            PatientNumberPrefix:
+              summary: Search by patient number prefix
+              value: 23-
+            TechnicalIdentifier:
+              summary: Search by the technical identifier of the patient
+              value: 3d5c2f19-56c3-4db9-9d6d-76a821cff842
       responses:
         '200':
           description: OK
@@ -175,6 +192,7 @@ components:
         - MALE
         - FEMALE
         - OTHER
+      nullable: true
     Page:
       type: object
       properties:
@@ -197,11 +215,24 @@ components:
     Patient:
       type: object
       properties:
+        patientNumber:
+          description: The identifier used by the hospital staff to correlate patients with their data.
+          type: string
+          example: 23-72362
+          minLength: 1
+          nullable: true
+        age:
+          description: The number of years that have passed since the patient's date of birth.
+          type: integer
+          example: 23
+          minimum: 0
+          nullable: true
         name:
           description: 'All the name parts, i.e. first name, middle name, and last name.'
           type: string
           example: John Doe
           minLength: 1
+          nullable: true
         gender:
           $ref: '#/components/schemas/Gender'
         patientCategory:
@@ -211,17 +242,20 @@ components:
           type: string
           example: '+1234567890'
           minLength: 1
+          nullable: true
         residentialAddress:
           description: Patient residential address
           type: string
-          example: '1234 Main St, City, State 12345'
+          example: Guesthouse
           minLength: 1
+          nullable: true
     PatientCategory:
       type: string
       enum:
         - GENERAL
         - INPATIENT
         - OUTPATIENT
+      nullable: true
     PatientListResponse:
       type: object
       properties:
@@ -274,12 +308,11 @@ components:
             timeStart:
               description: The time of the patient registration
               type: string
-              format: date-time
             timeEnd:
               description: The time of the patient discharge
               type: string
-              format: date-time
-              example: '2019-08-27T08:07:22Z'
+              nullable: true
+              example: '2023-05-13T10:55:06.618498'
     VisitType:
       type: string
       enum:
@@ -292,7 +325,7 @@ components:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: 'http://example.com/api/authorize'
+          authorizationUrl: 'https://example.com/api/authorize'
           tokenUrl: 'https://ksch-workflows.eu.auth0.com/oauth/token'
           scopes: {}
 tags:
