@@ -57,6 +57,7 @@ public class PatientControllerTest extends RestControllerTest {
                 .andExpect(jsonPath("_id", is(notNullValue())))
                 .andDo(print())
                 .andDo(document("patients-create-emergency"))
+                .andExpect(openApi().isValid(validator))
         ;
     }
 
