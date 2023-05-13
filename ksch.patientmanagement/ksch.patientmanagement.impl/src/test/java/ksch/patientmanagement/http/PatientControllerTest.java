@@ -108,7 +108,9 @@ public class PatientControllerTest extends RestControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("page.totalElements", is(greaterThanOrEqualTo(2))))
-                .andDo(document("patients-list"));
+                .andDo(document("patients-list"))
+                .andExpect(openApi().isValid(validator))
+        ;
     }
 
     @Test
@@ -121,6 +123,8 @@ public class PatientControllerTest extends RestControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("page.totalElements", is(equalTo(1))))
-                .andDo(document("patients-search"));
+                .andDo(document("patients-search"))
+                .andExpect(openApi().isValid(validator))
+        ;
     }
 }

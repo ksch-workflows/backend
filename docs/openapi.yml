@@ -61,9 +61,26 @@ paths:
       tags:
         - Patient
   /patients/search:
-    post:
+    get:
       operationId: searchPatients
       summary: Search for patients
+      parameters:
+        - name: q
+          in: query
+          description: The query that specifies which patients are searched for.
+          required: true
+          schema:
+            type: string
+          examples:
+            Name:
+              summary: Search by patient name
+              value: John Doe
+            PatientNumberPrefix:
+              summary: Search by patient number prefix
+              value: '23-'
+            TechnicalIdentifier:
+              summary: Search by the technical identifier of the patient
+              value: 3d5c2f19-56c3-4db9-9d6d-76a821cff842
       responses:
         '200':
           description: OK
