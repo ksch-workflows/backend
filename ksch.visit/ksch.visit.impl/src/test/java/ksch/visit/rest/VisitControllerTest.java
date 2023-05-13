@@ -95,6 +95,7 @@ public class VisitControllerTest extends RestControllerTest {
                 .andExpect(jsonPath("type", is("EMERGENCY")))
                 .andExpect(jsonPath("timeStart", matchesPattern(ISO_8601_PATTERN)))
                 .andDo(document("get-visit"))
+                .andExpect(openApi().isValid(validator))
         ;
     }
 
