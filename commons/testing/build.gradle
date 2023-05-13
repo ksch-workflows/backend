@@ -1,7 +1,6 @@
 dependencies {
-    // TODO Use version from Gradle properties
-    api 'com.atlassian.oai:swagger-request-validator-core:2.34.1'
-    api 'com.atlassian.oai:swagger-request-validator-mockmvc:2.34.1'
+    api "com.atlassian.oai:swagger-request-validator-core:${swaggerRequestValidatorVersion}"
+    api "com.atlassian.oai:swagger-request-validator-mockmvc:${swaggerRequestValidatorVersion}"
     api 'org.springframework.boot:spring-boot-starter-hateoas'
     api 'org.springframework.boot:spring-boot-starter-test'
     api 'org.springframework.boot:spring-boot-starter-web'
