@@ -11,16 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class OasValidatorFactory {
 
-    private static OpenApiInteractionValidator instance;
-
-    public static OpenApiInteractionValidator getValidator() {
-        if (instance == null) {
-            init();
-        }
-        return instance;
-    }
-
-    private static void init() {
+    public static OpenApiInteractionValidator createValidator(String specificationUrl) {
         LevelResolver levelResolver = LevelResolver.create()
             .withLevel("validation.schema.additionalProperties", ValidationReport.Level.IGNORE)
             .build();
@@ -30,8 +21,8 @@ public class OasValidatorFactory {
         parseOptions.setResolveFully(false);
         parseOptions.setResolveCombinators(true);
 
-        instance = OpenApiInteractionValidator
-            .createForSpecificationUrl("/Users/jmewes/src/ksch-workflows/backend/docs/openapi.yml")
+        return OpenApiInteractionValidator
+            .createForSpecificationUrl(specificationUrl)
             .withLevelResolver(levelResolver)
             .withParseOptions(parseOptions)
             .build();

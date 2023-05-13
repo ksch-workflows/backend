@@ -15,15 +15,6 @@
  */
 package ksch.patientmanagement.http;
 
-
-import io.swagger.v3.parser.core.models.ParseOptions;
-import ksch.patientmanagement.PatientService;
-import ksch.testing.RestControllerTest;
-import ksch.testing.TestResource;
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import static com.atlassian.oai.validator.mockmvc.OpenApiValidationMatchers.openApi;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -38,13 +29,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.atlassian.oai.validator.OpenApiInteractionValidator;
-import com.atlassian.oai.validator.report.LevelResolver;
-import com.atlassian.oai.validator.report.ValidationReport;
+
+import ksch.patientmanagement.PatientService;
+import ksch.testing.RestControllerTest;
+import ksch.testing.TestResource;
+import lombok.SneakyThrows;
 
 public class PatientControllerTest extends RestControllerTest {
 
-    final OpenApiInteractionValidator validator = OasValidatorFactory.getValidator();
+    final OpenApiInteractionValidator validator = OasValidatorFactory.createValidator("../../docs/openapi.yml");
 
     @Autowired
     private PatientService patientService;
