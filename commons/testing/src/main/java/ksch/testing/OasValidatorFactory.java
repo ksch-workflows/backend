@@ -1,4 +1,4 @@
-package ksch.patientmanagement.http;
+package ksch.testing;
 
 import com.atlassian.oai.validator.OpenApiInteractionValidator;
 import com.atlassian.oai.validator.report.LevelResolver;

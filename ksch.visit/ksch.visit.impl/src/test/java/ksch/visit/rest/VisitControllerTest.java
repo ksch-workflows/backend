@@ -15,19 +15,7 @@
  */
 package ksch.visit.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import ksch.patientmanagement.PatientService;
-import ksch.testing.RestControllerTest;
-import ksch.testing.TestResource;
-import ksch.visit.VisitService;
-import ksch.visit.VisitType;
-import ksch.visit.domain.JohnDoe;
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.UUID;
-
+import static com.atlassian.oai.validator.mockmvc.OpenApiValidationMatchers.openApi;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.notNullValue;
@@ -39,18 +27,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.UUID;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.atlassian.oai.validator.OpenApiInteractionValidator;
+
+import ksch.patientmanagement.PatientService;
+import ksch.testing.OasValidatorFactory;
+import ksch.testing.RestControllerTest;
+import ksch.testing.TestResource;
+import ksch.visit.VisitService;
+import ksch.visit.VisitType;
+import ksch.visit.domain.JohnDoe;
+import lombok.SneakyThrows;
+
 public class VisitControllerTest extends RestControllerTest {
 
     public static final String ISO_8601_PATTERN = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d*";
+
+    private static final OpenApiInteractionValidator validator = OasValidatorFactory.createValidator(
+        "../../docs/openapi.yml"
+    );
 
     @Autowired
     private PatientService patientService;
 
     @Autowired
     private VisitService visitService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Test
     @SneakyThrows
@@ -70,6 +75,7 @@ public class VisitControllerTest extends RestControllerTest {
                 .andExpect(jsonPath("type", is("OPD")))
                 .andExpect(jsonPath("timeStart", matchesPattern(ISO_8601_PATTERN)))
                 .andDo(document("start-visit"))
+                .andExpect(openApi().isValid(validator))
         ;
     }
 

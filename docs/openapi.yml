@@ -308,12 +308,11 @@ components:
             timeStart:
               description: The time of the patient registration
               type: string
-              format: date-time
             timeEnd:
               description: The time of the patient discharge
               type: string
-              format: date-time
-              example: '2019-08-27T08:07:22Z'
+              nullable: true
+              example: '2023-05-13T10:55:06.618498'
     VisitType:
       type: string
       enum:
