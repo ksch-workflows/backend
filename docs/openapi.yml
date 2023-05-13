@@ -33,7 +33,6 @@ paths:
                 summary: Empty details
                 value: {}
       responses:
-        # TODO: Use status code 201
         '200':
           description: Created
           content:
@@ -77,7 +76,7 @@ paths:
               value: John Doe
             PatientNumberPrefix:
               summary: Search by patient number prefix
-              value: '23-'
+              value: 23-
             TechnicalIdentifier:
               summary: Search by the technical identifier of the patient
               value: 3d5c2f19-56c3-4db9-9d6d-76a821cff842
@@ -189,11 +188,11 @@ components:
   schemas:
     Gender:
       type: string
-      nullable: true
       enum:
         - MALE
         - FEMALE
         - OTHER
+      nullable: true
     Page:
       type: object
       properties:
@@ -219,21 +218,21 @@ components:
         patientNumber:
           description: The identifier used by the hospital staff to correlate patients with their data.
           type: string
-          nullable: true
-          example: '23-72362'
+          example: 23-72362
           minLength: 1
+          nullable: true
         age:
           description: The number of years that have passed since the patient's date of birth.
           type: integer
-          nullable: true
           example: 23
           minimum: 0
+          nullable: true
         name:
           description: 'All the name parts, i.e. first name, middle name, and last name.'
           type: string
-          nullable: true
           example: John Doe
           minLength: 1
+          nullable: true
         gender:
           $ref: '#/components/schemas/Gender'
         patientCategory:
@@ -241,22 +240,22 @@ components:
         phoneNumber:
           description: Patient phone number
           type: string
-          nullable: true
           example: '+1234567890'
           minLength: 1
+          nullable: true
         residentialAddress:
           description: Patient residential address
           type: string
-          nullable: true
-          example: 'Guesthouse'
+          example: Guesthouse
           minLength: 1
+          nullable: true
     PatientCategory:
       type: string
-      nullable: true
       enum:
         - GENERAL
         - INPATIENT
         - OUTPATIENT
+      nullable: true
     PatientListResponse:
       type: object
       properties:
