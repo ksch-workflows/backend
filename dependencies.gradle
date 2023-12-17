@@ -6,7 +6,7 @@ ext {
     googleAppengineVersion = '2.4.4'
     sonarcubeVersion = '3.4.0.2513'
     springBootVersion = '2.6.0'
-    springDependencyManagementVersion = '1.0.11.RELEASE'
+    springDependencyManagementVersion = '1.1.4'
 
     // External dependencies
     hamcrestVersion = '2.2'
