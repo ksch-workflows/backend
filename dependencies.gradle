@@ -1,0 +1,19 @@
+ext {
+    // SPAs
+    registrationDeskVersion = '0.0.12'
+
+    // Plugins
+    googleAppengineVersion = '2.4.4'
+    sonarcubeVersion = '3.4.0.2513'
+    springBootVersion = '2.6.0'
+    springDependencyManagementVersion = '1.0.11.RELEASE'
+
+    // External dependencies
+    hamcrestVersion = '2.2'
+    lombokVersion = '1.18.22'
+    mockitoVersion = '3.11.2'
+    oauth2oidcSdkVersion = '9.37.2'
+    swaggerRequestValidatorVersion = '2.34.1'
+    unirestVersion = '3.13.10'
+    wiremockVersion = '2.33.2'
+}
