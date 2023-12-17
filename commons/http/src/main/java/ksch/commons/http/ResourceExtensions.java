@@ -15,12 +15,14 @@
  */
 package ksch.commons.http;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.hateoas.Link;
-
-import javax.annotation.PostConstruct;
 import java.util.Optional;
 import java.util.function.Function;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.hateoas.Link;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * A resource extension is a link to a related REST resource.
