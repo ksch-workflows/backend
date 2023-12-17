@@ -9,6 +9,7 @@ ext {
     springDependencyManagementVersion = '1.0.11.RELEASE'
 
     // External dependencies
+    googleCloudLoggingLogbackVersion = '0.130.28-alpha'
     hamcrestVersion = '2.2'
     lombokVersion = '1.18.22'
     mockitoVersion = '3.11.2'
