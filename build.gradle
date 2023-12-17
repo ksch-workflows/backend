@@ -39,6 +39,7 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
 
     dependencies {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+        implementation "com.google.cloud:google-cloud-logging-logback:${googleCloudLoggingLogbackVersion}"
 
         // Testing libraries and frameworks
         testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
