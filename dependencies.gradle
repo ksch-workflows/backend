@@ -11,7 +11,7 @@ ext {
     // External dependencies
     googleCloudLoggingLogbackVersion = '0.130.28-alpha'
     hamcrestVersion = '2.2'
-    lombokVersion = '1.18.22'
+    lombokVersion = '1.18.30'
     mockitoVersion = '3.11.2'
     oauth2oidcSdkVersion = '9.37.2'
     swaggerRequestValidatorVersion = '2.34.1'
