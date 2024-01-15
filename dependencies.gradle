@@ -16,5 +16,5 @@ ext {
     oauth2oidcSdkVersion = '9.37.2'
     swaggerRequestValidatorVersion = '2.34.1'
     unirestVersion = '3.13.10'
-    wiremockVersion = '2.33.2'
+    wiremockVersion = '3.0.1'
 }
