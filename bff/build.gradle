@@ -8,7 +8,8 @@ dependencies {
     implementation 'org.springframework.session:spring-session-core'
     implementation 'org.springframework.session:spring-session-jdbc'
     implementation project(':commons:http')
-    testImplementation "com.github.tomakehurst:wiremock-jre8:${wiremockVersion}"
+    testImplementation "com.github.tomakehurst:wiremock:${wiremockVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.yaml:snakeyaml:1.33'
     testImplementation project(':commons:testing')
 }
