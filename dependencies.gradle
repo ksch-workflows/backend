@@ -12,7 +12,7 @@ ext {
     googleCloudLoggingLogbackVersion = '0.130.30-alpha'
     hamcrestVersion = '2.2'
     lombokVersion = '1.18.30'
-    mockitoVersion = '3.11.2'
+    mockitoVersion = '5.10.0'
     oauth2oidcSdkVersion = '9.37.2'
     swaggerRequestValidatorVersion = '2.34.1'
     unirestVersion = '3.13.10'
