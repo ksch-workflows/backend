@@ -10,6 +10,6 @@ dependencies {
     implementation project(':commons:http')
     testImplementation "com.github.tomakehurst:wiremock:${wiremockVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.yaml:snakeyaml:1.33'
+    testImplementation 'org.yaml:snakeyaml:2.2'
     testImplementation project(':commons:testing')
 }
