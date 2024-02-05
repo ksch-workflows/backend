@@ -22,7 +22,6 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import ksch.visit.Visit;
 import ksch.visit.VisitService;
@@ -41,8 +40,6 @@ public class VisitServiceImpl implements VisitService {
 
     private final OpdNumberGenerator opdNumberGenerator;
 
-    private final TransactionTemplate transactionTemplate;
-
     @Override
     public Visit startVisit(UUID patientId, VisitType type) {
 
@@ -53,14 +50,12 @@ public class VisitServiceImpl implements VisitService {
         }
         var opdNumber = opdNumberGenerator.generateOpdNumber();
 
-        return transactionTemplate.execute(status -> {
-            return visitRepository.save(VisitDao.builder()
-                .opdNumber(opdNumber)
-                .patientId(patientId)
-                .type(type)
-                .timeStart(now())
-                .build());
-        });
+        return visitRepository.save(VisitDao.builder()
+            .opdNumber(opdNumber)
+            .patientId(patientId)
+            .type(type)
+            .timeStart(now())
+            .build());
     }
 
     @Override

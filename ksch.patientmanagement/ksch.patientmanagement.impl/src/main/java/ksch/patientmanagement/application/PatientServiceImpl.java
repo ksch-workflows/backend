@@ -18,7 +18,6 @@ package ksch.patientmanagement.application;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import ksch.patientmanagement.Patient;
 import ksch.patientmanagement.PatientService;
@@ -33,8 +32,6 @@ public class PatientServiceImpl implements PatientService {
 
     private final PatientJpaRepository patientRepository;
 
-    private final TransactionTemplate transactionTemplate;
-
     public Patient createPatient() {
         return createPatient(new PatientDao());
     }
@@ -44,8 +41,6 @@ public class PatientServiceImpl implements PatientService {
     }
 
     private Patient createPatient(PatientDao patient) {
-        return transactionTemplate.execute(status -> {
-            return patientRepository.save(patient);
-        });
+        return patientRepository.save(patient);
     }
 }
