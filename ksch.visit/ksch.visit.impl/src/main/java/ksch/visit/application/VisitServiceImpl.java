@@ -15,6 +15,15 @@
  */
 package ksch.visit.application;
 
+import static java.time.LocalDateTime.now;
+
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
+
 import ksch.visit.Visit;
 import ksch.visit.VisitService;
 import ksch.visit.VisitType;
@@ -22,13 +31,6 @@ import ksch.visit.domain.VisitCannotBeStartedException;
 import ksch.visit.domain.VisitRepository;
 import ksch.visit.infrastructure.VisitDao;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
-import java.util.UUID;
-
-import static java.time.LocalDateTime.now;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +40,8 @@ public class VisitServiceImpl implements VisitService {
     private final VisitRepository visitRepository;
 
     private final OpdNumberGenerator opdNumberGenerator;
+
+    private final TransactionTemplate transactionTemplate;
 
     @Override
     public Visit startVisit(UUID patientId, VisitType type) {
@@ -49,12 +53,14 @@ public class VisitServiceImpl implements VisitService {
         }
         var opdNumber = opdNumberGenerator.generateOpdNumber();
 
-        return visitRepository.save(VisitDao.builder()
+        return transactionTemplate.execute(status -> {
+            return visitRepository.save(VisitDao.builder()
                 .opdNumber(opdNumber)
                 .patientId(patientId)
                 .type(type)
                 .timeStart(now())
                 .build());
+        });
     }
 
     @Override

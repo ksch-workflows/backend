@@ -75,6 +75,7 @@ configure(subprojects.findAll { it.name.endsWith('.impl') } ) {
         implementation 'org.springframework.boot:spring-boot-starter-hateoas'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
         runtimeOnly 'com.h2database:h2'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'

@@ -17,6 +17,7 @@ management:
         allowedOrigins: '*'
         allowedMethods: GET
       basePath: /api/actuator
+      # TODO Start actuator on other port
   health:
     diskspace:
       enabled: false

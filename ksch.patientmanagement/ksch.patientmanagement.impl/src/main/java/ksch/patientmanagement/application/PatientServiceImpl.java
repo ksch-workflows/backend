@@ -15,14 +15,16 @@
  */
 package ksch.patientmanagement.application;
 
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionTemplate;
+
 import ksch.patientmanagement.Patient;
 import ksch.patientmanagement.PatientService;
 import ksch.patientmanagement.infrastructure.PatientDao;
 import ksch.patientmanagement.infrastructure.PatientJpaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +32,8 @@ import javax.transaction.Transactional;
 public class PatientServiceImpl implements PatientService {
 
     private final PatientJpaRepository patientRepository;
+
+    private final TransactionTemplate transactionTemplate;
 
     public Patient createPatient() {
         return createPatient(new PatientDao());
@@ -40,6 +44,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     private Patient createPatient(PatientDao patient) {
-        return patientRepository.save(patient);
+        return transactionTemplate.execute(status -> {
+            return patientRepository.save(patient);
+        });
     }
 }
