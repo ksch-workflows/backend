@@ -15,11 +15,6 @@
  */
 package ksch.visit.infrastructure;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,9 +22,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * {@link OpdSerialNumber} is a utility class for the generation of OPD numbers.
- *
+ * <p>
  * It represents the numeric part of an OPD number which gets incremented every time a visit gets created.
  */
 @Entity
@@ -42,7 +42,7 @@ public class OpdSerialNumber {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "numeric_part_of_opd_number")
-    @Column(unique = true)
+    @Column(unique = true, name = "`value`")
     private int value;
 
     @Override

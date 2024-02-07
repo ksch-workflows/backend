@@ -15,6 +15,13 @@
  */
 package ksch.patientmanagement.infrastructure;
 
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import ksch.patientmanagement.Gender;
 import ksch.patientmanagement.Patient;
 import ksch.util.TypeConverter;
@@ -25,12 +32,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -44,7 +45,7 @@ public class PatientDao implements Patient {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @Column(unique = true)
+    @Column(unique = true, columnDefinition = "uuid")
     private UUID id;
 
     private String patientNumber;
