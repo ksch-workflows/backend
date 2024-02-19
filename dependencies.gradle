@@ -13,7 +13,7 @@ ext {
     hamcrestVersion = '2.2'
     lombokVersion = '1.18.30'
     mockitoVersion = '5.10.0'
-    oauth2oidcSdkVersion = '11.9.1'
+    oauth2oidcSdkVersion = '11.10'
     swaggerRequestValidatorVersion = '2.40.0'
     unirestVersion = '3.14.5'
     wiremockVersion = '3.0.1'
