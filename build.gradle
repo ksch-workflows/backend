@@ -93,21 +93,31 @@ allprojects {
             }
         }
 
-        // OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
-        // https://stackoverflow.com/questions/54205486/how-to-avoid-sharing-is-only-supported-for-boot-loader-classes-because-bootstra
+        // Address the following compilation warning:
+        // "OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended"
         tasks.withType(Test).tap {
             configureEach {
                 options {jvmArgs("-Xshare:off")}
             }
         }
+        // Also see https://stackoverflow.com/questions/54205486
     }
 }
 
 sonarqube {
-  properties {
-    property "sonar.coverage.jacoco.xmlReportPaths", "./server/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
-    property "sonar.host.url", "https://sonarcloud.io"
-    property "sonar.organization", "ksch-workflows"
-    property "sonar.projectKey", "ksch-workflows_backend"
-  }
+    properties {
+        property "sonar.coverage.jacoco.xmlReportPaths", "./server/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.organization", "ksch-workflows"
+        property "sonar.projectKey", "ksch-workflows_backend"
+    }
 }
+
+def sonarqubeDependencies = new LinkedHashSet()
+subprojects {
+    sonarqubeDependencies.addAll(
+        tasks.findAll({ it.name.contains('jacocoTestReport') || it.name == 'test' })
+    )
+}
+rootProject.tasks.sonarqube.dependsOn = sonarqubeDependencies
+// Also see https://stackoverflow.com/a/73506443/2339010
