@@ -14,8 +14,6 @@ pluginManagement {
 
 rootProject.name = "ksch-workflows-backend"
 
-include("bff")
-
 include("commons:http")
 include("commons:testing")
 include("commons:util")
