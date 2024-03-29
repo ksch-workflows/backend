@@ -1,20 +1,5 @@
-spring:
-  security:
-    oauth2:
-      resourceserver:
-        opaquetoken:
-          introspection-uri: https://noauth-ga2speboxa-ew.a.run.app/token-info
-          client-id: dev
-          client-secret: dev
-
 server:
   servlet:
     session:
       cookie:
         same-site: none
-
-oauth:
-  baseUrl: https://noauth-ga2speboxa-ew.a.run.app
-  clientId: example_client_id
-  clientSecret: example_client_secret
-  redirectUri: http://localhost:8080/bff/callback

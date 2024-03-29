@@ -1,6 +1,6 @@
 # Contribution guidelines
 
-This file contains guideslines for making contributions in the `backend` repository of the KSCH Workflows project.
+This file contains guidelines for making contributions in the `backend` repository of the KSCH Workflows project.
 
 ## Testing
 
@@ -14,7 +14,7 @@ This file contains guideslines for making contributions in the `backend` reposit
 
 ## Commit messages
 
-The Git commit messages should follow the [Conventional Commits guideslines](https://www.conventionalcommits.org/en/v1.0.0/#summary).
+The Git commit messages should follow the [Conventional Commits guidelines](https://www.conventionalcommits.org/en/v1.0.0/#summary).
 
 There are no automatic validations of those guidelines in place, but you may get asked to split up a pull request which contains changes of different types.
 
