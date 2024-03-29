@@ -15,12 +15,11 @@
  */
 package ksch.visit.rest;
 
+import jakarta.validation.constraints.NotNull;
 import ksch.visit.VisitType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @Setter
