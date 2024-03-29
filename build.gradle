@@ -83,6 +83,26 @@ configure(subprojects.findAll { it.name.endsWith('.impl') } ) {
     }
 }
 
+allprojects {
+    gradle.projectsEvaluated {
+        // Include deprecation warnings in compilation output
+        tasks.withType(JavaCompile).tap {
+            configureEach {
+                options.encoding = 'UTF-8'
+                options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+            }
+        }
+
+        // OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+        // https://stackoverflow.com/questions/54205486/how-to-avoid-sharing-is-only-supported-for-boot-loader-classes-because-bootstra
+        tasks.withType(Test).tap {
+            configureEach {
+                options {jvmArgs("-Xshare:off")}
+            }
+        }
+    }
+}
+
 sonarqube {
   properties {
     property "sonar.coverage.jacoco.xmlReportPaths", "./server/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
