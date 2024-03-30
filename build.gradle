@@ -101,6 +101,12 @@ allprojects {
             }
         }
         // Also see https://stackoverflow.com/questions/54205486
+
+        // Enable dependency injection, property binding etc. based on parameter names
+        tasks.withType(JavaCompile).configureEach {
+            options.compilerArgs.add("-parameters")
+        }
+        // Also see https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x#parameter-name-retention
     }
 }
 
