@@ -146,6 +146,10 @@ gcloud init
 
 See [cloud.google.com](https://cloud.google.com/sdk/docs/install) for Google Cloud CLI installation instructions.
 
+### Update Java version
+
+See [cloud.google.com](https://cloud.google.com/appengine/docs/flexible/java/runtime#java_versions) for the Java versions supported by the Google App Engine.
+
 ## License
 
 K.S.C.H. Workflows is maintained by [KS-plus e.V.](https://ks-plus.org/en/welcome/),
