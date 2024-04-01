@@ -4,6 +4,17 @@
 
 This repository contains the source code for the K.S.C.H. Workflows backend that offers a RESTful API to browser, desktop, and mobile clients.
 
+## Overview
+
+TBD
+
+## Dependencies
+
+To be able to work on the KSCH Workflows backend, the following tools need to be installed:
+
+- Java 17
+- Docker
+
 ## Architecture
 
 This section gives an overview of the code in this repository.
@@ -12,7 +23,7 @@ This section gives an overview of the code in this repository.
 
 - Java
 - Spring Boot
-- MySQL
+- PostgreSQL
 - Hibernate
 - Gradle
 
@@ -68,17 +79,6 @@ With the `dev` profile, the app will run with a mock authorization server which 
 export SPRING_PROFILES_ACTIVE=dev
 ./gradlew bootRun
 ```
-
-### Embedded database
-
-When you start the app with the `bootRun` Gradle task, the app will use an embedded H2 database.
-This database can be introspected under the following URL:
-
-http://localhost:8080/h2-console
-
-`jdbc:h2:mem:ksch`
-
-Use `sa` / `password` as login.
 
 ### Add license comments
 

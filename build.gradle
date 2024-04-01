@@ -39,7 +39,7 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
 
     dependencies {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-        implementation "com.google.cloud:google-cloud-logging-logback:${googleCloudLoggingLogbackVersion}"
+        // implementation "com.google.cloud:google-cloud-logging-logback:${googleCloudLoggingLogbackVersion}"
 
         // Testing libraries and frameworks
         testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
@@ -70,15 +70,14 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
 configure(subprojects.findAll { it.name.endsWith('.impl') } ) {
 
     dependencies {
+        implementation 'org.postgresql:postgresql'
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springframework.boot:spring-boot-starter-hateoas'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-        runtimeOnly 'com.h2database:h2'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
         testImplementation project(':commons:testing')
     }
 }

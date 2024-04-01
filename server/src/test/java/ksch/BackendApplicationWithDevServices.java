@@ -16,14 +16,26 @@
 package ksch;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.context.annotation.Bean;
+import org.testcontainers.containers.PostgreSQLContainer;
 
-@SpringBootApplication
-@ComponentScan("ksch") // TODO Try to remove this configuration. Probably it is redundant with @SpringBootApplication
-public class BackendApplication {
+public class BackendApplicationWithDevServices {
+
+    static class ContainerConfig {
+        @Bean
+        @ServiceConnection
+        public PostgreSQLContainer<?> postgresContainer() {
+            //noinspection resource
+            return new PostgreSQLContainer<>(
+                "postgres:15-alpine"
+            ).withReuse(true);
+        }
+    }
 
     public static void main(String... args) {
-        SpringApplication.run(BackendApplication.class, args);
+        SpringApplication.from(BackendApplication::main)
+            .with(ContainerConfig.class)
+            .run(args);
     }
 }

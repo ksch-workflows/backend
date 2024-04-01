@@ -15,26 +15,30 @@
  */
 package ksch.visit.infrastructure;
 
-import ksch.visit.VisitType;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import ksch.testing.ContainerConfig;
+import ksch.visit.VisitType;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class})
 @Transactional
+@ActiveProfiles("postgres")
+@Import(ContainerConfig.class)
 public class VisitJpaRepositoryTest {
 
     @Autowired

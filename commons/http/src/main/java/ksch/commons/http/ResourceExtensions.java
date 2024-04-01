@@ -18,10 +18,9 @@ package ksch.commons.http;
 import java.util.Optional;
 import java.util.function.Function;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.hateoas.Link;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 /**

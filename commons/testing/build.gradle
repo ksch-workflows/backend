@@ -3,6 +3,12 @@ dependencies {
     api "com.atlassian.oai:swagger-request-validator-mockmvc:${swaggerRequestValidatorVersion}"
     api 'org.springframework.boot:spring-boot-starter-hateoas'
     api 'org.springframework.boot:spring-boot-starter-test'
+    api 'org.springframework.boot:spring-boot-starter-test'
     api 'org.springframework.boot:spring-boot-starter-web'
+    api 'org.springframework.boot:spring-boot-testcontainers'
+    api 'org.springframework.restdocs:spring-restdocs-mockmvc' // TODO Is this still needed?
+    api 'org.testcontainers:junit-jupiter'
+    api 'org.testcontainers:postgresql'
+    api 'org.testcontainers:testcontainers'
     compileOnly 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }

@@ -15,21 +15,27 @@
  */
 package ksch.patientmanagement.infrastructure;
 
-import ksch.patientmanagement.Patient;
-import ksch.patientmanagement.PatientService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.PatientService;
+import ksch.testing.ContainerConfig;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class})
 @Transactional
+@Import(ContainerConfig.class)
+@ActiveProfiles("postgres")
 public class PatientJpaRepositoryTest {
 
     @Autowired

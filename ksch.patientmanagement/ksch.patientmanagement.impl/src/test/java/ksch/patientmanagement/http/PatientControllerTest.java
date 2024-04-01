@@ -56,7 +56,7 @@ public class PatientControllerTest extends RestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("_id", is(notNullValue())))
                 .andDo(print())
-                .andDo(document("patients-create-emergency"))
+                .andDo(document("patients-create-emergency")) // TODO Is this still needed?
                 .andExpect(openApi().isValid(validator))
         ;
     }
