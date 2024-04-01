@@ -144,7 +144,22 @@ gcloud init
 ./gradlew appengineDeploy
 ```
 
-See [cloud.google.com](https://cloud.google.com/sdk/docs/install) for Google Cloud CLI installation instructions.
+The secrets are added to the App Engine process with the following configuration file:
+
+`~/.config/ksch-workflows/staging.yml`:
+
+```yml
+env_variables:
+  OAUTH_CLIENT_ID: "*****"
+  OAUTH_CLIENT_SECRET: "*****"
+  OAUTH_REDIRECT_URI: "*****"
+```
+
+**Also see**
+
+- [cloud.google.com](https://cloud.google.com/sdk/docs/install) for Google Cloud CLI installation instructions.
+- [How to add environmental variables to Google App Engine (node.js) using Cloud Build | medium.com](https://medium.com/@brian.young.pro/how-to-add-environmental-variables-to-google-app-engine-node-js-using-cloud-build-5ce31ee63d7)
+- https://stackoverflow.com/a/78059484/2339010
 
 ### Update Java version
 

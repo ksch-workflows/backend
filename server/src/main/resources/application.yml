@@ -1,12 +1,12 @@
 spring:
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/test
-#    username: test
-#    password: test
-#    driverClassName: org.h2.Driver
+  datasource:
+    url: "jdbc:postgresql:///postgres?cloudSqlInstance=*****:*****:*****&socketFactory=com.google.cloud.sql.postgres.SocketFactory"
+    username: "*****"
+    password: "*****"
   jpa:
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 management:
   endpoints:
