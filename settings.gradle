@@ -17,6 +17,7 @@ rootProject.name = "ksch-workflows-backend"
 include("commons:http")
 include("commons:testing")
 include("commons:util")
+include("commons:data")
 
 include("ksch.administration")
 include("ksch.administration:ksch.administration.api")
