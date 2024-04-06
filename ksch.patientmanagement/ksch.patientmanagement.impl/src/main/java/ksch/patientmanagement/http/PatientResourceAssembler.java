@@ -16,7 +16,7 @@
 package ksch.patientmanagement.http;
 
 import ksch.commons.http.ResourceExtensionsRegistry;
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.api.Patient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;

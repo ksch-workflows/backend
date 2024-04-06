@@ -15,12 +15,10 @@
  */
 package ksch.patientmanagement.http;
 
-import ksch.commons.http.error.NotFoundException;
-import ksch.patientmanagement.Patient;
-import ksch.patientmanagement.PatientService;
-import ksch.patientmanagement.infrastructure.PatientJpaRepository;
-import ksch.patientmanagement.infrastructure.PatientSearchSpecification;
-import lombok.RequiredArgsConstructor;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
@@ -32,9 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.UUID;
+import ksch.commons.http.error.NotFoundException;
+import ksch.patientmanagement.api.Patient;
+import ksch.patientmanagement.api.PatientService;
+import ksch.patientmanagement.infrastructure.PatientJpaRepository;
+import ksch.patientmanagement.infrastructure.PatientSearchSpecification;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/patients")

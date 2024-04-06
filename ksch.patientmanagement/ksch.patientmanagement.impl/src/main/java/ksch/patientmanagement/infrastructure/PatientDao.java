@@ -22,8 +22,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.api.Gender;
+import ksch.patientmanagement.api.Patient;
 import ksch.util.TypeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

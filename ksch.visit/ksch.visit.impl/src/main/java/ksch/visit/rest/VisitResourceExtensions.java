@@ -17,7 +17,7 @@ package ksch.visit.rest;
 
 import ksch.commons.http.ResourceExtensions;
 import ksch.commons.http.ResourceExtensionsRegistry;
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.api.Patient;
 import ksch.visit.domain.VisitRepository;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;

@@ -15,8 +15,8 @@
  */
 package ksch.patientmanagement.infrastructure;
 
-import ksch.patientmanagement.Patient;
-import ksch.patientmanagement.PatientService;
+import ksch.patientmanagement.api.Patient;
+import ksch.patientmanagement.api.PatientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

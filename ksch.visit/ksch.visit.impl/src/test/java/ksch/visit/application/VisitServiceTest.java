@@ -15,7 +15,6 @@
  */
 package ksch.visit.application;
 
-import ksch.patientmanagement.Patient;
 import ksch.visit.Visit;
 import ksch.visit.VisitType;
 import ksch.visit.domain.VisitCannotBeStartedException;

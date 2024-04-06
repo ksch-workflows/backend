@@ -34,7 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.atlassian.oai.validator.OpenApiInteractionValidator;
 
-import ksch.patientmanagement.PatientService;
+import ksch.patientmanagement.api.PatientService;
 import ksch.testing.OasValidatorFactory;
 import ksch.testing.RestControllerTest;
 import ksch.testing.TestResource;

@@ -16,7 +16,7 @@
 package ksch.visit.rest;
 
 import ksch.commons.http.ResourceExtensionsRegistry;
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.api.Patient;
 import ksch.visit.Visit;
 import ksch.visit.domain.JohnDoe;
 import ksch.visit.domain.VisitRepository;
@@ -25,7 +25,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
@@ -37,7 +36,6 @@ import static ksch.testing.ResourceExtensionMatchers.containsNoLinkWithRel;
 import static ksch.visit.VisitType.IPD;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;

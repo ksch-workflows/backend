@@ -15,8 +15,8 @@
  */
 package ksch.visit.domain;
 
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.api.Gender;
+import ksch.patientmanagement.api.Patient;
 
 import java.util.UUID;
 

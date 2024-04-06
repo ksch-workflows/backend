@@ -16,8 +16,8 @@
 package ksch.patientmanagement.http;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.api.Gender;
+import ksch.patientmanagement.api.Patient;
 import ksch.util.TypeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

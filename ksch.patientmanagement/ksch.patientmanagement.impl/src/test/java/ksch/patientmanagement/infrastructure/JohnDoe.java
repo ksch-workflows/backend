@@ -15,12 +15,12 @@
  */
 package ksch.patientmanagement.infrastructure;
 
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.api.Gender;
+import ksch.patientmanagement.api.Patient;
 
 import java.util.UUID;
 
-import static ksch.patientmanagement.Gender.MALE;
+import static ksch.patientmanagement.api.Gender.MALE;
 
 public class JohnDoe implements Patient {
 

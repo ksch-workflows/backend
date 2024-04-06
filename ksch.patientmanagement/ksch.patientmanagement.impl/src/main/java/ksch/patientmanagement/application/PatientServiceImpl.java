@@ -18,8 +18,8 @@ package ksch.patientmanagement.application;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ksch.patientmanagement.Patient;
-import ksch.patientmanagement.PatientService;
+import ksch.patientmanagement.api.Patient;
+import ksch.patientmanagement.api.PatientService;
 import ksch.patientmanagement.infrastructure.PatientDao;
 import ksch.patientmanagement.infrastructure.PatientJpaRepository;
 import lombok.RequiredArgsConstructor;
