@@ -3,6 +3,4 @@ dependencies {
 
     implementation project(':commons:http')
     implementation project(':commons:util')
-
-    testImplementation project(':ksch.patientmanagement:ksch.patientmanagement.impl')
 }

@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ksch.commons.data.PageableAdapter;
 import ksch.commons.http.error.NotFoundException;
 import ksch.patientmanagement.api.Patient;
-import ksch.patientmanagement.api.PatientService;
+import ksch.patientmanagement.core.PatientService;
 import ksch.patientmanagement.core.PatientRepository;
 import lombok.RequiredArgsConstructor;
 

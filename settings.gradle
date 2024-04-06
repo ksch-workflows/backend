@@ -33,7 +33,6 @@ include("ksch.billing:ksch.billing.web")
 include("ksch.patientmanagement")
 include("ksch.patientmanagement:ksch.patientmanagement.api")
 include("ksch.patientmanagement:ksch.patientmanagement.core")
-include("ksch.patientmanagement:ksch.patientmanagement.impl")
 include("ksch.patientmanagement:ksch.patientmanagement.persistence")
 include("ksch.patientmanagement:ksch.patientmanagement.web")
 

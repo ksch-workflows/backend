@@ -26,7 +26,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import ksch.patientmanagement.api.Patient;
-import ksch.patientmanagement.api.PatientService;
+import ksch.patientmanagement.core.PatientService;
 
 // TODO Use JPA test only
 @SpringBootTest

@@ -4,20 +4,21 @@ import java.util.UUID;
 
 import ksch.patientmanagement.api.Gender;
 import ksch.patientmanagement.api.Patient;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Setter // TODO Can the setters be removed?
-// TODO Use builder
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(force = true)
 public class PatientEntity implements Patient {
-
-    // TODO Use final?
-    private UUID id;
-    private String name;
-    private Integer age;
-    private Gender gender;
-    private String phoneNumber;
-    private String residentialAddress;
-    private String patientCategory;
+    private final UUID id;
+    private final String name;
+    private final Integer age;
+    private final Gender gender;
+    private final String phoneNumber;
+    private final String residentialAddress;
+    private final String patientCategory;
 }
