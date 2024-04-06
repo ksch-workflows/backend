@@ -6,7 +6,7 @@ import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.OffsetScrollPosition;
 import org.springframework.data.domain.Sort;
 
-public class PageableAdapter implements Pageable {
+public class PageableAdapter implements PageableFacade {
 
     private final org.springframework.data.domain.Pageable delegate;
 

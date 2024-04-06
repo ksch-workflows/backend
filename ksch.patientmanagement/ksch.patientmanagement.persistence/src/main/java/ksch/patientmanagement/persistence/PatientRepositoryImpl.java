@@ -5,9 +5,9 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
-import ksch.commons.data.Page;
+import ksch.commons.data.PageFacade;
 import ksch.commons.data.PageAdapter;
-import ksch.commons.data.Pageable;
+import ksch.commons.data.PageableFacade;
 import ksch.patientmanagement.api.Patient;
 import ksch.patientmanagement.core.PatientRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,12 +29,12 @@ public class PatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public Page<Patient> findAll(Pageable pageable) {
+    public PageFacade<Patient> findAll(PageableFacade pageable) {
         return new PageAdapter<>(patientJpaRepository.findAll(pageable).map(p -> p));
     }
 
     @Override
-    public Page<Patient> search(String query, Pageable pageable) {
+    public PageFacade<Patient> search(String query, PageableFacade pageable) {
         return new PageAdapter<>(patientJpaRepository
             .findAll(new PatientSearchSpecification(query), pageable).map(p -> p));
     }

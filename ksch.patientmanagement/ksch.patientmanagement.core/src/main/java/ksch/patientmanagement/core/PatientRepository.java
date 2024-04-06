@@ -3,8 +3,8 @@ package ksch.patientmanagement.core;
 import java.util.Optional;
 import java.util.UUID;
 
-import ksch.commons.data.Page;
-import ksch.commons.data.Pageable;
+import ksch.commons.data.PageFacade;
+import ksch.commons.data.PageableFacade;
 import ksch.patientmanagement.api.Patient;
 
 public interface PatientRepository {
@@ -13,7 +13,7 @@ public interface PatientRepository {
 
     Optional<Patient> findById(UUID patientId);
 
-    Page<Patient> findAll(Pageable pageable);
+    PageFacade<Patient> findAll(PageableFacade pageable);
 
-    Page<Patient> search(String query, Pageable pageable);
+    PageFacade<Patient> search(String query, PageableFacade pageable);
 }

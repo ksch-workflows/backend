@@ -4,15 +4,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class PageAdapter<T> implements Page<T> {
+public class PageAdapter<T> implements PageFacade<T> {
 
-    private final org.springframework.data.domain.Page<T> delegate;
+    private final Page<T> delegate;
 
     @Override
     public int getTotalPages() {
