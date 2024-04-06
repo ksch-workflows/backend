@@ -15,7 +15,6 @@
  */
 package ksch.patientmanagement.web;
 
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,8 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ksch.commons.data.PageableAdapter;
 import ksch.commons.http.error.NotFoundException;
 import ksch.patientmanagement.api.Patient;
-import ksch.patientmanagement.core.PatientService;
 import ksch.patientmanagement.core.PatientRepository;
+import ksch.patientmanagement.core.PatientService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -52,7 +51,7 @@ class PatientController {
 
     @PostMapping
     PatientResource createPatient(@RequestBody Optional<PatientPayload> request) {
-        Patient patient = null;
+        Patient patient;
         if (request.isPresent()) {
             patient = patientService.createPatient(request.get());
         } else {
@@ -69,7 +68,7 @@ class PatientController {
 
     @GetMapping
     PagedModel<PatientResource> listPatients(Pageable pageable) {
-        var patients = patientRepository.findAll(new PageableAdapter(pageable)).map(p -> (Patient) p);
+        var patients = patientRepository.findAll(new PageableAdapter(pageable)).map(p -> p);
         return pagedResourcesAssembler.toModel(patients, patientResourceAssembler);
     }
 
@@ -77,22 +76,7 @@ class PatientController {
     PagedModel<PatientResource> searchPatients(@RequestParam("q") String query, Pageable pageable) {
         var patients = patientRepository
                 .search(query, new PageableAdapter(pageable))
-                .map(p -> (Patient) p);
+                .map(p -> p);
         return pagedResourcesAssembler.toModel(patients, patientResourceAssembler);
-    }
-
-    /**
-     * @deprecated This endpoint has no actual use but was added to be able to experiment with subresource
-     * in the client SDK design.
-     */
-    @Deprecated
-    @GetMapping("/{patientId}/residential-address")
-    public HashMap<String, String> getResidentialAddress(@PathVariable("patientId") UUID patientId) {
-        var residentialAddress = patientRepository.findById(patientId)
-                .orElseThrow(NotFoundException::new)
-                .getResidentialAddress();
-        var result = new HashMap<String, String>();
-        result.put("residentialAddress", residentialAddress);
-        return result;
     }
 }

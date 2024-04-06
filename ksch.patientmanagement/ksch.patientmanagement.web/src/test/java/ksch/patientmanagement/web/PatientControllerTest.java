@@ -40,7 +40,7 @@ import ksch.testing.RestControllerTest;
 import ksch.testing.TestResource;
 import lombok.SneakyThrows;
 
-public class PatientControllerTest extends RestControllerTest {
+class PatientControllerTest extends RestControllerTest {
 
     private static final OpenApiInteractionValidator validator = OasValidatorFactory.createValidator(
         "../../docs/openapi.yml"
@@ -51,7 +51,7 @@ public class PatientControllerTest extends RestControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_create_patient_without_payload() {
+    void should_create_patient_without_payload() {
         mockMvc.perform(post("/api/patients").accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("_id", is(notNullValue())))
@@ -63,7 +63,7 @@ public class PatientControllerTest extends RestControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_create_patient_with_payload() {
+    void should_create_patient_with_payload() {
         var payload = new TestResource("create-patient.json").readString();
         mockMvc.perform(
                 post("/api/patients")
@@ -88,7 +88,7 @@ public class PatientControllerTest extends RestControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_get_patient() {
+    void should_get_patient() {
         var patient = patientService.createPatient();
 
         mockMvc.perform(get("/api/patients/{patientId}", patient.getId()).accept(APPLICATION_JSON))
@@ -101,7 +101,7 @@ public class PatientControllerTest extends RestControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_list_patients() {
+    void should_list_patients() {
         patientService.createPatient();
         patientService.createPatient();
 
@@ -116,7 +116,7 @@ public class PatientControllerTest extends RestControllerTest {
 
     @Test
     @SneakyThrows
-    public void should_search_patients() {
+    void should_search_patients() {
         var searchedPatient = patientService.createPatient();
         patientService.createPatient(searchedPatient);
 

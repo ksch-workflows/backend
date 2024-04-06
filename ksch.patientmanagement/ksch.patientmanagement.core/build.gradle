@@ -1,4 +1,6 @@
 dependencies {
     api project(':ksch.patientmanagement:ksch.patientmanagement.api')
     api project(':commons:data')
+
+    testRuntimeOnly project(':ksch.patientmanagement:ksch.patientmanagement.persistence')
 }

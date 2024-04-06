@@ -15,24 +15,28 @@
  */
 package ksch.patientmanagement.web;
 
+import java.util.UUID;
+
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import ksch.patientmanagement.api.Gender;
 import ksch.patientmanagement.api.Patient;
 import ksch.util.TypeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.hateoas.RepresentationModel;
-
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = false)
 class PatientResource extends RepresentationModel<PatientResource> implements Patient {
 
     @JsonProperty("_id")

@@ -15,14 +15,16 @@
  */
 package ksch.patientmanagement.persistence;
 
+import java.util.UUID;
+import java.util.regex.Pattern;
+
 import org.springframework.data.jpa.domain.Specification;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import java.util.UUID;
-import java.util.regex.Pattern;
+import lombok.NonNull;
 
 /**
  * Spring Data JPA Specification for patient search
@@ -40,12 +42,12 @@ import java.util.regex.Pattern;
  */
 public class PatientSearchSpecification implements Specification<PatientDao> {
 
-    private final static Pattern UUID_PATTERN =
+    private static final Pattern UUID_PATTERN =
             Pattern.compile("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$");
 
     final String searchCriteria;
 
-    public PatientSearchSpecification(String searchCriteria) {
+    public PatientSearchSpecification(@NonNull String searchCriteria) {
         this.searchCriteria = searchCriteria.trim().toLowerCase();
     }
 
@@ -66,10 +68,7 @@ public class PatientSearchSpecification implements Specification<PatientDao> {
         );
     }
 
-    public static boolean isUuid(String string) {
-        if (string == null) {
-            return false;
-        }
+    private static boolean isUuid(@NonNull String string) {
         return UUID_PATTERN.matcher(string).matches();
     }
 }
