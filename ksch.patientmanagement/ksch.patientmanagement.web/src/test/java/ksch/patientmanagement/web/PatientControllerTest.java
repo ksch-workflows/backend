@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.http;
+package ksch.patientmanagement.web;
 
 import static com.atlassian.oai.validator.mockmvc.OpenApiValidationMatchers.openApi;
 import static org.hamcrest.Matchers.equalTo;
