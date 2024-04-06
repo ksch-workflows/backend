@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(':ksch.patientmanagement:ksch.patientmanagement.core')
+
+    implementation project(':commons:http')
+    implementation project(':commons:util')
+
+    testImplementation project(':ksch.patientmanagement:ksch.patientmanagement.impl')
+}

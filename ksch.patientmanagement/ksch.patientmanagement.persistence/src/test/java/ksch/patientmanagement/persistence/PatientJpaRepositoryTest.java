@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.infrastructure;
+package ksch.patientmanagement.persistence;
 
-import ksch.patientmanagement.api.Patient;
-import ksch.patientmanagement.api.PatientService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,8 +25,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import ksch.patientmanagement.api.Patient;
+import ksch.patientmanagement.api.PatientService;
 
+// TODO Use JPA test only
 @SpringBootTest
 @ExtendWith({SpringExtension.class})
 @Transactional

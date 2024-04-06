@@ -5,4 +5,5 @@ dependencies {
     implementation project(':commons:util')
 
     testImplementation project(':ksch.patientmanagement:ksch.patientmanagement.impl')
+    testImplementation project(':ksch.patientmanagement:ksch.patientmanagement.persistence')
 }

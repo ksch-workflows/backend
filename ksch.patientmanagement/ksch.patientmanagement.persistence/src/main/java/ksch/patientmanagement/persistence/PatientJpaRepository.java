@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.infrastructure;
+package ksch.patientmanagement.persistence;
+
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import java.util.UUID;
-
-public interface PatientJpaRepository extends JpaRepository<PatientDao, UUID>, JpaSpecificationExecutor<PatientDao> {
+interface PatientJpaRepository extends JpaRepository<PatientDao, UUID>, JpaSpecificationExecutor<PatientDao> {
 }
