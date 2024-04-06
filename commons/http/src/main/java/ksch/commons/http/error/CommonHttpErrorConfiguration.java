@@ -60,8 +60,7 @@ class CommonHttpErrorConfiguration {
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleUnknownException(Exception exception) {
-        log.error("Missing error handler for exception of type {}. The dev team should create an error handler, so " +
-                        "that more details can be determined for the error which has happened.",
+        log.error("Missing error handler for exception of type {}.",
                 exception.getClass().getTypeName(), exception
         );
         var responseBody = ErrorResponseBody.builder()
