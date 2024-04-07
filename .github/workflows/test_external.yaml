@@ -1,4 +1,4 @@
-name: Test (external)
+name: Test (excluding Sonarqube)
 
 on:
   pull_request:
