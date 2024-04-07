@@ -157,4 +157,4 @@ a non-profit association dedicated to supporting the [Kirpal Sagar](https://kirp
 
 It is licensed under the [Apache License Version 2.0](https://github.com/ksch-workflows/ksch-workflows/blob/master/LICENSE).
 
-Currently the project is a prototype for educational purposes which does not yet comply with the legal regulations for custom clinical software.
+Currently the project is a prototype for educational purposes which does not yet fully comply with the legal regulations for custom clinical software.
