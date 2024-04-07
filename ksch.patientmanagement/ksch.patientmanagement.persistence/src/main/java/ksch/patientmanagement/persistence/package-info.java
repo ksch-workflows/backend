@@ -15,7 +15,6 @@
  */
 @org.hibernate.annotations.GenericGenerator(
         name = "UUID",
-        // TODO Replace deprecated strategy
         strategy = "org.hibernate.id.UUIDGenerator"
 )
 package ksch.patientmanagement.persistence;

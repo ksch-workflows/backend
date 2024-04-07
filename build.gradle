@@ -67,7 +67,8 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
     test.finalizedBy jacocoTestReport
 }
 
-configure(subprojects.findAll { it.name.endsWith('.impl')
+configure(subprojects.findAll {
+    it.name.endsWith('.impl')
         || it.name.endsWith('.core')
         || it.name.endsWith('.web')
         || it.name.endsWith('.persistence')

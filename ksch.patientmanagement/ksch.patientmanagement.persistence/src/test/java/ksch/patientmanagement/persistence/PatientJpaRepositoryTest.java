@@ -29,7 +29,6 @@ import ksch.patientmanagement.api.Patient;
 import ksch.patientmanagement.core.PatientRepository;
 import ksch.patientmanagement.core.PatientService;
 
-// TODO Use JPA test only
 @SpringBootTest
 @ExtendWith({SpringExtension.class})
 @Transactional
