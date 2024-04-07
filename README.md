@@ -150,9 +150,11 @@ See [cloud.google.com](https://cloud.google.com/sdk/docs/install) for Google Clo
 
 See [cloud.google.com](https://cloud.google.com/appengine/docs/flexible/java/runtime#java_versions) for the Java versions supported by the Google App Engine.
 
-## License
+## Legal notice
 
 K.S.C.H. Workflows is maintained by [KS-plus e.V.](https://ks-plus.org/en/welcome/),
 a non-profit association dedicated to supporting the [Kirpal Sagar](https://kirpal-sagar.org/en/welcome/) project.
 
 It is licensed under the [Apache License Version 2.0](https://github.com/ksch-workflows/ksch-workflows/blob/master/LICENSE).
+
+Currently the project is a prototype for educational purposes which does not yet comply with the legal regulations for custom clinical software.
