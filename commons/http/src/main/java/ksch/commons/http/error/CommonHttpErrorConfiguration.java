@@ -42,7 +42,7 @@ class CommonHttpErrorConfiguration {
     }
 
     @ExceptionHandler({MissingServletRequestParameterException.class})
-    public JsonResponseEntity<ErrorResponseBody> handleMissingServletRequestParameterException(
+    JsonResponseEntity<ErrorResponseBody> handleMissingServletRequestParameterException(
             MissingServletRequestParameterException exception
     ) {
         log.warn("Someone called the API in a way which is not intended.", exception);

@@ -1,4 +1,6 @@
 dependencies {
     api project(':ksch.scheduling:ksch.scheduling.api')
-    implementation project(':ksch.scheduling:ksch.scheduling.impl')
+    implementation project(':ksch.scheduling:ksch.scheduling.core')
+    implementation project(':ksch.scheduling:ksch.scheduling.persistence')
+    implementation project(':ksch.scheduling:ksch.scheduling.web')
 }

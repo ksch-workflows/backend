@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * A resource extension is a link to a related REST resource.
- *
+ * <p>
  * This class is intended to be used as the base class for those classes which perform the extension registration.
  */
 @RequiredArgsConstructor

@@ -1,4 +1,0 @@
-dependencies {
-    implementation project(':commons:http')
-    implementation project(':ksch.patientmanagement')
-}
