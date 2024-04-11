@@ -15,7 +15,10 @@
  */
 package ksch.commons.http.error;
 
-import lombok.extern.slf4j.Slf4j;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+
+import java.util.HashMap;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +26,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.HashMap;
-
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import lombok.extern.slf4j.Slf4j;
 
 @ControllerAdvice
 @Slf4j
@@ -38,15 +39,6 @@ class CommonHttpErrorConfiguration {
                 .errorId("entity-not-found")
                 .build();
         return new ResponseEntity<>(responseBody, new HttpHeaders(), HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler({DeserializationException.class})
-    public ResponseEntity<Object> handleDeserializationException(DeserializationException exception) {
-        log.error("Payload could not be deserialized into a Java type.", exception);
-        var responseBody = ErrorResponseBody.builder()
-                .errorId( "deserialization-error")
-                .build();
-        return new ResponseEntity<>(responseBody, new HttpHeaders(), INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler({MissingServletRequestParameterException.class})

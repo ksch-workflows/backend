@@ -55,7 +55,7 @@ The following list gives an overview of the contents in the project's directorie
 
 ### Generate test coverage report
 
-```
+```sh
 ./gradlew clean check
 open ./server/build/reports/jacoco/testCodeCoverageReport/html/index.html
 ```
@@ -64,7 +64,7 @@ open ./server/build/reports/jacoco/testCodeCoverageReport/html/index.html
 
 With the `dev` profile, the app will run with a mock authorization server which approves any valid [JWT](https://jwt.io/).
 
-```
+```sh
 export SPRING_PROFILES_ACTIVE=dev
 ./gradlew bootRun
 ```
@@ -85,7 +85,7 @@ Use `sa` / `password` as login.
 To add license header comments to all Java files which don't have them yet, you
 can call the following shell script:
 
-```
+```sh
 ./docs/license/add-license-notices.sh
 git add . && git commit -m "docs: add license notices"
 ```
@@ -97,7 +97,7 @@ the caches or re-generating the project files.
 
 [File > Invalidate caches]
 
-```
+```sh
 find . -name "*.iml" -or -name "*.ipr" -or -name "*.iws" | xargs rm
 ./gradlew idea
 ```
@@ -139,16 +139,22 @@ Run the following script to normalize the formatting of the OpenAPI specificatio
 
 ### Deploy to staging environment
 
-```
+```sh
 gcloud init
 ./gradlew appengineDeploy
 ```
 
 See [cloud.google.com](https://cloud.google.com/sdk/docs/install) for Google Cloud CLI installation instructions.
 
-## License
+### Update Java version
+
+See [cloud.google.com](https://cloud.google.com/appengine/docs/flexible/java/runtime#java_versions) for the Java versions supported by the Google App Engine.
+
+## Legal notice
 
 K.S.C.H. Workflows is maintained by [KS-plus e.V.](https://ks-plus.org/en/welcome/),
 a non-profit association dedicated to supporting the [Kirpal Sagar](https://kirpal-sagar.org/en/welcome/) project.
 
 It is licensed under the [Apache License Version 2.0](https://github.com/ksch-workflows/ksch-workflows/blob/master/LICENSE).
+
+Currently the project is a prototype for educational purposes which does not yet fully comply with the legal regulations for custom clinical software.

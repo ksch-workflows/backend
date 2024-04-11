@@ -15,9 +15,8 @@
  */
 package ksch.patientmanagement.application;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ksch.patientmanagement.Patient;
 import ksch.patientmanagement.PatientService;
