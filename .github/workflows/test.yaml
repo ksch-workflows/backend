@@ -1,4 +1,5 @@
-name: Build
+name: Test (including Sonarqube)
+
 on:
   push:
     branches: [main]
