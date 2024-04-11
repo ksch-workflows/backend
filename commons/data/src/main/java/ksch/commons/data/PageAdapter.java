@@ -26,7 +26,7 @@ import org.springframework.data.domain.Sort;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Converts a {@link Page} from Spring Data Common into a {@link PageFacade} which can be used by the KSCH Core modules
+ * Converts a {@link Page} from Spring Data Commons into a {@link PageFacade} which can be used by the KSCH Core modules
  * without the need of having a direct dependency on Spring Data.
  */
 @SuppressWarnings("NullableProblems")
