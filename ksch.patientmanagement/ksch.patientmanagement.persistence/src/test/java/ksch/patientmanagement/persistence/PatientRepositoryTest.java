@@ -63,8 +63,7 @@ class PatientRepositoryTest {
     void test_findById_existing_patient() {
         final Optional<Patient> result = patientRepository.findById(johnDoe.getId());
 
-        assertThat(result).isPresent();
-        assertThat(result.get()).isEqualTo(johnDoe);
+        assertThat(result).contains(johnDoe);
     }
 
     @Test

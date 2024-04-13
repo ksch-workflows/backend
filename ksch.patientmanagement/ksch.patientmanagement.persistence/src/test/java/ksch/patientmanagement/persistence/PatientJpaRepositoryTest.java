@@ -26,16 +26,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import ksch.patientmanagement.api.Patient;
-import ksch.patientmanagement.core.PatientRepository;
 import ksch.patientmanagement.core.PatientService;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class})
 @Transactional
 class PatientJpaRepositoryTest {
-
-    @Autowired
-    private PatientRepository patientRepository;
 
     @Autowired
     private PatientJpaRepository patientJpaRepository;
@@ -55,19 +51,19 @@ class PatientJpaRepositoryTest {
     }
 
     @Test
-    public void should_find_patients_by_last_name() {
+    void should_find_patients_by_last_name() {
         var result = patientJpaRepository.findAll(new PatientSearchSpecification("Doe"));
         assertEquals(2, result.size());
     }
 
     @Test
-    public void should_find_no_results_for_unknown_patient_name() {
+    void should_find_no_results_for_unknown_patient_name() {
         var result = patientJpaRepository.findAll(new PatientSearchSpecification("Max Mustermann"));
         assertEquals(0, result.size());
     }
 
     @Test
-    public void should_find_patient_by_full_name() {
+    void should_find_patient_by_full_name() {
         var result = patientJpaRepository.findAll(new PatientSearchSpecification("John Doe"));
         assertEquals(1, result.size());
 
@@ -76,7 +72,7 @@ class PatientJpaRepositoryTest {
     }
 
     @Test
-    public void should_find_patient_by_full_name_case_insensitive() {
+    void should_find_patient_by_full_name_case_insensitive() {
         var result = patientJpaRepository.findAll(new PatientSearchSpecification("john doe"));
         assertEquals(1, result.size());
 
@@ -85,7 +81,7 @@ class PatientJpaRepositoryTest {
     }
 
     @Test
-    public void should_find_patient_by_partial_name() {
+    void should_find_patient_by_partial_name() {
         var result = patientJpaRepository.findAll(new PatientSearchSpecification("john"));
         assertEquals(1, result.size());
 
@@ -94,7 +90,7 @@ class PatientJpaRepositoryTest {
     }
 
     @Test
-    public void should_find_patient_by_id() {
+    void should_find_patient_by_id() {
         var result = patientJpaRepository.findAll(new PatientSearchSpecification(johnDoe.getId().toString()));
         assertEquals(1, result.size());
 
