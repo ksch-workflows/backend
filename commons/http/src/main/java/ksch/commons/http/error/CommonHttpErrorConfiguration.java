@@ -42,7 +42,7 @@ class CommonHttpErrorConfiguration {
     }
 
     @ExceptionHandler({MissingServletRequestParameterException.class})
-    public JsonResponseEntity<ErrorResponseBody> handleMissingServletRequestParameterException(
+    JsonResponseEntity<ErrorResponseBody> handleMissingServletRequestParameterException(
             MissingServletRequestParameterException exception
     ) {
         log.warn("Someone called the API in a way which is not intended.", exception);
@@ -60,8 +60,7 @@ class CommonHttpErrorConfiguration {
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleUnknownException(Exception exception) {
-        log.error("Missing error handler for exception of type {}. The dev team should create an error handler, so " +
-                        "that more details can be determined for the error which has happened.",
+        log.error("Missing error handler for exception of type {}.",
                 exception.getClass().getTypeName(), exception
         );
         var responseBody = ErrorResponseBody.builder()

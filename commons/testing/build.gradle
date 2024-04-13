@@ -1,6 +1,7 @@
 dependencies {
     api "com.atlassian.oai:swagger-request-validator-core:${swaggerRequestValidatorVersion}"
     api "com.atlassian.oai:swagger-request-validator-mockmvc:${swaggerRequestValidatorVersion}"
+    api "org.instancio:instancio-junit:${instancioVersion}"
     api 'org.springframework.boot:spring-boot-starter-hateoas'
     api 'org.springframework.boot:spring-boot-starter-test'
     api 'org.springframework.boot:spring-boot-starter-web'

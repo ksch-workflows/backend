@@ -1,4 +1,6 @@
 dependencies {
     api project(':ksch.visit:ksch.visit.api')
-    implementation project(':ksch.visit:ksch.visit.impl')
+    implementation project(':ksch.visit:ksch.visit.core')
+    implementation project(':ksch.visit:ksch.visit.persistence')
+    implementation project(':ksch.visit:ksch.visit.web')
 }

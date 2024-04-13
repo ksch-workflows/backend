@@ -1,4 +1,6 @@
 dependencies {
     api project(':ksch.reporting:ksch.reporting.api')
-    implementation project(':ksch.reporting:ksch.reporting.impl')
+    implementation project(':ksch.reporting:ksch.reporting.core')
+    implementation project(':ksch.reporting:ksch.reporting.persistence')
+    implementation project(':ksch.reporting:ksch.reporting.web')
 }
