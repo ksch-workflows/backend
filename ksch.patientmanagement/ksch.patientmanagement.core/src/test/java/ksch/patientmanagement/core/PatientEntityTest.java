@@ -6,7 +6,7 @@ import org.instancio.Instancio;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class PatientEntityTest {
+class PatientEntityTest {
 
     @Test
     @DisplayName("Should create patient entity from data interface")

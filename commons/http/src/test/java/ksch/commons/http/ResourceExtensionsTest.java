@@ -15,24 +15,22 @@
  */
 package ksch.commons.http;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
-public class ResourceExtensionsTest {
+import java.util.UUID;
+
+import org.junit.jupiter.api.Test;
+
+class ResourceExtensionsTest {
 
     private final ResourceExtensionsRegistry resourceExtensionsRegistry = new ResourceExtensionsRegistry();
 
     private final ExampleEntity exampleEntity = new ExampleEntity(UUID.randomUUID());
 
     @Test
-    public void should_add_link_to_resource_extensions() {
+    void should_add_link_to_resource_extensions() {
         var resourceExtension = new SingleResourceExtension(resourceExtensionsRegistry);
 
         resourceExtension.init();
@@ -44,7 +42,7 @@ public class ResourceExtensionsTest {
     }
 
     @Test
-    public void should_two_links_to_resource_extensions() {
+    void should_two_links_to_resource_extensions() {
         var resourceExtensions = new TwoResourceExtensions(resourceExtensionsRegistry);
 
         resourceExtensions.init();
@@ -58,7 +56,7 @@ public class ResourceExtensionsTest {
     }
 
     @Test
-    public void should_get_empty_results_for_unknown_type() {
+    void should_get_empty_results_for_unknown_type() {
         var links = resourceExtensionsRegistry.getLinks(ExampleEntity.class, exampleEntity);
 
         assertThat(links.size(), equalTo(0));
