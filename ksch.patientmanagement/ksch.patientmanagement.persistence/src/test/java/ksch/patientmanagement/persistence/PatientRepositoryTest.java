@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,9 +36,11 @@ import ksch.commons.data.PageableAdapter;
 import ksch.patientmanagement.api.Patient;
 import ksch.patientmanagement.core.PatientRepository;
 import ksch.patientmanagement.core.PatientService;
+import ksch.testing.PostgresTestConfiguration;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class})
+@Import(PostgresTestConfiguration.class)
 @Transactional
 class PatientRepositoryTest {
 

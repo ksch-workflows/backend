@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql:///postgres?cloudSqlInstance=${CLOUD_SQL_INSTANCE}&socketFactory=com.google.cloud.sql.postgres.SocketFactory"
+    username: "${DB_USERNAME}"
+    password: "${DB_PASSWORD}"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
