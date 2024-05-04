@@ -22,6 +22,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+// TODO Can this be removed?
 @ComponentScan("ksch")
 @EntityScan("ksch")
 @EnableJpaRepositories("ksch")

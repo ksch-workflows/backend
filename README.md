@@ -69,16 +69,20 @@ export SPRING_PROFILES_ACTIVE=dev
 ./gradlew bootRun
 ```
 
-### Embedded database
-
 When you start the app with the `bootRun` Gradle task, the app will use an embedded H2 database.
 This database can be introspected under the following URL:
 
 http://localhost:8080/h2-console
 
-`jdbc:h2:mem:ksch`
+`jdbc:h2:mem:test`
 
-Use `sa` / `password` as login.
+Use `test` / `test` as login.
+
+### Start locally with Postgres database
+
+By running the `main` method of the [BackendApplicationWithDevServices](./server/src/test/java/ksch/BackendApplicationWithDevServices.java) class the backend application can be started with Postgres.
+
+The Testcontainer running postgres will use a random port. This database name, username and password is `test`.
 
 ### Add license comments
 
@@ -144,7 +148,25 @@ gcloud init
 ./gradlew appengineDeploy
 ```
 
-See [cloud.google.com](https://cloud.google.com/sdk/docs/install) for Google Cloud CLI installation instructions.
+The secrets are added to the App Engine process with the following configuration file:
+
+`~/.config/ksch-workflows/staging.yml`:
+
+```yml
+env_variables:
+  OAUTH_CLIENT_ID: "*****"
+  OAUTH_CLIENT_SECRET: "*****"
+  OAUTH_REDIRECT_URI: "*****"
+  CLOUD_SQL_INSTANCE: "*****"
+  DB_USERNAME: "*****"
+  DB_PASSWORD: "*****"
+```
+
+**Also see**
+
+- [cloud.google.com](https://cloud.google.com/sdk/docs/install) for Google Cloud CLI installation instructions.
+- [How to add environmental variables to Google App Engine (node.js) using Cloud Build | medium.com](https://medium.com/@brian.young.pro/how-to-add-environmental-variables-to-google-app-engine-node-js-using-cloud-build-5ce31ee63d7)
+- [Error while trying to deploy to Google App Engine: max instances limit | stackoverflow.com](https://stackoverflow.com/a/78059484/2339010)
 
 ### Update Java version
 

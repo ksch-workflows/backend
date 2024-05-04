@@ -10,14 +10,3 @@ spring:
   h2:
     console:
       enabled: true
-
-management:
-  endpoints:
-    web:
-      cors:
-        allowedOrigins: '*'
-        allowedMethods: GET
-      basePath: /api/actuator
-  health:
-    diskspace:
-      enabled: false
