@@ -29,12 +29,13 @@ bootJar {
 }
 
 dependencies {
-    implementation "ksch:registration-desk:${registrationDeskVersion}"
-
     implementation project(':ksch.administration')
     implementation project(':ksch.billing')
     implementation project(':ksch.patientmanagement')
     implementation project(':ksch.visit')
+
+    runtimeOnly "com.google.cloud.sql:postgres-socket-factory:${googleCloudSqlPostgresSocketFactoryVersion}"
+    runtimeOnly "ksch:registration-desk:${registrationDeskVersion}"
 
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly 'org.projectlombok:lombok'

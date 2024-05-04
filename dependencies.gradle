@@ -10,6 +10,7 @@ ext {
 
     // External dependencies
     googleCloudLoggingLogbackVersion = '0.131.4-alpha'
+    googleCloudSqlPostgresSocketFactoryVersion = '1.17.1'
     hamcrestVersion = '2.2'
     instancioVersion = '4.5.0'
     lombokVersion = '1.18.32'
