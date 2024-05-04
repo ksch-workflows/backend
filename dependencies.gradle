@@ -5,14 +5,14 @@ ext {
     // Plugins
     googleAppengineVersion = '2.4.4'
     sonarcubeVersion = '5.0.0.4638'
-    springBootVersion = '3.2.4'
-    springDependencyManagementVersion = '1.1.4'
+    springBootVersion = '3.2.5'
+    springDependencyManagementVersion = '1.1.5'
 
     // External dependencies
-    googleCloudLoggingLogbackVersion = '0.131.4-alpha'
+    googleCloudLoggingLogbackVersion = '0.131.5-alpha'
     googleCloudSqlPostgresSocketFactoryVersion = '1.17.1'
     hamcrestVersion = '2.2'
-    instancioVersion = '4.5.0'
+    instancioVersion = '4.5.1'
     lombokVersion = '1.18.32'
     mockitoVersion = '5.11.0'
     swaggerRequestValidatorVersion = '2.40.0'
