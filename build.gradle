@@ -39,7 +39,7 @@ configure(subprojects.findAll { !it.name.endsWith('.api') } ) {
 
     dependencies {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-        //implementation "com.google.cloud:google-cloud-logging-logback:${googleCloudLoggingLogbackVersion}"
+        implementation "com.google.cloud:google-cloud-logging-logback:${googleCloudLoggingLogbackVersion}"
 
         // Testing libraries and frameworks
         testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
@@ -89,8 +89,12 @@ configure(subprojects.findAll {it.name.endsWith('.web')} ) {
 configure(subprojects.findAll {it.name.endsWith('.persistence')} ) {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        runtimeOnly 'com.h2database:h2'
-        runtimeOnly 'org.postgresql:postgresql'
+        // To avoid costs for unused CloudSQL instances it is possible to run the backend with H2
+        if (project.hasProperty('useH2')) {
+            runtimeOnly 'com.h2database:h2'
+        } else {
+            runtimeOnly 'org.postgresql:postgresql'
+        }
     }
 }
 

@@ -30,7 +30,7 @@ public class BackendApplicationWithDevServices {
         public PostgreSQLContainer<?> postgresContainer() {
             //noinspection resource
             return new PostgreSQLContainer<>(
-                "postgres:16-alpine"
+                "postgres:15-alpine"
             ).withReuse(true);
         }
     }

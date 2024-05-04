@@ -60,13 +60,11 @@ The following list gives an overview of the contents in the project's directorie
 open ./server/build/reports/jacoco/testCodeCoverageReport/html/index.html
 ```
 
-### Start with dev profile
-
-With the `dev` profile, the app will run with a mock authorization server which approves any valid [JWT](https://jwt.io/).
+### Start locally with H2 database
 
 ```sh
-export SPRING_PROFILES_ACTIVE=dev
-./gradlew bootRun
+export SPRING_PROFILES_ACTIVE=dev,h2
+./gradlew -PuseH2 bootRun
 ```
 
 When you start the app with the `bootRun` Gradle task, the app will use an embedded H2 database.
@@ -145,7 +143,9 @@ Run the following script to normalize the formatting of the OpenAPI specificatio
 
 ```sh
 gcloud init
-./gradlew appengineDeploy
+GRADLE_PROPERTIES="-PuseH2" # if the "useH2" property is set, the H2 dependency be used instead of Postgres
+
+./gradlew ${GRADLE_PROPERTIES} appengineDeploy
 ```
 
 The secrets are added to the App Engine process with the following configuration file:
@@ -160,6 +160,7 @@ env_variables:
   CLOUD_SQL_INSTANCE: "*****"
   DB_USERNAME: "*****"
   DB_PASSWORD: "*****"
+  SPRING_PROFILES_ACTIVE: staging,postgres
 ```
 
 **Also see**

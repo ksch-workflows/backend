@@ -9,12 +9,12 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @TestConfiguration(proxyBeanMethods = false)
 public class PostgresTestConfiguration {
 
-    @Profile("postgres")
+    @Profile("!h2")
     @Bean
     @ServiceConnection
     public PostgreSQLContainer<?> postgresContainer() {
         return new PostgreSQLContainer<>(
-            "postgres:16-alpine"
+            "postgres:15-alpine"
         );
     }
 }

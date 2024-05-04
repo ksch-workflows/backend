@@ -58,6 +58,7 @@ appengine {
     }
 }
 
+// TODO How this affects the H2 flag?
 def profiles = System.getenv('SPRING_PROFILES_ACTIVE') ?: 'dev'
 
 bootRun {
