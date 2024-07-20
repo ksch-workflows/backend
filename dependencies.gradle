@@ -4,7 +4,7 @@ ext {
 
     // Plugins
     googleAppengineVersion = '2.4.4'
-    sonarcubeVersion = '5.0.0.4638'
+    sonarcubeVersion = '5.1.0.4882'
     springBootVersion = '3.3.1'
     springDependencyManagementVersion = '1.1.5'
 
